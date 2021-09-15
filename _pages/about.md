@@ -14,6 +14,6 @@ My  research interests are extremal, probabilistic, and algebraic combinatorics,
 
 I received my PhD in mathematics from Stanford University in 2021, where my advisor was [Jacob Fox](https://stanford.edu/~jacobfox/).
 
-You can find my CV [here](alkjash.github.io/files/HeX_CV.pdf). I blog about life, research, and rationality at [my personal blog](radimentary.wordpress.com); most of my better posts can be found cross-posted on [LessWrong](https://www.lesswrong.com/users/alkjash).
+You can find my CV [here](https://alkjash.github.io/files/HeX_CV.pdf). I blog about life, research, and rationality at [my personal blog](https://radimentary.wordpress.com); most of my better posts can be found cross-posted on [LessWrong](https://www.lesswrong.com/users/alkjash).
 
 Contact: xiaoyuh [at] princeton [dot] edu
