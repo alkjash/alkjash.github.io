@@ -8,16 +8,16 @@ author_profile: true
 This page contains the pdf files (from the arXiv) for my papers. For a few, you can also find the slides for a talk I gave on the subject.
 
 * ### Maximal independent sets in clique-free graphs
-  with Jiaxi Nie and Sam Spiro, preprint (2021). [[pdf](https://arxiv.org/pdf/2108.06359)]
+  with Jiaxi Nie and Sam Spiro, preprint (2021). [[pdf](https://arxiv.org/pdf/2108.06359.pdf)]
   
 * ### The zero-rate threshold for adversarial bit-deletions is less than 1/2
-  with Venkatesan Guruswami and Ray Li, accepted for publication, FOCS 2021. [[pdf](https://arxiv.org/abs/2106.05250)]
+  with Venkatesan Guruswami and Ray Li, accepted for publication, FOCS 2021. [[pdf](https://arxiv.org/pdf/2106.05250.pdf)]
   
 * ### Ramsey numbers of sparse digraphs
-  with Jacob Fox and Yuval Wigderson, preprint (2021). [[pdf](https://arxiv.org/abs/2105.02383)] [[slides](https://alkjash.github.io/files/Ramsey_numbers_of_sparse_digraphs_slides.pdf)]
+  with Jacob Fox and Yuval Wigderson, preprint (2021). [[pdf](https://arxiv.org/pdf/2105.02383.pdf)] [[slides](https://alkjash.github.io/files/Ramsey_numbers_of_sparse_digraphs_slides.pdf)]
   
 * ### Multicolor list Ramsey numbers grow exponentially, 
-  with Jacob Fox, Sammy Luo, and Max Xu, preprint (2021). [[pdf](https://arxiv.org/abs/2103.15175)]
+  with Jacob Fox, Sammy Luo, and Max Xu, preprint (2021). [[pdf](https://arxiv.org/pdf/2103.15175.pdf)]
 
 * ### Hat guessing on books and windmills 
   with Yuzu Ido and Benjamin Przybocki, preprint (2020). [[pdf](https://arxiv.org/pdf/2010.13249.pdf)]
