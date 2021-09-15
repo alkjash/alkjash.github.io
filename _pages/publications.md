@@ -1,6 +1,6 @@
 ---
 layout: archive
-title: "Papers and Talk Slides"
+title: "Papers and Slides"
 permalink: /publications/
 author_profile: true
 ---
