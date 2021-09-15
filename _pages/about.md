@@ -1,6 +1,6 @@
 ---
 permalink: /
-title: "Home"
+title: "About"
 excerpt: "About me"
 author_profile: true
 redirect_from: 
@@ -8,7 +8,6 @@ redirect_from:
   - /about.html
 ---
 
-## About
 I am a NSF postdoctoral research fellow in the [Department of Mathematics](https://www.math.princeton.edu/) at Princeton University.
 
 My  research interests are extremal, probabilistic, and algebraic combinatorics, especially Ramsey theory, graph coloring, additive combinatorics, discrete geometry, and the combinatorics of words, with applications to computer science.
