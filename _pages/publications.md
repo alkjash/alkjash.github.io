@@ -5,7 +5,7 @@ permalink: /publications/
 author_profile: true
 ---
 
-This page contains arXiv links to the pdf files of all my papers. For a few you can also find the slides for a talk I gave on the subject.
+This page contains the pdf files (from the arXiv) for my papers. For a few, you can also find the slides for a talk I gave on the subject.
 
 * ### Maximal independent sets in clique-free graphs
   with Jiaxi Nie and Sam Spiro, preprint (2021). [[pdf](https://arxiv.org/pdf/2108.06359)]
