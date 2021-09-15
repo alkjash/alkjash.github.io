@@ -1,3 +1,13 @@
+---
+permalink: /
+title: "Home"
+excerpt: "About me"
+author_profile: true
+redirect_from: 
+  - /about/
+  - /about.html
+---
+
 ## About
 I am a NSF postdoctoral research fellow in the [Department of Mathematics](https://www.math.princeton.edu/) at Princeton University.
 
