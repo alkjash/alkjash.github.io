@@ -8,7 +8,7 @@ author_profile: true
 This page contains the pdf files (from the arXiv) for my papers. For a few, you can also find the slides for an associated talk.
 
 * Xiaoyu He, Emily Huang, Ihyun Nam, and Rishubh Thaper, Shuffle squares and reverse shuffle squares, preprint (2021). [[pdf](https://arxiv.org/pdf/2109.12455.pdf)]
-* Jacob Fox, Xiaoyu He, and Yuval Wigderson, Ramsey goodness of books revisited, preprint (2021). [[pdf](https://arxiv.org/abs/2109.09205.pdf)]
+* Jacob Fox, Xiaoyu He, and Yuval Wigderson, Ramsey goodness of books revisited, preprint (2021). [[pdf](https://arxiv.org/pdf/2109.09205.pdf)]
 * Xiaoyu He, Jiaxi Nie, and Sam Spiro, Maximal independent sets in clique-free graphs, preprint (2021). [[pdf](https://arxiv.org/pdf/2108.06359.pdf)]
 * Venkatesan Guruswami, Xiaoyu He, and Ray Li, The zero-rate threshold for adversarial bit-deletions is less than 1/2, accepted for publication, FOCS (2021). [[pdf](https://arxiv.org/pdf/2106.05250.pdf)]
 * Jacob Fox, Xiaoyu He, and Yuval Wigderson, Ramsey numbers of sparse digraphs, preprint (2021). [[pdf](https://arxiv.org/pdf/2105.02383.pdf)] [[slides](https://alkjash.github.io/files/Ramsey_numbers_of_sparse_digraphs_slides.pdf)]  
