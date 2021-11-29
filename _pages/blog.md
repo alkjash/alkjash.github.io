@@ -11,6 +11,6 @@ I blog about life, research, and rationality at [my personal blog](https://radim
 
 1. [Pain is not the unit of Effort](https://radimentary.wordpress.com/2020/11/24/pain-is-not-the-unit-of-effort/)
 2. [Gravity Turn](https://radimentary.wordpress.com/2021/08/16/gravity-turn/)
-3. [Is Success the enemy of Freedom?](https://radimentary.wordpress.com/2020/10/26/is-success-the-enemy-of-freedom-full/)
+3. [Is Success the Enemy of Freedom?](https://radimentary.wordpress.com/2020/10/26/is-success-the-enemy-of-freedom-full/)
 4. [Babble](https://radimentary.wordpress.com/2018/01/10/babble/)
 5. [Where do your eyes go?](https://radimentary.wordpress.com/2021/09/19/where-do-your-eyes-go/)
