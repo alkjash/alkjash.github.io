@@ -7,16 +7,18 @@ author_profile: true
 
 This page contains the pdf files (from the arXiv) for my papers. For a few, you can also find the slides for an associated talk.
 
+
+* Benjamin Gunby, Xiaoyu He, and Bhargav Narayanan, Down-set thresholds, preprint (2021). [[pdf](https://arxiv.org/pdf/2112.08525)]
 * Xiaoyu He, Emily Huang, Ihyun Nam, and Rishubh Thaper, Shuffle squares and reverse shuffle squares, preprint (2021). [[pdf](https://arxiv.org/pdf/2109.12455.pdf)]
 * Jacob Fox, Xiaoyu He, and Yuval Wigderson, Ramsey goodness of books revisited, preprint (2021). [[pdf](https://arxiv.org/pdf/2109.09205.pdf)]
 * Xiaoyu He, Jiaxi Nie, and Sam Spiro, Maximal independent sets in clique-free graphs, preprint (2021). [[pdf](https://arxiv.org/pdf/2108.06359.pdf)]
-* Venkatesan Guruswami, Xiaoyu He, and Ray Li, The zero-rate threshold for adversarial bit-deletions is less than 1/2, accepted for publication, FOCS (2021). [[pdf](https://arxiv.org/pdf/2106.05250.pdf)]
+* Venkatesan Guruswami, Xiaoyu He, and Ray Li, The zero-rate threshold for adversarial bit-deletions is less than 1/2, FOCS (2021). [[pdf](https://arxiv.org/pdf/2106.05250.pdf)]
 * Jacob Fox, Xiaoyu He, and Yuval Wigderson, Ramsey numbers of sparse digraphs, preprint (2021). [[pdf](https://arxiv.org/pdf/2105.02383.pdf)] [[slides](https://alkjash.github.io/files/Ramsey_numbers_of_sparse_digraphs_slides.pdf)]  
 * Jacob Fox, Xiaoyu He, Sammy Luo, and Max Xu, Multicolor list Ramsey numbers grow exponentially, preprint (2021). [[pdf](https://arxiv.org/pdf/2103.15175.pdf)]
 * Xiaoyu He, Yuzu Ido, and Benjamin Przybocki, Hat guessing on books and windmills, preprint (2020). [[pdf](https://arxiv.org/pdf/2010.13249.pdf)]
-* Persi Diaconis, Ron Graham, Xiaoyu He, and Sam Spiro, Card guessing with partial feedback, in press, Combin. Probab. Comput. (2020). [[pdf](https://arxiv.org/pdf/2010.05059.pdf)]
+* Persi Diaconis, Ron Graham, Xiaoyu He, and Sam Spiro, Card guessing with partial feedback, Combin. Probab. Comput. 31 (2022), 1-20. [[pdf](https://arxiv.org/pdf/2010.05059.pdf)]
 * Xiaoyu He and Ray Li, Hat guessing numbers of degenerate graphs, Electron. J. Combin. 27 (2020), P3.58. [[pdf](https://arxiv.org/pdf/2003.04990.pdf)]
-* Jacob Fox and Xiaoyu He, Independent sets in hypergraphs with a forbidden link, in press, Proc. London Math. Soc. (2021). [[pdf](https://arxiv.org/pdf/1909.05988.pdf)] [[slides](https://alkjash.github.io/files/Hypergraph_Ramsey.pdf)]
+* Jacob Fox and Xiaoyu He, Independent sets in hypergraphs with a forbidden link, Proc. London Math. Soc. 123 (2021), 384-409. [[pdf](https://arxiv.org/pdf/1909.05988.pdf)] [[slides](https://alkjash.github.io/files/Hypergraph_Ramsey.pdf)]
 * John Engbers, Aysel Erey, Jacob Fox, and Xiaoyu He, Tomescu’s graph-coloring conjecture for l-connected graphs, SIAM J. Discrete Math. (2021), 1478–1502. [[pdf](https://arxiv.org/pdf/1912.03236.pdf)]
 * Jacob Fox, Xiaoyu He, and Yuval Wigderson, Ramsey, Paper, Scissors, Random Structures Algorithms 57 (2020), 1157–1173. [[pdf](https://arxiv.org/pdf/1906.01092.pdf)]
 * Xiaoyu He and Matthew Kwan, Universality of random permutations, Bull. London Math. Soc. 52 (2020), 515–529. [[pdf](https://arxiv.org/pdf/1911.12878.pdf)]
