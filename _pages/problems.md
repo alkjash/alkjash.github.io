@@ -5,7 +5,7 @@ permalink: /problems/
 author_profile: true
 ---
 
-Here are a few open problems I like.
+Here are some open problems I like.
 
 1. The *(oriented) Ramsey number $r(H)$* of an (acyclic) directed graph $H$ is the smallest $N$ such that every tournament on $N$ vertices contains a copy of $H$.
 If $H$ has bounded degree, is $r(H)$ always bounded by a polynomial in the number of vertices of $H$? [reference](https://arxiv.org/abs/2105.02383)
