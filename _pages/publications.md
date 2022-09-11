@@ -7,15 +7,16 @@ author_profile: true
 
 This page contains the pdf files (from the arXiv) for my papers. For a few, you can also find the slides for an associated talk.
 
-
+* David Conlon, Jacob Fox, Xiaoyu He, Dhruv Mubayi, Andrew Suk, and Jacques Verstraete, Set-coloring Ramsey numbers via codes, preprint (2022). [[pdf](https://arxiv.org/pdf/2206.11371.pdf)]
+* Noga Alon, Benjamin Gunby, Xiaoyu He, Eran Shmaya, and Eilon Solan, Identifying the Deviator, preprint (2022). [[pdf](https://arxiv.org/pdf/2203.03744.pdf)]
 * Benjamin Gunby, Xiaoyu He, and Bhargav Narayanan, Down-set thresholds, preprint (2021). [[pdf](https://arxiv.org/pdf/2112.08525)]
 * Xiaoyu He, Emily Huang, Ihyun Nam, and Rishubh Thaper, Shuffle squares and reverse shuffle squares, preprint (2021). [[pdf](https://arxiv.org/pdf/2109.12455.pdf)]
 * Jacob Fox, Xiaoyu He, and Yuval Wigderson, Ramsey goodness of books revisited, preprint (2021). [[pdf](https://arxiv.org/pdf/2109.09205.pdf)]
-* Xiaoyu He, Jiaxi Nie, and Sam Spiro, Maximal independent sets in clique-free graphs, preprint (2021). [[pdf](https://arxiv.org/pdf/2108.06359.pdf)]
+* Xiaoyu He, Jiaxi Nie, and Sam Spiro, Maximal independent sets in clique-free graphs, European J. Combin. 106 (2022), 103575. [[pdf](https://arxiv.org/pdf/2108.06359.pdf)]
 * Venkatesan Guruswami, Xiaoyu He, and Ray Li, The zero-rate threshold for adversarial bit-deletions is less than 1/2, FOCS (2021). [[pdf](https://arxiv.org/pdf/2106.05250.pdf)]
-* Jacob Fox, Xiaoyu He, and Yuval Wigderson, Ramsey numbers of sparse digraphs, preprint (2021). [[pdf](https://arxiv.org/pdf/2105.02383.pdf)] [[slides](https://alkjash.github.io/files/Ramsey_numbers_of_sparse_digraphs_slides.pdf)]  
-* Jacob Fox, Xiaoyu He, Sammy Luo, and Max Xu, Multicolor list Ramsey numbers grow exponentially, preprint (2021). [[pdf](https://arxiv.org/pdf/2103.15175.pdf)]
-* Xiaoyu He, Yuzu Ido, and Benjamin Przybocki, Hat guessing on books and windmills, preprint (2020). [[pdf](https://arxiv.org/pdf/2010.13249.pdf)]
+* Jacob Fox, Xiaoyu He, and Yuval Wigderson, Ramsey numbers of sparse digraphs, Israel J. Math. (2021), accepted for publication. [[pdf](https://arxiv.org/pdf/2105.02383.pdf)] [[slides](https://alkjash.github.io/files/Ramsey_numbers_of_sparse_digraphs_slides.pdf)]  
+* Jacob Fox, Xiaoyu He, Sammy Luo, and Max Xu, Multicolor list Ramsey numbers grow exponentially, J. Graph Theory (2021), early view. [[pdf](https://arxiv.org/pdf/2103.15175.pdf)]
+* Xiaoyu He, Yuzu Ido, and Benjamin Przybocki, Hat guessing on books and windmills, Electron. J. Combin. 29 (2020), P1. 12. [[pdf](https://arxiv.org/pdf/2010.13249.pdf)]
 * Persi Diaconis, Ron Graham, Xiaoyu He, and Sam Spiro, Card guessing with partial feedback, Combin. Probab. Comput. 31 (2022), 1-20. [[pdf](https://arxiv.org/pdf/2010.05059.pdf)]
 * Xiaoyu He and Ray Li, Hat guessing numbers of degenerate graphs, Electron. J. Combin. 27 (2020), P3.58. [[pdf](https://arxiv.org/pdf/2003.04990.pdf)]
 * Jacob Fox and Xiaoyu He, Independent sets in hypergraphs with a forbidden link, Proc. London Math. Soc. 123 (2021), 384-409. [[pdf](https://arxiv.org/pdf/1909.05988.pdf)] [[slides](https://alkjash.github.io/files/Hypergraph_Ramsey.pdf)]
