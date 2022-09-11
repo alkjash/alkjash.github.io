@@ -12,7 +12,7 @@ I am a NSF postdoctoral research fellow in the [Department of Mathematics](https
 
 In Fall 2022, I am teaching [MAT 104: Calculus II](https://www.math.princeton.edu/undergraduate/placement/MAT104).
 
-My  research interests are extremal, probabilistic, and algebraic combinatorics, especially Ramsey theory, graph coloring, additive combinatorics, discrete geometry, and the combinatorics of words, with applications to computer science.
+My  research interests are extremal, probabilistic, and algebraic combinatorics, especially Ramsey theory, graph coloring, additive combinatorics, discrete geometry, and coding theory, with applications to computer science.
 
 I received my PhD in mathematics from Stanford University in 2021, where my advisor was [Jacob Fox](https://stanford.edu/~jacobfox/).
 
