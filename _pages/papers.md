@@ -7,6 +7,7 @@ author_profile: true
 
 This page contains the pdf files (from the arXiv) for my papers. For a few, you can also find the slides for an associated talk.
 
+* Xiaoyu He, Ray Li, Approximating binary longest common subsequence in near-linear time, preprint (2022). [[pdf](https://arxiv.org/abs/2211.16660)]
 * David Conlon, Jacob Fox, Xiaoyu He, Dhruv Mubayi, Andrew Suk, and Jacques Verstra&euml;te, Hypergraph Ramsey numbers of cliques versus stars, preprint (2022). [[pdf](https://arxiv.org/pdf/2210.03545)]
 * Noga Alon, Gabriela Bourla, Ben Graham, Xiaoyu He, and Noah Kravitz, Logarithmically larger deletion codes of all distances, preprint (2022). [[pdf](https://arxiv.org/pdf/2209.11882)]
 * David Conlon, Jacob Fox, Xiaoyu He, Dhruv Mubayi, Andrew Suk, and Jacques Verstra&euml;te, Set-coloring Ramsey numbers via codes, preprint (2022). [[pdf](https://arxiv.org/pdf/2206.11371.pdf)]
