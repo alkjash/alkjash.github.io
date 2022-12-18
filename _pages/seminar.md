@@ -5,7 +5,7 @@ permalink: /seminar/
 author_profile: true
 ---
 
-Noah Kravitz (nkravitz@princeton.edu) is running an informal reading seminar in combinatorics at Princeton (not to be confused with the [DMS](https://web.math.princeton.edu/~pds/seminar.html)), mainly directed at graduate students and postdocs. All members of the Princeton community interested in combinatorics are welcome to attend. 
+Noah Kravitz (nkravitz@princeton.edu) is running an informal learning seminar in combinatorics at Princeton (not to be confused with the [DMS](https://web.math.princeton.edu/~pds/seminar.html)), mainly directed at graduate students and postdocs. All members of the Princeton community interested in combinatorics are welcome to attend. 
 
 Please find the schedule below and direct all inquiries to Noah.
 
