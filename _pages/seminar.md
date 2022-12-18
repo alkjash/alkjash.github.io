@@ -9,4 +9,4 @@ Noah Kravitz (nkravitz@princeton.edu) is running an informal reading seminar in 
 
 Please find the schedule below and direct all inquiries to Noah.
 
-<iframe style="width: 100%; height: 1000px" src="https://docs.google.com/document/d/e/2PACX-1vTr9ujAVFFd6sKsZKosFEpUTjqlywo9mtv0GmGfc_tebkq_AtqFgx9a9j-kEjJbo43aItJRXzms7Yxz/pub?embedded=true"></iframe>
+<iframe style="width: 100%; height: 1000px" frameborder="no" border="0" marginwidth="0" marginheight="0" src="https://docs.google.com/document/d/e/2PACX-1vTr9ujAVFFd6sKsZKosFEpUTjqlywo9mtv0GmGfc_tebkq_AtqFgx9a9j-kEjJbo43aItJRXzms7Yxz/pub?embedded=true"></iframe>
