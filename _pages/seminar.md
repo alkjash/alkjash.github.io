@@ -1,6 +1,6 @@
 ---
 layout: archive
-title: "Reading Seminar"
+title: "Seminar"
 permalink: /seminar/
 author_profile: true
 ---
