@@ -1,6 +1,6 @@
 ---
 layout: archive
-title: "Princeton Combinatorics Learning Seminar"
+title: "Combinatorics Learning Seminar"
 permalink: /seminar/
 author_profile: true
 ---
