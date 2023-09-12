@@ -12,7 +12,7 @@ I am an NSF postdoctoral research fellow in the [Department of Mathematics](http
 
 In Fall 2023, I am teaching [MAT 175: Math Economics/Life Sciences](https://www.math.princeton.edu/undergraduate/placement/MAT175). I taught MAT 378: Theory of Games in Spring 2022 and [MAT 104: Calculus II](https://www.math.princeton.edu/undergraduate/placement/MAT104) in Fall 2022.
 
-See [here](/seminar/) for information on the Princeton combinatorics learning seminar.
+See [here](https://sites.google.com/view/princetoncombinatoricslearning) for information on the Princeton combinatorics learning seminar.
 
 My  research interests are extremal, probabilistic, and algebraic combinatorics, especially Ramsey theory, graph coloring, additive combinatorics, discrete geometry, and coding theory, with applications to computer science.
 
