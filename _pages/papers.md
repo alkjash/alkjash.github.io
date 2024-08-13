@@ -15,7 +15,7 @@ This page contains the pdf files (from the arXiv) for my papers. For a few, you 
 * David Conlon, Jacob Fox, Xiaoyu He, Dhruv Mubayi, Andrew Suk, and Jacques Verstra&euml;te, Hypergraph Ramsey numbers of cliques versus stars, Random Structures Algorithms 63 (2023), 442--456. [[pdf](https://arxiv.org/pdf/2210.03545)]
 * Noga Alon, Gabriela Bourla, Ben Graham, Xiaoyu He, and Noah Kravitz, IEEE Transactions on Information Theory 70 (2023), 125--130. [[pdf](https://arxiv.org/pdf/2209.11882)][[slides](https://alkjash.github.io/files/Deletion_Codes_Talk_2023.pdf)]
 * David Conlon, Jacob Fox, Xiaoyu He, Dhruv Mubayi, Andrew Suk, and Jacques Verstra&euml;te, Set-coloring Ramsey numbers via codes, Studia Sci. Math. Hungar. 61 (2024), 1--15. [[pdf](https://arxiv.org/pdf/2206.11371.pdf)][[slides](https://alkjash.github.io/files/Set_coloring_Talk__RSA_2023_.pdf)]
-* Noga Alon, Benjamin Gunby, Xiaoyu He, Eran Shmaya, and Eilon Solan, Identifying the Deviator, preprint (2022). [[pdf](https://arxiv.org/pdf/2203.03744.pdf)]
+* Noga Alon, Benjamin Gunby, Xiaoyu He, Eran Shmaya, and Eilon Solan, Identifying the Deviator, Ann. Appl. Probab. (2024), to appear. [[pdf](https://arxiv.org/pdf/2203.03744.pdf)]
 * Benjamin Gunby, Xiaoyu He, and Bhargav Narayanan, Down-set thresholds, Random Structures Algorithms 63 (2023), 442--456. [[pdf](https://arxiv.org/pdf/2112.08525)]
 * Xiaoyu He, Emily Huang, Ihyun Nam, and Rishubh Thaper, Shuffle squares and reverse shuffle squares, preprint (2021). [[pdf](https://arxiv.org/pdf/2109.12455.pdf)]
 * Jacob Fox, Xiaoyu He, and Yuval Wigderson, Ramsey goodness of books revisited, Advances in Combinatorics (2023). [[pdf](https://arxiv.org/pdf/2109.09205.pdf)]
