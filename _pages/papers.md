@@ -7,9 +7,9 @@ author_profile: true
 
 This page contains the pdf files (from the arXiv) for my papers. For a few, you can also find the slides for an associated talk.
 
-* David Conlon, Jacob Fox, Xiaoyu He, Dhruv Mubayi, Andrew Suk, Jacques Verstra\"ete, Big line or big convex polygon, preprint (2024).
-* David Conlon, Jacob Fox, Xiaoyu He, Dhruv Mubayi, Huy Tuan Pham, Andrew Suk, Jacques Verstra\"ete, A question of Erd\H {o}s and Graham on Egyptian fractions, preprint (2024).
-* David Conlon, Jacob Fox, Benjamin Gunby, Xiaoyu He, Dhruv Mubayi, Andrew Suk, Jacques Verstra\"ete, On off-diagonal hypergraph Ramsey numbers, preprint (2024).
+* David Conlon, Jacob Fox, Xiaoyu He, Dhruv Mubayi, Andrew Suk, Jacques Verstra&euml;te, Big line or big convex polygon, preprint (2024). [[pdf](https://arxiv.org/abs/2405.03455)]
+* David Conlon, Jacob Fox, Xiaoyu He, Dhruv Mubayi, Huy Tuan Pham, Andrew Suk, Jacques Verstra&euml;te, A question of Erdős and Graham on Egyptian fractions, preprint (2024). [[pdf](https://arxiv.org/abs/2404.16016)]
+* David Conlon, Jacob Fox, Benjamin Gunby, Xiaoyu He, Dhruv Mubayi, Andrew Suk, Jacques Verstra&euml;te, On off-diagonal hypergraph Ramsey numbers, preprint (2024). [[pdf](https://arxiv.org/html/2404.02021v1)]
 * Benjamin Gunby, Xiaoyu He, Bhargav Narayanan, and Sam Spiro, Antichain codes, Bull. London Math. Soc. 55 (2023), 3053--3062. [[pdf](https://arxiv.org/abs/2212.08406)]
 * Xiaoyu He and Ray Li, Approximating binary longest common subsequence in near-linear time, STOC (2023). [[pdf](https://arxiv.org/abs/2211.16660)]
 * David Conlon, Jacob Fox, Xiaoyu He, Dhruv Mubayi, Andrew Suk, and Jacques Verstra&euml;te, Hypergraph Ramsey numbers of cliques versus stars, Random Structures Algorithms 63 (2023), 442--456. [[pdf](https://arxiv.org/pdf/2210.03545)]
