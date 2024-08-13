@@ -8,18 +8,16 @@ redirect_from:
   - /about.html
 ---
 
-I am an NSF postdoctoral research fellow in the [Department of Mathematics](https://www.math.princeton.edu/) at Princeton University.
+Hi! I am an Assistant Professor at Georgia Institute of Technology.
 
-In Fall 2023, I am teaching [MAT 175: Math Economics/Life Sciences](https://www.math.princeton.edu/undergraduate/placement/MAT175). I taught MAT 378: Theory of Games in Spring 2022 and [MAT 104: Calculus II](https://www.math.princeton.edu/undergraduate/placement/MAT104) in Fall 2022.
+In Fall 2024, I am teaching [Math 4022](https://math.gatech.edu/courses/math/4022) (Introduction to Graph Theory). 
 
-See [here](https://sites.google.com/view/princetoncombinatoricslearning) for information on the Princeton combinatorics learning seminar.
+My  research interests are extremal, probabilistic, and algebraic combinatorics, especially Ramsey theory, graph coloring, additive combinatorics, discrete geometry, and coding theory, and their applications to computer science.
 
-My  research interests are extremal, probabilistic, and algebraic combinatorics, especially Ramsey theory, graph coloring, additive combinatorics, discrete geometry, and coding theory, with applications to computer science.
-
-I received my PhD in mathematics from Stanford University in 2021, where my advisor was [Jacob Fox](https://stanford.edu/~jacobfox/).
+Previously, I was an NSF postdoctoral research fellow at Princeton University working with [Noga Alon](https://web.math.princeton.edu/~nalon/). Before that, I received my PhD in mathematics from Stanford University in 2021, where my advisor was [Jacob Fox](https://stanford.edu/~jacobfox/).
 
 You can find my CV [here](https://alkjash.github.io/files/CV_Xiaoyu_He.pdf). I blog about life, research, and rationality at [my personal blog](https://radimentary.wordpress.com); most of my better posts can also be found cross-posted on [LessWrong](https://www.lesswrong.com/users/alkjash).
 
-Contact: xiaoyuh [at] princeton [dot] edu
+Contact: xhe399 [at] gatech [dot] edu
 
-Office: Fine Hall 102
+Office: TBD
