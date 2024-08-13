@@ -7,11 +7,14 @@ author_profile: true
 
 This page contains the pdf files (from the arXiv) for my papers. For a few, you can also find the slides for an associated talk.
 
-* Benjamin Gunby, Xiaoyu He, Bhargav Narayanan, and Sam Spiro, Antichain codes, Bull. London Math. Soc. (2023), early view. [[pdf](https://arxiv.org/abs/2212.08406)]
+* David Conlon, Jacob Fox, Xiaoyu He, Dhruv Mubayi, Andrew Suk, Jacques Verstra\"ete, Big line or big convex polygon, preprint (2024).
+* David Conlon, Jacob Fox, Xiaoyu He, Dhruv Mubayi, Huy Tuan Pham, Andrew Suk, Jacques Verstra\"ete, A question of Erd\H {o}s and Graham on Egyptian fractions, preprint (2024).
+* David Conlon, Jacob Fox, Benjamin Gunby, Xiaoyu He, Dhruv Mubayi, Andrew Suk, Jacques Verstra\"ete, On off-diagonal hypergraph Ramsey numbers, preprint (2024).
+* Benjamin Gunby, Xiaoyu He, Bhargav Narayanan, and Sam Spiro, Antichain codes, Bull. London Math. Soc. 55 (2023), 3053--3062. [[pdf](https://arxiv.org/abs/2212.08406)]
 * Xiaoyu He and Ray Li, Approximating binary longest common subsequence in near-linear time, STOC (2023). [[pdf](https://arxiv.org/abs/2211.16660)]
-* David Conlon, Jacob Fox, Xiaoyu He, Dhruv Mubayi, Andrew Suk, and Jacques Verstra&euml;te, Hypergraph Ramsey numbers of cliques versus stars, Random Structures Algorithms (2023), early view. [[pdf](https://arxiv.org/pdf/2210.03545)]
-* Noga Alon, Gabriela Bourla, Ben Graham, Xiaoyu He, and Noah Kravitz, IEEE Transactions on Information Theory (2023), early access. [[pdf](https://arxiv.org/pdf/2209.11882)][[slides](https://alkjash.github.io/files/Deletion_Codes_Talk_2023.pdf)]
-* David Conlon, Jacob Fox, Xiaoyu He, Dhruv Mubayi, Andrew Suk, and Jacques Verstra&euml;te, Set-coloring Ramsey numbers via codes, preprint (2022). [[pdf](https://arxiv.org/pdf/2206.11371.pdf)][[slides](https://alkjash.github.io/files/Set_coloring_Talk__RSA_2023_.pdf)]
+* David Conlon, Jacob Fox, Xiaoyu He, Dhruv Mubayi, Andrew Suk, and Jacques Verstra&euml;te, Hypergraph Ramsey numbers of cliques versus stars, Random Structures Algorithms 63 (2023), 442--456. [[pdf](https://arxiv.org/pdf/2210.03545)]
+* Noga Alon, Gabriela Bourla, Ben Graham, Xiaoyu He, and Noah Kravitz, IEEE Transactions on Information Theory 70 (2023), 125--130. [[pdf](https://arxiv.org/pdf/2209.11882)][[slides](https://alkjash.github.io/files/Deletion_Codes_Talk_2023.pdf)]
+* David Conlon, Jacob Fox, Xiaoyu He, Dhruv Mubayi, Andrew Suk, and Jacques Verstra&euml;te, Set-coloring Ramsey numbers via codes, Studia Sci. Math. Hungar. 61 (2024), 1--15. [[pdf](https://arxiv.org/pdf/2206.11371.pdf)][[slides](https://alkjash.github.io/files/Set_coloring_Talk__RSA_2023_.pdf)]
 * Noga Alon, Benjamin Gunby, Xiaoyu He, Eran Shmaya, and Eilon Solan, Identifying the Deviator, preprint (2022). [[pdf](https://arxiv.org/pdf/2203.03744.pdf)]
 * Benjamin Gunby, Xiaoyu He, and Bhargav Narayanan, Down-set thresholds, Random Structures Algorithms 63 (2023), 442--456. [[pdf](https://arxiv.org/pdf/2112.08525)]
 * Xiaoyu He, Emily Huang, Ihyun Nam, and Rishubh Thaper, Shuffle squares and reverse shuffle squares, preprint (2021). [[pdf](https://arxiv.org/pdf/2109.12455.pdf)]
