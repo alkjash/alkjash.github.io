@@ -22,4 +22,4 @@ If you are a student interested in reading or working with me, please reach out 
 
 Contact: xhe399 [at] gatech [dot] edu
 
-Office: TBD
+Office: Skiles 260
