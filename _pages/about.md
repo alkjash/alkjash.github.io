@@ -18,7 +18,7 @@ Previously, I was an NSF postdoctoral research fellow at Princeton University wo
 
 You can find my CV [here](https://alkjash.github.io/files/CV_Xiaoyu_He.pdf). I blog about life, research, and rationality at [my personal blog](https://radimentary.wordpress.com); most of my better posts can also be found cross-posted on [LessWrong](https://www.lesswrong.com/users/alkjash).
 
-#### My group
+### My group
 
 [Jiaxi Nie](https://jiaxinie.github.io/) (Visiting Assistant Professor)
 
