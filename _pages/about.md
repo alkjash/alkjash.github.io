@@ -10,7 +10,7 @@ redirect_from:
 
 Welcome! I am an Assistant Professor in the School of Math at Georgia Tech.
 
-In Spring 2024, I will teach [Math 7018](https://math.gatech.edu/courses/math/7018) (Probabilistic Methods in Combinatorics). In Fall 2024, I taught [Math 4022](https://math.gatech.edu/courses/math/4022) (Introduction to Graph Theory). 
+In Spring 2025, I will teach [Math 7018](https://math.gatech.edu/courses/math/7018) (Probabilistic Methods in Combinatorics). In Fall 2024, I taught [Math 4022](https://math.gatech.edu/courses/math/4022) (Introduction to Graph Theory). 
 
 My  research interests are extremal, probabilistic, and algebraic combinatorics, especially Ramsey theory, graph coloring, additive combinatorics, discrete geometry, and coding theory, and their applications to computer science.
 
