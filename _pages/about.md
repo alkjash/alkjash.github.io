@@ -21,7 +21,7 @@ You can find my CV [here](https://alkjash.github.io/files/CV_Xiaoyu_He.pdf). I b
 ## Current group
 
 [Jiaxi Nie](https://jiaxinie.github.io/) (Visiting Assistant Professor) <br />
-[Ruben Ascoli](https://sites.google.com/view/ruben-ascoli) (ACO PhD Student)
+[Ruben Ascoli](https://sites.google.com/view/ruben-ascoli) (ACO PhD Student) <br />
 Winston Stucki (SoM PhD Student)
 
 If you are a student interested in working with me, please reach out after taking a look at [problems](https://alkjash.github.io/problems/) and [my blog](https://alkjash.github.io/blog/) to get a sense of my research interests and philosophy.
