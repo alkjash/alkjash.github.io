@@ -8,9 +8,9 @@ redirect_from:
   - /about.html
 ---
 
-Welcome! I am an Assistant Professor in the School of Math at Georgia Tech.
+Welcome! I am a (tenure-track) Richard Duke Assistant Professor in the School of Math at Georgia Tech.
 
-In Spring 2025, I will teach [Math 7018](https://math.gatech.edu/courses/math/7018) (Probabilistic Methods in Combinatorics). In Fall 2024, I taught [Math 4022](https://math.gatech.edu/courses/math/4022) (Introduction to Graph Theory). 
+In Spring 2025, I am teaching [Math 7018](https://math.gatech.edu/courses/math/7018) (Probabilistic Methods in Combinatorics). In Fall 2024, I taught [Math 4022](https://math.gatech.edu/courses/math/4022) (Introduction to Graph Theory). 
 
 My  research interests are extremal, probabilistic, and algebraic combinatorics, especially Ramsey theory, graph coloring, additive combinatorics, discrete geometry, and coding theory, and their applications to computer science.
 
@@ -22,7 +22,8 @@ You can find my CV [here](https://alkjash.github.io/files/CV_Xiaoyu_He.pdf). I b
 
 [Jiaxi Nie](https://jiaxinie.github.io/) (Visiting Assistant Professor) <br />
 [Ruben Ascoli](https://sites.google.com/view/ruben-ascoli) (ACO PhD Student) <br />
-Winston Stucki (SoM PhD Student)
+Winston Stucki (SoM PhD Student) <br />
+[Logan Post](https://sites.google.com/view/loganpost) (ACO PhD Student)
 
 If you are a student interested in working with me, please reach out after taking a look at [problems](https://alkjash.github.io/problems/) and [my blog](https://alkjash.github.io/blog/) to get a sense of my research interests and philosophy.
 
