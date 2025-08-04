@@ -7,10 +7,15 @@ author_profile: true
 
 This page contains the pdf files (from the arXiv) for my papers. For a few, you can also find the slides for an associated talk.
 
+* Ruben Ascoli, Xiaoyu He, and Hans Hung-Hsun Yu, Polynomial-to-exponential transition in 3-uniform Ramsey numbers, preprint (2025). [[pdf](https://arxiv.org/abs/2507.09434)]
+* Xiaoyu He, Jiaxi Nie, Yuval Wigderson, and Hans Hung-Hsun Yu, Off-diagonal Ramsey numbers for linear hypergraphs, preprint (2025). [[pdf](https://arxiv.org/abs/2507.05641)]
+* David Conlon, Jacob Fox, Benjamin Gunby, Xiaoyu He, Dhruv Mubayi, Andrew Suk, Jacques Verstraëte, and Hans Hung-Hsun Yu, When are off-diagonal hypergraph Ramsey numbers polynomial?, Proc. Amer. Math. Soc (2025), to appear. [[pdf](https://arxiv.org/abs/2411.13812)]
+* Xiaoyu He and Jiaxi Nie, Generalized Erdős-Rogers problems for hypergraphs, preprint (2025). [[pdf](https://arxiv.org/abs/2504.03138)]
+* Ruben Ascoli and Xiaoyu He, Rational values of the weak saturation limit, preprint (2025). [[pdf](https://arxiv.org/abs/2501.15686)]
 * Xiaoyu He, Tomas Juskevicius, Bhargav Narayanan, and Sam Spiro, The reverse Littlewood-Offord problem of Erdős, preprint (2024). [[pdf](https://arxiv.org/abs/2408.11034)]
 * David Conlon, Jacob Fox, Xiaoyu He, Dhruv Mubayi, Andrew Suk, Jacques Verstra&euml;te, Big line or big convex polygon, preprint (2024). [[pdf](https://arxiv.org/abs/2405.03455)]
 * David Conlon, Jacob Fox, Xiaoyu He, Dhruv Mubayi, Huy Tuan Pham, Andrew Suk, Jacques Verstra&euml;te, A question of Erdős and Graham on Egyptian fractions, preprint (2024). [[pdf](https://arxiv.org/abs/2404.16016)]
-* David Conlon, Jacob Fox, Benjamin Gunby, Xiaoyu He, Dhruv Mubayi, Andrew Suk, Jacques Verstra&euml;te, On off-diagonal hypergraph Ramsey numbers, preprint (2024). [[pdf](https://arxiv.org/html/2404.02021v1)]
+* David Conlon, Jacob Fox, Benjamin Gunby, Xiaoyu He, Dhruv Mubayi, Andrew Suk, Jacques Verstra&euml;te, On off-diagonal hypergraph Ramsey numbers, Int. Math. Res. Not. IMRN (2025). [[pdf](https://arxiv.org/html/2404.02021v1)]
 * Benjamin Gunby, Xiaoyu He, Bhargav Narayanan, and Sam Spiro, Antichain codes, Bull. London Math. Soc. 55 (2023), 3053--3062. [[pdf](https://arxiv.org/abs/2212.08406)]
 * Xiaoyu He and Ray Li, Approximating binary longest common subsequence in near-linear time, STOC (2023). [[pdf](https://arxiv.org/abs/2211.16660)]
 * David Conlon, Jacob Fox, Xiaoyu He, Dhruv Mubayi, Andrew Suk, and Jacques Verstra&euml;te, Hypergraph Ramsey numbers of cliques versus stars, Random Structures Algorithms 63 (2023), 442--456. [[pdf](https://arxiv.org/pdf/2210.03545)]
