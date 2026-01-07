@@ -10,7 +10,7 @@ redirect_from:
 
 Welcome! I am a (tenure-track) Richard Duke Assistant Professor in the School of Math at Georgia Tech.
 
-In Fall 2025, I am teaching Math 8803, a topics course in on Ramsey and Turán problems for graphs and hypergraphs.
+In Spring 2026, I am teaching Math 7018, Probabilistic Combinatorics.
 
 My  research interests are extremal, probabilistic, and algebraic combinatorics, especially Ramsey theory, graph coloring, additive combinatorics, discrete geometry, and coding theory, and their applications to computer science.
 
