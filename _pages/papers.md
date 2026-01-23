@@ -17,7 +17,7 @@ This page contains the pdf files (from the arXiv) for my papers. For a few, you 
 * Ruben Ascoli and Xiaoyu He, Rational values of the weak saturation limit, preprint (2025). [[pdf](https://arxiv.org/abs/2501.15686)]
 * Xiaoyu He, Tomas Juskevicius, Bhargav Narayanan, and Sam Spiro, The reverse Littlewood-Offord problem of Erdős, preprint (2024). [[pdf](https://arxiv.org/abs/2408.11034)]
 * David Conlon, Jacob Fox, Xiaoyu He, Dhruv Mubayi, Andrew Suk, Jacques Verstra&euml;te, Big line or big convex polygon, Comput. Geom. 131 (2026), 102218. [[pdf](https://arxiv.org/abs/2405.03455)]
-* David Conlon, Jacob Fox, Xiaoyu He, Dhruv Mubayi, Huy Tuan Pham, Andrew Suk, Jacques Verstra&euml;te, A question of Erdős and Graham on Egyptian fractions, preprint (2024). [[pdf](https://arxiv.org/abs/2404.16016)]
+* David Conlon, Jacob Fox, Xiaoyu He, Dhruv Mubayi, Huy Tuan Pham, Andrew Suk, Jacques Verstra&euml;te, A question of Erdős and Graham on Egyptian fractions, Discret. Anal. 28 (2025). [[pdf](https://arxiv.org/abs/2404.16016)]
 * David Conlon, Jacob Fox, Benjamin Gunby, Xiaoyu He, Dhruv Mubayi, Andrew Suk, Jacques Verstra&euml;te, On off-diagonal hypergraph Ramsey numbers, Int. Math. Res. Not. IMRN (2025). [[pdf](https://arxiv.org/html/2404.02021v1)]
 * Benjamin Gunby, Xiaoyu He, Bhargav Narayanan, and Sam Spiro, Antichain codes, Bull. London Math. Soc. 55 (2023), 3053--3062. [[pdf](https://arxiv.org/abs/2212.08406)]
 * Xiaoyu He and Ray Li, Approximating binary longest common subsequence in near-linear time, STOC (2023). [[pdf](https://arxiv.org/abs/2211.16660)]
