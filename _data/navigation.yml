@@ -4,6 +4,8 @@ main:
     url: /papers/
   - title: "Problems"
     url: /problems/
+  - title: "Teaching"
+    url: /teaching/
   - title: "Blog"
     url: /blog/
   - title: "CV"
