@@ -140,6 +140,9 @@ sitemap: false
     .cite:hover .pop, .cite:focus-within .pop,
     .fnref:hover .pop, .fnref:focus-within .pop, .fnref.open .pop,
     .gloss:hover .pop, .gloss:focus-within .pop, .gloss.open .pop{transform:translateY(0)}
+    /* Long sections can never reach a ratio-based observer threshold on a
+       short mobile viewport. Keep them visible even if reveal JS is delayed. */
+    section.reveal{opacity:1; transform:none}
   }
 
   .draftnote{
@@ -775,7 +778,7 @@ const spy=new IntersectionObserver(es=>{
 },{rootMargin:'-20% 0px -70% 0px'});
 document.querySelectorAll('section[id], h3.subsec[id]').forEach(s=>spy.observe(s));
 
-const rev=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in'); rev.unobserve(e.target);}})},{threshold:.05});
+const rev=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in'); rev.unobserve(e.target);}})},{threshold:0,rootMargin:'0px 0px -5% 0px'});
 document.querySelectorAll('.reveal').forEach(r=>rev.observe(r));
 
 addEventListener('scroll',()=>{
