@@ -7,6 +7,8 @@ author_profile: true
 
 I blog about life, research, and rationality at [my personal blog](https://radimentary.wordpress.com); most of my better posts can also be found cross-posted on [LessWrong](https://www.lesswrong.com/users/alkjash).
 
+Here is an experimental essay I wrote about x-risk: [Existential Risk from AI: An Exposition for Mathematicians](/ai-risk/).
+
 ## Best Posts
 
 1. [Pain is not the unit of Effort](https://radimentary.wordpress.com/2020/11/24/pain-is-not-the-unit-of-effort/)
