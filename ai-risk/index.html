@@ -224,7 +224,7 @@ layout: null
   .gloss:hover .pop.below, .gloss:focus-within .pop.below, .gloss.open .pop.below{transform:translateX(-50%) translateY(0)}
   .toc a.statement-link{min-width:1.5rem; min-height:1.5rem; display:inline-flex; align-items:center; justify-content:center}
   @media (max-width:900px){
-    nav.toc{width:min(var(--toc-w),calc(100vw - 1rem)); height:100vh; height:100dvh; overscroll-behavior:contain; padding-bottom:max(2rem,env(safe-area-inset-bottom))}
+    nav.toc{width:min(var(--toc-w),calc(100vw - 1rem)); height:100vh; height:100dvh; overscroll-behavior:contain; padding-bottom:calc(4.75rem + env(safe-area-inset-bottom))}
     .pop{max-height:calc(100vh - 6rem); max-height:calc(100dvh - 6rem)}
     body.toc-open{overflow:hidden}
   }
@@ -258,6 +258,9 @@ layout: null
   #main .proof>p:not(.mathblock){margin-top:1.05em}
   figure.markov-chain{padding:.25rem 0 .5rem}
   figure.markov-chain img{display:block; width:100%; max-width:100%; height:auto; margin:0 auto}
+
+  .toc .writing-link{display:flex; align-items:center; min-height:44px; margin:.15rem .5rem 0; padding:.55rem .1rem .35rem; border-top:1px solid var(--rule); color:var(--muted); font-size:.76rem; line-height:1.35; text-decoration:none}
+  .toc .writing-link:hover{color:var(--crimson); text-decoration:underline; text-underline-offset:.15em}
 </style>
 <link rel="icon" href="data:,"></head>
 <body id="top">
@@ -289,7 +292,7 @@ layout: null
     <li><a class="sec" href="#conclusion"><small>6</small> Concluding Remarks</a></li>
     <li><a class="sec" href="#references"><small> </small> References</a></li>
   </ol>
-</nav>
+<a class="writing-link" href="https://alkjash.github.io/blog/" aria-label="See more writing by Xiaoyu He">← More writing</a></nav>
 
 <div class="wrap">
 <main id="main" tabindex="-1">
