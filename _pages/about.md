@@ -21,6 +21,7 @@ You can find my CV [here](https://alkjash.github.io/files/CV_Xiaoyu_He.pdf). I b
 ## Current group
 
 [Jiaxi Nie](https://jiaxinie.github.io/) (Visiting Assistant Professor) <br />
+[Fei Peng](https://fei.land/math/peng/) (Visiting Assistant Professor) <br />
 [Ruben Ascoli](https://sites.google.com/view/ruben-ascoli) (ACO PhD Student) <br />
 Winston Stucki (SoM PhD Student) <br />
 [Logan Post](https://sites.google.com/view/loganpost) (ACO PhD Student)
