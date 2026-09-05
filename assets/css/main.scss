@@ -39,3 +39,33 @@
 @import "vendor/font-awesome/brands";
 @import "vendor/magnific-popup/magnific-popup";
 @import "print";
+
+// Keep the portrait and all navigation links visible on phones.
+@media (max-width: 767px) {
+  .masthead__inner-wrap { padding: .6em 1em; }
+  #site-nav { white-space: normal; }
+  #site-nav > button, #site-nav .hidden-links { display: none; }
+  #site-nav .visible-links {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    align-items: center;
+    width: 100%;
+  }
+  #site-nav .visible-links > li { display: block; }
+  #site-nav .visible-links > .masthead__menu-item--lg {
+    grid-column: 1 / -1;
+    padding-right: 0;
+  }
+  #site-nav .visible-links a {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    margin: 0;
+    padding: 0 .4em;
+    font-size: .875rem;
+  }
+  #site-nav .masthead__menu-item--lg a { padding-left: 0; font-size: 1rem; }
+  .sidebar .author__avatar { width: 80px; }
+  .sidebar .author__avatar img { width: 80px; max-width: 80px; height: auto; }
+  .sidebar .author__urls-wrapper { display: none; }
+}

@@ -1,0 +1,118 @@
+---
+layout: null
+---
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Safety: A Short FAQ for Mathematicians</title><meta name="description" content="A short introduction to AI safety research and ways for mathematicians to get involved."><meta name="author" content="Xiaoyu He">
+<meta property="og:type" content="article"><meta property="og:title" content="AI Safety: A Short FAQ for Mathematicians"><meta property="og:description" content="A short introduction to AI safety research and ways for mathematicians to get involved."><meta name="twitter:card" content="summary">
+<style>:root{--paper:#fff;--ink:#1b1b1d;--muted:#71717a;--crimson:#a3241c;--crimson-soft:#f6e9e8;--link:#2244aa;--rule:#e8e8ea;--toc-w:250px}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:Charter,'Bitstream Charter','Sitka Text',Cambria,Georgia,serif;font-size:17px;line-height:1.62}
+a{color:var(--link);text-decoration:none}a:hover{text-decoration:underline}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var(--crimson);outline-offset:4px}
+nav.toc{position:fixed;top:0;left:0;width:var(--toc-w);height:100vh;height:100dvh;overflow-y:auto;padding:2.2rem 1.4rem 2rem 1.6rem;border-right:1px solid var(--rule);font-family:ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;font-size:.82rem;background:var(--paper);z-index:50}
+main{width:min(700px,calc(100% - var(--toc-w)));padding:3.2rem 1.4rem 5rem;margin-left:max(var(--toc-w),calc((100vw - 700px)/2));margin-right:0}
+.toc-title{display:block;margin:0 0 .9rem;font-size:.8rem;line-height:1.35;letter-spacing:.025em;color:var(--ink);font-weight:650}
+.toc ol{list-style:none;margin:0 0 1.4rem;padding:0}.toc li{margin:0}
+.toc a.sec{display:block;padding:.38rem .5rem;border-left:2px solid transparent;color:var(--ink);border-radius:0 4px 4px 0}
+.toc a.sec small{color:var(--muted);margin-right:.35em}
+.toc a.sec:hover{background:#f6f6f7;text-decoration:none}
+.toc a.sec.active{border-left-color:var(--crimson);background:var(--crimson-soft);color:var(--crimson);font-weight:600}
+.writing-link{display:block;border-top:1px solid var(--rule);padding:.9rem .5rem;color:var(--muted);font-size:.78rem}
+.titleblock{text-align:center;margin:1rem 0 2.6rem}
+.titleblock h1{font-family:Charter,Georgia,'Times New Roman',serif;font-weight:400;font-size:1.9rem;line-height:1.3;margin:0 0 1.1rem}
+.author{font-family:Charter,Georgia,serif;font-size:1.05rem;margin:.2rem 0}
+p{margin:0 0 1.05em}ol.goals{padding-left:1.5em}ol.goals li{padding-left:.25em;margin-bottom:.55em}
+section,details{scroll-margin-top:2.5rem}
+details.faq{margin:2.4rem 0}
+summary{list-style:none;cursor:pointer;display:flex;align-items:baseline;gap:.75rem}
+summary::-webkit-details-marker{display:none}
+summary::after{content:'+';font-family:ui-sans-serif,system-ui,sans-serif;color:var(--muted);font-size:1.1rem;margin-left:auto;flex-shrink:0}
+details[open]>summary::after{content:'−'}
+summary h2{font-family:Charter,Georgia,serif;font-weight:700;font-size:1em;line-height:1.5;margin:0}
+summary .n{margin-right:.6em}
+.question{font-style:italic;margin:1rem 0 1.4rem}
+.answer{margin-top:1.2rem}
+.answer hr{width:5rem;border:0;border-top:1px solid #ccc;margin:1.8rem auto}
+h2.sec{font-family:Charter,Georgia,serif;font-size:1.35rem;margin:3rem 0 1rem}
+h3{font-family:Charter,Georgia,serif;font-size:1.12rem;margin:2rem 0 .8rem}
+.attribution{border-top:1px solid var(--rule);margin-top:2.8rem;padding-top:1.2rem;font-size:.88rem;color:var(--muted)}
+#tocbtn{display:none;position:fixed;bottom:1.1rem;left:1.1rem;z-index:70;background:var(--ink);color:#fff;border:0;border-radius:999px;padding:.6rem 1rem;font-family:ui-sans-serif,system-ui,sans-serif;font-size:.85rem;cursor:pointer;min-height:44px}
+.skip-link{position:fixed;top:.5rem;left:.5rem;z-index:100;padding:.55rem .8rem;background:#fff;color:var(--link);border:2px solid var(--link);transform:translateY(-180%)}.skip-link:focus{transform:none}
+@media(max-width:900px){nav.toc{transform:translateX(-102%);visibility:hidden;transition:transform .2s ease;width:min(var(--toc-w),calc(100vw - 1rem));box-shadow:8px 0 30px #0001;padding-bottom:6rem}nav.toc.open{transform:none;visibility:visible}main{width:min(700px,100%);margin-left:auto;margin-right:auto}#tocbtn{display:block}.toc a.sec{padding:.65rem .5rem}}
+@media(max-width:480px){main{padding:2.2rem 1.2rem 5rem}.titleblock h1{font-size:1.7rem}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}nav.toc{transition:none}}
+@media print{nav.toc,#tocbtn,.skip-link{display:none!important}main{width:100%;max-width:none;margin:0;padding:0}summary::after{display:none}details{break-inside:auto}h2,h3,summary{break-after:avoid}}
+</style></head><body>
+<a class="skip-link" href="#main">Skip to article</a>
+<button id="tocbtn" type="button" aria-label="Open table of contents" aria-controls="toc" aria-expanded="false">§ Contents</button>
+<nav class="toc" id="toc" aria-label="Contents"><span class="toc-title">AI safety for mathematicians</span><ol><li><a class="sec" href="#introduction">Introduction</a></li><li><a class="sec" href="#a-field-of-problems"><small>1</small> Is there enough to do?</a></li><li><a class="sec" href="#the-mathematics"><small>2</small> Is the math interesting?</a></li><li><a class="sec" href="#what-we-bring"><small>3</small> Can I compete?</a></li><li><a class="sec" href="#getting-involved"><small>4</small> How can I contribute?</a></li><li><a class="sec" href="#resources">Resources</a></li></ol><a class="writing-link" href="/ai-safety/">← AI Safety</a></nav>
+<main id="main"><header class="titleblock"><h1>AI Safety: A Short FAQ<br>for Mathematicians</h1><p class="author">Xiaoyu He</p></header>
+<section id="introduction" data-source><p>This is a follow-up to my <a href="https://alkjash.github.io/ai-risk/">essay about existential risk</a>, in which I made the case that AI presents a substantial existential risk to humanity. The primary goals of this post are to suggest that:</p>
+<ol class="goals"><li>AI safety research is deep, broad, and mathematically interesting.</li><li>It is possible to transition smoothly to alignment work as an academic mathematician without necessarily leaving your career.</li></ol>
+</section>
+<details class="faq" id="a-field-of-problems"><summary><h2><span class="n">1</span><span data-source>AI safety is just one problem. Even if it’s the biggest problem in the world, is it really productive to have many people work on it?</span></h2></summary><div class="answer" data-source><p>AI safety is not one problem in the same way that the Riemann Hypothesis is one problem; it’s an umbrella over a sprawling <a href="https://shallowreview.ai/overview">network</a> of interconnected problems. To list several important factorizations off the top of my head:</p>
+<p><strong>Inner vs. outer alignment.</strong> Inner alignment is the technical problem of robustly encoding a target set of preferences into an AI; it is difficult because training procedures that select for outwardly aligned behavior do not necessarily select for deeply aligned internals. Outer alignment is the problem of deciding what set of preferences we want to encode in the first place, and is more of a moral philosophy problem.</p>
+<p><strong>Control vs. alignment.</strong> Control asks “How do we build superintelligences that stay subservient?” Alignment asks “How do we build superintelligences that support human flourishing (or at least don’t kill or torture us) even if they don’t stay subservient?” These are related but distinct research programs, and many researchers believe only one or the other is possible or ethical.</p>
+<p><strong>Monopolar vs. multipolar alignment.</strong> Depending on takeoff speeds and geopolitics, we may either end up in a monopolar world (one lab or state actor races ahead to superintelligence and dominates the competition) or a multipolar situation (several different actors stay neck-and-neck throughout the AI race and keep each other in check). Navigating multipolar endgames opens up a whole new set of mathematically difficult game-theoretic considerations.</p>
+<p><strong>Security and dissemination of magic.</strong> As I argued in the <a href="https://alkjash.github.io/ai-risk/#magic">previous essay</a>, AI progress may hand us a plethora of technological advances even before reaching true superintelligence. Some of these advances may be extremely dangerous and demand draconian and specialized security measures. Others may be enormously beneficial to society but <em>still</em> be catastrophically disruptive if handled carelessly. At a minimum, policy conversations would benefit from the inclusion of level-headed humans who can reason about shifts in supply and demand curves, instead of acting out of purely vibe-based Luddism or accelerationism.</p>
+<p><strong>Pause and technical governance.</strong> AI progress will come overwhelmingly fast if it is not slowed down by fiat. A substantial and effective pause requires civilizational coordination on the level of nuclear nonproliferation. We need a lot of people to engage in activism, and there are a host of technical problems to be solved on top of it (how do we monitor all the GPUs to make sure they’re not training new models?).</p>
+<hr>
+<p>AI safety is everyone’s problem, the same way that World War II was everyone’s problem. Mathematicians in World War II made essential contributions to the bomb, cryptography, ballistics, operations research, and game theory. There will be an even broader spectrum of technical problems for mathematicians to contribute to in the critical window of AI progress.</p></div></details>
+<details class="faq" id="the-mathematics"><summary><h2><span class="n">2</span><span data-source>Isn’t AI research just ugly linear algebra and machine learning?</span></h2></summary><div class="answer" data-source><p>Alignment research is not confined to ML in the same way capabilities research is, and parts of it are as beautiful as anything I’ve encountered in pure mathematics. One of the most mind-bending areas of alignment research is the so-called “agent foundations” agenda, which seeks to build a mathematical and philosophical framework for understanding game theory and decision theory for AI agents, breaking several of the unstated assumptions of the classical theories. Examples:</p>
+<p><strong>Open-source game theory.</strong> What happens when the players in a game of strategy are not black boxes, but LLMs who have access to each other’s weights and can simulate each other&#x27;s intentions and decisions? In toy models, Löb’s theorem from mathematical logic lets specially constructed agents reliably cooperate in the one-shot prisoner’s dilemma, and coordinate in other ways completely alien to human experience. For example, the agents could be sufficiently mathematically legible and deterministic that they can trust each other to cooperate if and only if they cooperate themselves, where trust is in the sense of a Lean proof. Such considerations may be important in understanding the emergent behavior of “AI agent swarms” or “hive minds” since future LLM-based agents may have access to levels of cooperation unthinkable to us.</p>
+<p><strong>Embedded agency.</strong> Traditional decision theory assumes a “Cartesian boundary”: an impassable boundary separating the “agent” that acts and the “arena” it acts upon. We may soon be breaking this boundary and building minds with deep and precise introspective access at the level of modifying their own neural connections one at a time, and similar access to the minds of future generations of AIs via recursive self-improvement. Even for humans, it is hard to draw an exact line between acceptable human self-tinkering, such as taking SSRIs for depression, and unacceptable self-tinkering, such as developing a heroin addiction. We still don’t collectively agree on whether it was okay for Erdős to take amphetamines. It is both philosophically and technically hard to reason about minds that are embedded in their own arenas and have the capacity to inspect and modify their own internals. Initial forays into embedded agency suggest that making embedded superintelligences stable may reduce to deep mathematical fixed-point problems.</p>
+<hr>
+<p>Even for the mathematics closer to AI/ML research, which is relatively unaesthetic, I’ve found several of the guiding paradigms to be enlightening parables about the human condition:</p>
+<p><strong>Reinforcement Learning with Verifiable Rewards (RLVR).</strong> One of the new big things in AI research is RLVR, which increasingly supplements the older tech Reinforcement Learning with Human Feedback (RLHF) in domains like mathematics, where answer quality can be verified mechanically. RLVR is one of the reasons why LLMs are especially good at math now: mathematical progress is easily verifiable by itself and does not require laborious human data-labelling. As a mathematician, I identify with the RLVR model: much of the best mathematics I’ve produced happened in an empty room, judging my progress by myself, unthrottled by slow and noisy feedback from other human beings.</p>
+<p><strong>Iterated Distillation and Amplification (IDA).</strong> This is a proposal for bootstrapping weaker models into stronger ones, developed at the intersection of capabilities and alignment research. Roughly speaking, the idea is to alternate between two stages: have the model think slowly to produce outputs better than its reflexes (amplification), then train on those high-quality outputs until the better judgment <em>becomes</em> reflex (distillation). IDA is analogous to the way one trains a graduate student to write papers - the first couple of papers take a dozen agonizing rewrites and editing passes, with the goal that the student can successfully distill the lessons from these laborious sessions and write essentially polished drafts on the first (or third) try.</p>
+<hr>
+<p>Another reason I’ve become more excited about working in this space recently is that LLMs can now think about all the matrix multiplication for us. It’s been claimed that the primary value humans can now add to both capabilities and alignment research is “research taste,” the ability to select the right questions and introduce the most aesthetic formalizations. There’s nobody with better taste than mathematicians.</p></div></details>
+<details class="faq" id="what-we-bring"><summary><h2><span class="n">3</span><span data-source>Can I possibly compete with the legions of ambitious youngsters who grew up in this era?</span></h2></summary><div class="answer" data-source><p>Mathematicians have a sort of deep learned helplessness about acting in the “Real World,” since we are trained to act within our narrow sandbox with very constrained imagination. When I was in grad school, for example, it occurred to me that if I wanted to maximize my contribution to mathematical progress, I would do better by being a personal assistant to my much more brilliant PhD advisor to free up his research time than by trying to prove theorems on my own. I know of someone else who was a full-time ghostwriter for other people’s papers who thus contributed more to the progress of their subfield than most of their peers.</p>
+<p>Learned helplessness sounds like a bad thing, but it’s actually like spending your whole life wearing heavy training weights. My observation is that mathematicians who successfully take these training weights off can become superstars. Acting with agency and imagination in the Real World is complicated and does require practice, but in the end this is a relatively easy and primitive mental skill compared to algebraic geometry. Math is the language in which the universe is written, and in many parts of the world the actual hardest part of acting effectively is being good at math. This is why many of the top AI capabilities and alignment researchers have deep math/TCS backgrounds.</p>
+<p>Let me also add that academic mathematicians have been partially responsible for (and complicit in) steering AI progress for a long time. Many of the most-cited benchmarks, including FrontierMath, FirstProof, and many others, were developed by mathematicians in collaboration with frontier labs, and their existence is likely partially responsible for the particular mathematical strength of current models. Math academia already has an ecosystem in place for designing evals to guide AI research; we should be using this ecosystem to advance alignment and the interests of humanity.</p></div></details>
+<details class="faq" id="getting-involved"><summary><h2><span class="n">4</span><span data-source>OK, I’m convinced. What can I actually do to contribute?</span></h2></summary><div class="answer" data-source><p>There are numerous existing ways to dip your toes in the water. Here are a few off the top of my head:</p>
+<p><strong>Start a reading course. </strong>Is there anything mathematicians are better at than starting reading courses?<strong> </strong>Most PhD students and postdocs in mathematics are extremely worried about AI and their job prospects; it is essentially trivial to nudge them into starting reading groups and looking into alignment research, if only as a backup option in case mathematics goes kaboom.</p>
+<p><strong>Contact your local AI safety group. </strong>Most research universities with computer science programs already have active AI safety initiatives and student groups; you can likely do a lot of good cheaply by contacting your local group and helping them reach mathematics departments, where they are relatively inactive.</p>
+<p><strong>Look into short-term fellowships. </strong>There are plenty of reputable fellowship, visiting-researcher, and career-transition programs designed exactly to get outsiders up to speed on alignment research in a few months, without a career-ending commitment. Some such programs I (weakly) endorse are hosted by ARC, MATS, and Anthropic. Senior researchers can probably get even more mileage out of directly contacting organizations of interest.</p>
+<p><strong>Apply for funding. </strong>There are already hundreds of millions in yearly <a href="https://harrywaterman.com/fieldmap/">funding</a> available for safety research, and it is projected that this amount will shoot up by an <a href="https://harrywaterman.com/fieldmap/#context">order of magnitude</a> with the astronomical upcoming IPOs of certain AI labs. A surprising amount of such funding has already been captured by “one interested academic and their group.” Mathematicians may soon have an easier time being funded for mathematical research in AI safety via philanthropy than by the NSF.</p></div></details>
+<section id="resources" data-source>
+<h2 class="sec">Resources</h2>
+<p>Here are some places to start, whether you want to organize a reading group, try a research project, or take a few months to explore the field.</p>
+<h3><strong>Getting oriented and starting a reading group</strong></h3>
+<p><a href="https://harrywaterman.com/fieldmap/">AI Safety Fieldmap</a>: Overview of the field, including organizations, research areas, headcounts, budgets, and funding flows.</p>
+<p><a href="https://bluedot.org/courses">BlueDot Impact</a>: Online AI safety courses and project sprints, with material you can use to structure a reading group.</p>
+<p><a href="https://www.alignmentforum.org/">AI Alignment Forum</a>: Research posts and technical discussion across alignment agendas.</p>
+<p><a href="https://www.arena.education/">ARENA</a>: Practical training and exercises for the empirical side of AI safety, including deep learning and mechanistic interpretability.</p>
+<h3><strong>Fellowships and research programs</strong></h3>
+<p><a href="https://www.matsprogram.org/">MATS</a>: Mentored research across AI safety areas, including theory, with extension and residency pathways.</p>
+<p><a href="https://alignment.anthropic.com/2025/anthropic-fellows-program-2026/">Anthropic Fellows</a>: Four months of empirical AI safety research with funding and mentorship from Anthropic researchers.</p>
+<p><a href="https://www.sparai.org/">SPAR</a>: A three-month, remote research program with flexible, part-time participation and mentorship in AI safety and policy.</p>
+<p><a href="https://princint.ai/programs/fellowship/">PIBBSS</a>: Run by Principles of Intelligence; an approximately three-month interdisciplinary fellowship connecting researchers from fields such as mathematics, neuroscience, and philosophy with AI safety mentors.</p>
+<p><a href="https://www.aialignmentfoundation.org/fellowship">AI Alignment Foundation Fellowship</a>: An eight-week, remote, full-time alignment research fellowship.</p>
+<p><a href="https://constellation.org/programs/astra">Astra Fellowship at Constellation</a>: Full-time research with separate empirical AI safety and strategy and governance streams.</p>
+<p class="attribution"><em>Written with help from Claude Fable 5.1 and ChatGPT 6 Astra.</em></p>
+</section>
+</main><script>const toc=document.getElementById('toc');
+const tocButton=document.getElementById('tocbtn');
+const links=[...toc.querySelectorAll('a.sec')];
+const faq=[...document.querySelectorAll('details.faq')];
+function closeToc(){toc.classList.remove('open');tocButton.setAttribute('aria-expanded','false');tocButton.setAttribute('aria-label','Open table of contents');}
+tocButton.addEventListener('click',()=>{const open=toc.classList.toggle('open');tocButton.setAttribute('aria-expanded',String(open));tocButton.setAttribute('aria-label',open?'Close table of contents':'Open table of contents');});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&toc.classList.contains('open')){closeToc();tocButton.focus();}});
+document.addEventListener('click',e=>{if(!toc.contains(e.target)&&!tocButton.contains(e.target))closeToc();});
+function revealHash(){let id;try{id=decodeURIComponent(location.hash.slice(1));}catch{return;}const target=document.getElementById(id);if(!target)return;const details=target.closest('details');if(details)details.open=true;requestAnimationFrame(()=>target.scrollIntoView());}
+links.forEach(link=>link.addEventListener('click',()=>{const target=document.getElementById(link.hash.slice(1));if(target?.tagName==='DETAILS')target.open=true;closeToc();}));
+window.addEventListener('hashchange',revealHash);
+if(location.hash)revealHash();
+const sections=links.map(link=>document.getElementById(link.hash.slice(1)));
+let scheduled=false;
+function highlight(){scheduled=false;let current=0;sections.forEach((section,i)=>{if(section.getBoundingClientRect().top<=160)current=i;});links.forEach((link,i)=>{link.classList.toggle('active',i===current);if(i===current)link.setAttribute('aria-current','location');else link.removeAttribute('aria-current');});}
+window.addEventListener('scroll',()=>{if(!scheduled){scheduled=true;requestAnimationFrame(highlight);}},{passive:true});
+faq.forEach(section=>section.addEventListener('toggle',highlight));
+highlight();
+let beforePrint=[];
+window.addEventListener('beforeprint',()=>{beforePrint=faq.map(section=>section.open);faq.forEach(section=>section.open=true);});
+window.addEventListener('afterprint',()=>faq.forEach((section,i)=>section.open=beforePrint[i]));
+</script></body></html>
