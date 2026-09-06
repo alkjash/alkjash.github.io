@@ -156,8 +156,8 @@ button:disabled{opacity:.62;color:#aab2ad}
  .underbar{padding:8px 4px;gap:5px}
  .underbar>span:not(.save){display:none}
  .underbar .save{font-size:8px}
- .log-strip{min-height:46px}
- .log-strip .log-lines span:nth-child(n+2){display:none}
+ 
+ 
  .first-steps{gap:4px;margin-bottom:12px}
  .first-steps>span{grid-template-columns:auto;gap:3px;padding:6px 3px;font-size:9px}
  .first-steps>span i{display:none}

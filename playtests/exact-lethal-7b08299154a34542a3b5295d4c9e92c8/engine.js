@@ -1,8 +1,11 @@
-// Exact Lethal, Act I — deterministic, JSON-safe rules independent of the UI.
+// Exact Lethal — deterministic, JSON-safe rules independent of the UI.
 import {generateEncounter,DANGEROUS_TYPES} from './encounters.js';
 import {WEAPONS,STARTING_POOL} from './equipment-catalog.js';
 import {selectEnemyLoot,selectShopStock} from './loot-tables.js';
-export {WEAPONS,STARTING_POOL};
+import {ACT_ENEMIES,ACT_EVENTS} from './act-content.js';
+import {DAYS as CAMPAIGN_DAYS,RECOVERY_POLICIES,campaignStateForDay,dayDefinition,isActMilestone,isFinalDay,validateCampaignState} from './campaign.js';
+export {WEAPONS,STARTING_POOL,RECOVERY_POLICIES};
+export const SAVE_VERSION=8;
 export const REWARD_ITEM_CHANCE=0.2;
 export const BLESSINGS = {
  power:{id:'power',name:'Blessing of Power',desc:'+1 to both damage endpoints.'},
@@ -17,18 +20,7 @@ export const DIFFICULTIES = {
  famine:{id:'famine',name:'Famine',parent:'pilgrim',desc:'Dangerous encounters join the road. All healing is halved.',dangerous:true,hpBonus:0,attackBonus:0,healingMultiplier:0.5,armorBonus:0},
  crown:{id:'crown',name:'The Broken Crown',parent:'iron',desc:'Dangerous encounters, Iron Vow, and +1 enemy attack and armor.',dangerous:true,hpBonus:0.25,attackBonus:1,healingMultiplier:1,armorBonus:1}
 };
-export const DAYS = [
- {day:1,type:'combat',name:'The Ashen Gate',desc:'One goblin bars the gate.'},
- {day:2,type:'combat',name:'The Toll Road',desc:'Goblins steal. Orcs grow stronger.'},
- {day:3,type:'event',name:'The Last Wayside',desc:'A little warmth before the climb.'},
- {day:4,type:'combat',name:'The Iron Vigil',desc:'The road grows less forgiving.'},
- {day:5,type:'combat',name:'The Bone Orchard',desc:'New enemies test your equipment.'},
- {day:6,type:'combat',name:'The Red Procession',desc:'Read each threat before committing.'},
- {day:7,type:'event',name:'The Lantern Merchant',desc:'Review your equipment. Prepare for the final days.'},
- {day:8,type:'combat',name:'The Sunken Choir',desc:'A stronger procession awaits.'},
- {day:9,type:'combat',name:'The Warden’s Stair',desc:'A final test before the bell.'},
- {day:10,type:'boss',name:'The Bell of Ash',desc:'Defeat the Bellwarden to finish Act I.'}
-];
+export const DAYS = CAMPAIGN_DAYS;
 export const ENEMIES = {
  goblin:{name:'Ash goblin',art:'goblin',armor:0,attack:2,mechanic:'steal',traitText:'PILFER · Steals 1 gold when its attack deals damage.'},
  orc:{name:'Cinder orc',art:'brute',armor:0,attack:2,mechanic:'rage',traitText:'RAGE · Gains 1 attack at the end of every turn.'},
@@ -45,7 +37,8 @@ export const ENEMIES = {
  bonecook:{name:'Bone cook',art:'shaman',armor:0,attack:3,mechanic:'bonecook',healInterrupt:4},
  painkeeper:{name:'Painkeeper',art:'brute',armor:0,attack:0,mechanic:'painkeeper',reflectionMultiplier:4},
  weaponbreaker:{name:'Weapon breaker',art:'knight',armor:0,attack:5,mechanic:'weaponbreaker'},
- oathkeeper:{name:'Oathkeeper',art:'knight',armor:0,attack:4,mechanic:'oathkeeper',oathMultiplier:4}
+ oathkeeper:{name:'Oathkeeper',art:'knight',armor:0,attack:4,mechanic:'oathkeeper',oathMultiplier:4},
+ ...ACT_ENEMIES
 };
 const ENCOUNTERS = {
  1:[['goblin',4]],2:[['orc',6],['goblin',4]],4:[['knight',7,'laceration'],['goblin',6]],
@@ -57,7 +50,7 @@ const LATE_ATTACK_BONUS={8:5,9:6,10:7};
 const copy=value=>JSON.parse(JSON.stringify(value));
 const has=(object,key)=>Object.prototype.hasOwnProperty.call(object,key);
 const validSlot=slot=>Number.isInteger(slot)&&slot>=0&&slot<4;
-const managed=s=>['camp','event'].includes(s.phase);
+const managed=s=>['camp','event','milestone'].includes(s.phase);
 function seedNumber(seed){if(typeof seed==='number'&&Number.isFinite(seed))return seed>>>0;let n=2166136261;for(const ch of String(seed))n=Math.imul(n^ch.charCodeAt(0),16777619);return n>>>0;}
 export function rng(s){s.seed=(Math.imul(s.seed,1664525)+1013904223)>>>0;return s.seed/4294967296;}
 function roll(s,min,max=min){return min===max?min:min+Math.floor(rng(s)*(max-min+1));}
@@ -75,7 +68,7 @@ function placeDrop(s,drop,slot){
  markDrop(s,drop,'equipped',slot);note(s,`${WEAPONS[drop.id].name} equipped in slot ${slot+1}${old?`; ${WEAPONS[old.id].name} left behind`:''}.`,'gold');
 }
 function fillEmptySlots(s){
- if(!['camp','event','won'].includes(s.phase))return;
+ if(!['camp','event','milestone','won'].includes(s.phase))return;
  while(s.pendingDrops.length&&s.slots.includes(null)){
   const slot=s.slots.indexOf(null),drop=s.pendingDrops[0];if(!canResolveDrop(s,slot))break;
   s.pendingDrops.shift();placeDrop(s,drop,slot);
@@ -109,7 +102,7 @@ export function availableDifficulties(profile={}){const wins=Array.isArray(profi
 export function recordWin(profile={},s){const result={...profile,wins:[...new Set(Array.isArray(profile.wins)?profile.wins:[])]};if(s?.phase==='won'&&has(DIFFICULTIES,s.difficulty)&&!result.wins.includes(s.difficulty))result.wins.push(s.difficulty);return result;}
 export function newRun(seed=Date.now(),difficulty='pilgrim'){
  if(!has(DIFFICULTIES,difficulty))difficulty='pilgrim';const value=seedNumber(seed);
- const s={version:7,id:`${value}-${difficulty}`,initialSeed:value,seed:value,difficulty,character:'wanderer',phase:'draft',day:1,act:1,plannedDays:30,hp:84,maxHp:84,gold:6,energy:3,maxEnergy:3,turn:1,nextUid:1,slots:[null,null,null,null],inventory:[],pendingDrops:[],startingChoices:[],enemies:[],loot:[],offers:[],event:null,dropHistory:[],lastLoot:null,jammedSlots:[],lastWeaponUsedSlot:null,exact:0,kills:0,overkills:0,roomExact:0,roomKills:0,damageTaken:0,log:[],history:[],lastAction:null};
+ const s={version:SAVE_VERSION,id:`${value}-${difficulty}`,initialSeed:value,seed:value,difficulty,character:'wanderer',phase:'draft',day:1,act:1,plannedDays:30,campaign:copy(campaignStateForDay(1)),hp:84,maxHp:84,gold:6,energy:3,maxEnergy:3,turn:1,nextUid:1,slots:[null,null,null,null],inventory:[],pendingDrops:[],startingChoices:[],enemies:[],loot:[],offers:[],event:null,dropHistory:[],lastLoot:null,jammedSlots:[],lastWeaponUsedSlot:null,exact:0,kills:0,overkills:0,roomExact:0,roomKills:0,damageTaken:0,log:[],history:[],lastAction:null};
  const pool=STARTING_POOL.filter(id=>id!=='rusty_dagger');for(let i=pool.length-1;i>0;i--){const j=roll(s,0,i);[pool[i],pool[j]]=[pool[j],pool[i]];}
  s.startingChoices=['rusty_dagger',...pool.slice(0,3)].map(id=>({id}));
  note(s,'Choose two rusty weapons. Your other two equipment slots start empty.');return s;
@@ -119,7 +112,7 @@ export function selectStartingItems(s,indices){
  for(let slot=0;slot<2;slot++)s.slots[slot]=addItem(s,s.startingChoices[indices[slot]].id).uid;
  note(s,`${getWeapon(s,0).name} and ${getWeapon(s,1).name}. The road begins.`);startDay(s);return true;
 }
-function makeDrop(s,index,type,blessing){const id=selectEnemyLoot(type,s.day,s.initialSeed,index);return {type:'chance',itemChance:REWARD_ITEM_CHANCE,item:{id,blessings:blessing?[blessing]:[]},gold:s.day<=2?3:s.day<=6?5:8};}
+function makeDrop(s,index,type,blessing){const id=selectEnemyLoot(type,s.day,s.initialSeed,index);return {type:'chance',itemChance:REWARD_ITEM_CHANCE,item:{id,blessings:blessing?[blessing]:[]},gold:s.day<=2?3:s.day<=6?5:s.day<=10?8:s.day<=20?12:18};}
 function resolveExactReward(s,e){
  const offer=e.drop;
  if(offer.type==='chance')return rng(s)<offer.itemChance?{type:'item',...copy(offer.item)}:{type:'gold',value:offer.gold};
@@ -173,7 +166,7 @@ function beginEnemyTurnCounters(s,e){
 }
 export function createEncounter(s,tuples){
  const keys=['attack','armor','chargeDamage','interruptHit','interruptHits','interruptExact','berserkAttack','trapDamage','healInterrupt','reflectionMultiplier','oathMultiplier'];
- if(!Array.isArray(tuples)||!tuples.length||tuples.some(t=>!Array.isArray(t)||!has(ENEMIES,t[0])||!Number.isInteger(t[1])||t[1]<=0||(t[2]!=null&&!has(BLESSINGS,t[2]))))return false;
+ if(!Array.isArray(tuples)||!tuples.length||tuples.length>2||tuples.some(t=>!Array.isArray(t)||!has(ENEMIES,t[0])||!Number.isInteger(t[1])||t[1]<=0||(t[2]!=null&&!has(BLESSINGS,t[2]))))return false;
  const prepared=[];
  for(const t of tuples){const override={...(typeof t[3]==='number'?{attack:t[3]}:t[3]||{}),...(t[4]||{})};if(Object.entries(override).some(([key,value])=>!keys.includes(key)||!Number.isInteger(value)||value<0))return false;prepared.push(override);}
  s.phase='combat';s.turn=1;s.energy=3;s.roomExact=0;s.roomKills=0;s.lastAction=null;s.lastLoot=null;s.event=null;s.loot=[];s.offers=[];s.jammedSlots=[];s.lastWeaponUsedSlot=null;
@@ -185,12 +178,14 @@ export function createEncounter(s,tuples){
 export function intent(s,e){return e.intent;}
 function startDay(s){
  s.loot=[];s.offers=[];s.event=null;s.lastAction=null;s.lastLoot=null;s.roomExact=0;s.roomKills=0;s.turn=1;s.energy=3;
- if(s.day===3||s.day===7){s.phase='event';s.enemies=[];s.event=makeEvent(s);note(s,`Day ${s.day} · ${DAYS[s.day-1].name}.`);return;}
+ const definition=dayDefinition(s.day);if(!definition)throw new RangeError(`Day ${s.day} is outside the campaign.`);
+ s.act=definition.act;s.campaign=copy(campaignStateForDay(s.day,{completedMilestones:s.campaign?.completedMilestones||[],finalComplete:false}));
+ if(definition.type==='event'){s.phase='event';s.enemies=[];s.event=makeEvent(s);note(s,`Day ${s.day} · ${definition.name}.`);return;}
  const road=DIFFICULTIES[s.difficulty];
  const generated=generateEncounter(s.day,{dangerous:road.dangerous,hpBonus:road.hpBonus,armorBonus:road.armorBonus,attackBonus:road.attackBonus},s.initialSeed);
  const blessingByDay={4:'laceration',6:'precision',9:'power',10:'dismantling'};
  const tuples=generated.tuples.map((tuple,index)=>{const t=[...tuple];if(index===0&&t[2]==null)t[2]=blessingByDay[s.day]||null;return t;});
- createEncounter(s,tuples);s.encounterInfo={day:s.day,seed:generated.seed,threatBudget:generated.threatBudget,actualThreat:generated.actualThreat,dangerous:generated.dangerous};
+ createEncounter(s,tuples);s.encounterInfo={day:s.day,seed:generated.seed,profileId:generated.profileId||definition.encounterProfileId,variantId:generated.variantId||null,threatBudget:generated.threatBudget,actualThreat:generated.actualThreat,dangerous:generated.dangerous};
  note(s,`Day ${s.day} · ${DAYS[s.day-1].name}. Each exact kill grants one reward: 20% equipment, 80% gold.`);
 }
 export function canUse(s,slot){const w=validSlot(slot)?getWeapon(s,slot):null;return s.phase==='combat'&&!!w&&!w.passive&&s.energy>=w.cost&&!(s.jammedSlots||[]).includes(slot);}
@@ -244,7 +239,20 @@ function finishEnemy(s,e,w,dealt,before){
   for(const keeper of s.enemies)if(!keeper.dead&&keeper.id!==e.id&&keeper.mechanic==='oathkeeper'){const gained=excess*keeper.oathMultiplier;keeper.strength+=gained;keeper.oathBonus=(keeper.oathBonus||0)+gained;note(s,`${keeper.name} gains ${gained} attack from ${excess} overkill.`,'hurt');}
  }
 }
-function victory(s){s.history.push({day:s.day,exact:s.roomExact,kills:s.roomKills,hp:s.hp});note(s,`Day ${s.day} cleared. ${s.roomExact}/${s.roomKills} exact-lethal rewards earned.`,'exact');s.phase=s.day===10?'won':'camp';s.jammedSlots=[];s.lastWeaponUsedSlot=null;fillEmptySlots(s);if(s.phase==='won')note(s,'ACT I COMPLETE · The bell is silent. A harder road opens.','exact');}
+function victory(s){
+ s.history.push({day:s.day,exact:s.roomExact,kills:s.roomKills,hp:s.hp});note(s,`Day ${s.day} cleared. ${s.roomExact}/${s.roomKills} exact-lethal rewards earned.`,'exact');
+ s.jammedSlots=[];s.lastWeaponUsedSlot=null;
+ if(isActMilestone(s.day)){
+  const definition=dayDefinition(s.day),completed=[...new Set([...(s.campaign?.completedMilestones||[]),definition.act])].sort((a,b)=>a-b);
+  s.phase='milestone';s.campaign=copy(campaignStateForDay(s.day,{completedMilestones:completed,finalComplete:false,
+   transition:{fromAct:definition.act,toAct:definition.act+1,nextDay:s.day+1,recoveryPolicy:RECOVERY_POLICIES.FULL,recoveryApplied:false}}));
+  note(s,`ACT ${definition.act} COMPLETE · Continue to the next act with full HP.`,'exact');
+ }else if(isFinalDay(s.day)){
+  s.phase='won';s.campaign=copy(campaignStateForDay(s.day,{completedMilestones:[1,2],finalComplete:true}));
+  note(s,'CAMPAIGN COMPLETE · The heart below is silent.','exact');
+ }else s.phase='camp';
+ fillEmptySlots(s);
+}
 export function attack(s,slot,targetIndex){
  if(!canUse(s,slot)||!Number.isInteger(targetIndex))return false;const requested=s.enemies[targetIndex];if(!requested||requested.dead)return false;
  const actual=redirectedTarget(s,targetIndex),e=s.enemies[actual],w=getWeapon(s,slot),before=e.hp,plannedHits=w.hits||1;
@@ -311,7 +319,7 @@ export function equip(s,uid,slot){if(!managed(s)||!validSlot(slot))return false;
 export function unequip(){return false;}
 export function sell(){return false;}
 export function canResolveDrop(s,slot){
- if(!['camp','event','won'].includes(s.phase)||!s.pendingDrops.length||(slot!==null&&!validSlot(slot)))return false;
+ if(!['camp','event','milestone','won'].includes(s.phase)||!s.pendingDrops.length||(slot!==null&&!validSlot(slot)))return false;
  const drop=s.pendingDrops[0];
  if(slot===null){
   if(!WEAPONS[drop.id].passive&&!activeEquipment(s).length&&!s.pendingDrops.slice(1).some(item=>!WEAPONS[item.id].passive))return false;
@@ -330,29 +338,42 @@ export function resolveDrop(s,slot){
  }
  return true;
 }
-export function nextDay(s){if(s.phase!=='camp'||s.day>=10||s.pendingDrops.length)return false;if(!s.slots.some((_,slot)=>{const w=getWeapon(s,slot);return w&&!w.passive;}))return false;s.day++;startDay(s);return true;}
+function hasActiveWeapon(s){return s.slots.some((_,slot)=>{const w=getWeapon(s,slot);return w&&!w.passive;});}
+export function nextDay(s){if(s.phase!=='camp'||s.day>=30||isActMilestone(s.day)||s.pendingDrops.length||!hasActiveWeapon(s))return false;s.day++;startDay(s);return true;}
+export function continueAct(s){
+ if(s.phase!=='milestone'||s.pendingDrops.length||!hasActiveWeapon(s))return false;
+ const campaignValidation=validateCampaignState(s.campaign),definition=dayDefinition(s.day),transition=s.campaign?.transition;
+ if(!campaignValidation.valid||!definition||s.campaign.day!==s.day||s.campaign.act!==s.act||!isActMilestone(s.day)||
+  !transition||transition.fromAct!==s.act||transition.toAct!==s.act+1||transition.nextDay!==s.day+1||
+  ![RECOVERY_POLICIES.UNRESOLVED,RECOVERY_POLICIES.FULL].includes(transition.recoveryPolicy)||transition.recoveryApplied)return false;
+ const hpBefore=s.hp,recoveryAmount=s.maxHp-s.hp;s.hp=s.maxHp;
+ s.history.push({day:s.day,actTransition:transition.fromAct,recoveryPolicy:RECOVERY_POLICIES.FULL,recoveryAmount,recoveryApplied:true,hpBefore,hpAfter:s.hp});
+ s.day=transition.nextDay;startDay(s);return true;
+}
 function makeEvent(s){
+ if(ACT_EVENTS[s.day])return {...copy(ACT_EVENTS[s.day]),purchased:[]};
  const equipment=(id,cost,label)=>({id,item:id,label:label||WEAPONS[id].name,desc:describeWeapon(WEAPONS[id])+' Choose a slot if needed.',cost});
  const prices={sword:4,buckler:4,axe:4,falchion:10,plate:6,fang:4},price=id=>prices[id]||Math.max(4,(WEAPONS[id].sell||2)*2);
  const stock=selectShopStock(s.day,s.initialSeed,2),offers=stock.map(id=>equipment(id,price(id),s.day===3&&id==='sword'?'Buy an Iron sword':s.day===3&&id==='buckler'?'Buy an Ash buckler':s.day===3&&id==='axe'?'Buy a Cinder axe':undefined));
  if(s.day===3)return {id:'wayside',title:'The Last Wayside',desc:'A coal stove still burns in the ruined chapel. Rest or buy one piece of equipment.',options:[
-  {id:'rest',label:'Rest by the coals',desc:'Restore 8 health.',heal:8},...offers]};
+  {id:'rest',label:'Rest by the coals',desc:'Restore 8 health.',heal:8,endsEvent:true},...offers.map(option=>({...option,endsEvent:true}))],purchased:[]};
  return {id:'merchant',title:'The Lantern Merchant',desc:'Buy supplies, choose what to carry, then return to the road.',options:[
-  ...offers,
-  {id:'heal',label:'A warm meal',desc:'Restore 10 health.',cost:5,heal:10},
-  {id:'leave',label:'Continue on the road',desc:'Leave the lantern behind.'}],purchased:[]};
+  ...offers.map(option=>({...option,endsEvent:false,purchasedOnce:true})),
+  {id:'heal',label:'A warm meal',desc:'Restore 10 health.',cost:5,heal:10,endsEvent:false,purchasedOnce:true},
+  {id:'leave',label:'Continue on the road',desc:'Leave the lantern behind.',endsEvent:true}],purchased:[]};
 }
 export function chooseEvent(s,index){
  if(s.phase!=='event'||!Number.isInteger(index)||s.pendingDrops.length)return false;const event=s.event,option=event?.options[index];if(!option||option.disabled||s.gold<(option.cost||0))return false;
- if(event.id==='merchant'&&event.purchased.includes(option.id))return false;s.gold-=option.cost||0;if(option.heal)heal(s,option.heal);if(option.item){queueDrop(s,option.item,[],event.title,'event');note(s,`${WEAPONS[option.item].name} purchased. Choose what to carry.`,'gold');}
- if(event.id==='merchant'&&option.id!=='leave'){event.purchased.push(option.id);option.disabled=true;}else{s.phase='camp';s.history.push({day:s.day,event:event.id,choice:option.id,hp:s.hp});}fillEmptySlots(s);return true;
+ if(option.purchasedOnce&&event.purchased.includes(option.id))return false;s.gold-=option.cost||0;if(option.heal)heal(s,option.heal);if(option.item){queueDrop(s,option.item,[],event.title,'event');note(s,`${WEAPONS[option.item].name} purchased. Choose what to carry.`,'gold');}
+ if(option.purchasedOnce){event.purchased.push(option.id);option.disabled=true;}
+ if(option.endsEvent){s.phase='camp';s.history.push({day:s.day,event:event.id,choice:option.id,hp:s.hp});}fillEmptySlots(s);return true;
 }
 export function restoreRun(serialized){
  try{
   const s=typeof serialized==='string'?JSON.parse(serialized):copy(serialized);
-  if(!s||![3,4,5,6,7].includes(s.version)||!has(DIFFICULTIES,s.difficulty)||s.character!=='wanderer'||!['draft','combat','camp','event','won','lost'].includes(s.phase))return null;
+  if(!s||![3,4,5,6,7,8].includes(s.version)||!has(DIFFICULTIES,s.difficulty)||s.character!=='wanderer'||!['draft','combat','camp','event','milestone','won','lost'].includes(s.phase))return null;
   const oldVersion=s.version;
-  if(!Number.isInteger(s.day)||s.day<1||s.day>10||!Number.isInteger(s.seed)||s.seed<0||s.seed>4294967295||!Number.isInteger(s.turn)||s.turn<1||!Number.isInteger(s.nextUid)||s.nextUid<1)return null;
+  if(!Number.isInteger(s.day)||s.day<1||s.day>(oldVersion<8?10:30)||!Number.isInteger(s.seed)||s.seed<0||s.seed>4294967295||!Number.isInteger(s.turn)||s.turn<1||!Number.isInteger(s.nextUid)||s.nextUid<1)return null;
   if(!Number.isInteger(s.initialSeed)||s.initialSeed<0||s.initialSeed>4294967295){
    if(oldVersion>=7||s.initialSeed!=null)return null;
    const match=typeof s.id==='string'?s.id.match(/^(\d+)-/):null,recovered=match?Number(match[1]):NaN;
@@ -372,7 +393,9 @@ export function restoreRun(serialized){
   if(oldVersion<6)for(const e of s.enemies)if(e&&validDrop(e.drop)&&!e.drop.type){e.drop={type:'item',...e.drop};if(e.finish==='exact')e.resolvedDrop=copy(e.drop);}
   if(s.enemies.some(e=>!e||!has(ENEMIES,e.type)||!Number.isFinite(e.hp)||!Number.isFinite(e.maxHp)||e.hp<0||e.hp>e.maxHp||!Number.isInteger(e.armor)||e.armor<0||!Number.isInteger(e.strength)||e.strength<0||['turnHits','turnDamage','largestHit','oathBonus'].some(key=>!Number.isInteger(e[key])||e[key]<0)||typeof e.interrupted!=='boolean'||(e.trappedSlot!==null&&!validSlot(e.trappedSlot))||!e.intent||!['attack','wait','heal'].includes(e.intent.type)||!Number.isInteger(e.intent.value)||e.intent.value<0||!validReward(e.drop)||(e.resolvedDrop&&!validReward(e.resolvedDrop))))return null;
   if(s.phase==='draft'&&(s.inventory.length!==0||equipped.length!==0||s.day!==1||s.enemies.length!==0))return null;
-  if(s.phase==='event'&&(!s.event||!Array.isArray(s.event.options)||!['wayside','merchant'].includes(s.event.id)||s.event.options.some(o=>!o||(o.item&&!has(WEAPONS,o.item))||(o.cost!==undefined&&(!Number.isInteger(o.cost)||o.cost<0)))||(s.event.id==='merchant'&&!Array.isArray(s.event.purchased))))return null;
+  if(oldVersion<8&&s.phase==='event'&&!Array.isArray(s.event?.purchased))s.event.purchased=[];
+  const eventDefinition=s.phase==='event'?makeEvent(s):null;
+  if(s.phase==='event'&&(!s.event||!Array.isArray(s.event.options)||s.event.id!==eventDefinition?.id||s.event.options.some(o=>!o||(o.item&&!has(WEAPONS,o.item))||(o.cost!==undefined&&(!Number.isInteger(o.cost)||o.cost<0)))||!Array.isArray(s.event.purchased)))return null;
   if(s.version===3){
    s.pendingDrops=s.inventory.filter(item=>!equipped.includes(item.uid)).map(item=>({...item,day:s.day,source:'Previous equipment',origin:'migration'}));
    s.inventory=s.inventory.filter(item=>equipped.includes(item.uid));
@@ -391,8 +414,27 @@ export function restoreRun(serialized){
   if(s.phase==='draft'){s.hp=84;s.maxHp=84;if(!s.startingChoices.some(item=>item.id==='rusty_dagger'))s.startingChoices[s.startingChoices.length-1]={id:'rusty_dagger'};}
   if(oldVersion<6){s.version=6;s.migratedFrom=oldVersion;for(const item of s.pendingDrops)item.type='item';for(const entry of s.dropHistory)if(entry.id&&!entry.type)entry.type='item';if(s.lastLoot?.id&&!s.lastLoot.type)s.lastLoot.type='item';}
   if(oldVersion<7){s.version=7;s.migratedFrom=oldVersion;}
+  if(oldVersion<8){
+   const completed=s.day===10&&s.phase==='won'?[1]:[];
+   s.version=SAVE_VERSION;s.migratedFrom=oldVersion;s.plannedDays=30;s.act=1;
+   if(s.day===10&&s.phase==='won'){
+    s.phase='milestone';s.campaign=copy(campaignStateForDay(10,{completedMilestones:completed,
+     transition:{fromAct:1,toAct:2,nextDay:11,recoveryPolicy:RECOVERY_POLICIES.UNRESOLVED,recoveryApplied:false}}));
+   }else s.campaign=copy(campaignStateForDay(s.day));
+  }
+  const campaignValidation=validateCampaignState(s.campaign);
+  const definition=dayDefinition(s.day);
+  if(!campaignValidation.valid||!definition||s.campaign.day!==s.day||s.act!==definition.act)return null;
+  // Boss days cannot end in ordinary camp: advancement requires their terminal phase.
+  if((isActMilestone(s.day)||isFinalDay(s.day))&&!['combat','lost','milestone','won'].includes(s.phase))return null;
+  const expectedMilestones=Array.from({length:Math.max(0,s.act-1)},(_,index)=>index+1);
+  if(s.phase==='milestone')expectedMilestones.push(s.act);
+  if(s.campaign.completedMilestones.length!==expectedMilestones.length||s.campaign.completedMilestones.some((act,index)=>act!==expectedMilestones[index]))return null;
+  if(s.phase==='milestone'&&(!isActMilestone(s.day)||!s.campaign.transition||![RECOVERY_POLICIES.UNRESOLVED,RECOVERY_POLICIES.FULL].includes(s.campaign.transition.recoveryPolicy)||s.campaign.transition.recoveryApplied))return null;
+  if(s.phase==='won'&&(!isFinalDay(s.day)||!s.campaign.finalComplete))return null;
+  if(s.phase!=='won'&&s.campaign.finalComplete)return null;
   // Preserve legacy progress, prices and purchased flags while removing obsolete bag/sale wording.
-  if(s.event){const current=makeEvent(s);s.event.desc=current.desc;for(const option of s.event.options){const fresh=current.options.find(x=>x.id===option.id);if(fresh)option.desc=fresh.desc;else if(option.item&&WEAPONS[option.item])option.desc=describeWeapon(WEAPONS[option.item])+' Choose a slot if needed.';}}
+  if(s.event){const current=makeEvent(s);s.event.desc=current.desc;for(const option of s.event.options){const fresh=current.options.find(x=>x.id===option.id);if(fresh){option.desc=fresh.desc;option.endsEvent=fresh.endsEvent;if(fresh.purchasedOnce)option.purchasedOnce=true;}else if(option.item&&WEAPONS[option.item])option.desc=describeWeapon(WEAPONS[option.item])+' Choose a slot if needed.';}}
   return s;
  }catch{return null;}
 }

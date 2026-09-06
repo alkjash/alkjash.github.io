@@ -1,9 +1,46 @@
-.character-hero,.character-goblin,.character-orc,.character-shaman,.character-boss{background-image:url('characters-v2.png');mix-blend-mode:screen}
-.character-hero{background-size:349.09% 249.76%;background-position:8.67% 10.59%}
-.character-goblin{background-size:487.62% 353.1%;background-position:46.68% 24.52%}
-.character-orc{background-size:287.10% 262.56%;background-position:90.41% 12.62%}
-.character-shaman{background-size:432.68% 217.87%;background-position:8.04% 85.74%}
-.character-boss{background-size:279.27% 217.87%;background-position:47.67% 85.74%}
-.weapon-icon{background-image:url('equipment-v2.png');background-size:300% 200%;mix-blend-mode:screen}
+.stage[data-act="1"]{background-image:url('battlefield-act1-v3.png')}
+.stage[data-act="2"]{background-image:url('battlefield-act2-v3.png')}
+.stage[data-act="3"]{background-image:url('battlefield-act3-v3.png')}
+
+/* EL-010 actor refinement: measured, disjoint crops from the accepted v2 atlas. */
+.character-goblin,.character-orc,.character-shaman,.character-knight,.character-boss{background-image:url('enemies-chibi-v2.png');background-repeat:no-repeat;mix-blend-mode:screen;image-rendering:pixelated;image-rendering:crisp-edges}
+.character-goblin{background-size:626.2774% 260.9687%;background-position:1.5257% 50.4425%}
+.character-orc{background-size:448.0418% 260.9687%;background-position:23.3308% 50.4425%}
+.character-shaman,.character-knight{background-size:572% 260.9687%;background-position-y:50.4425%}
+.character-shaman{background-position-x:49.7881%}
+.character-knight{background-position-x:71.8927%}
+.character-boss{background-size:431.1558% 260.9687%;background-position:100% 50.4425%}
+.enemy .monster.character-goblin{width:125px;height:160px}.enemy .monster.character-orc{width:175px;height:160px}.enemy .monster.character-shaman{width:137px;height:160px}.enemy .monster.character-knight{width:137px;height:160px}.enemy .monster.character-boss{width:181px;height:160px}
+@media(min-width:1450px){.enemy .monster.character-goblin{width:160px;height:205px}.enemy .monster.character-orc{width:224px;height:205px}.enemy .monster.character-shaman{width:175px;height:205px}.enemy .monster.character-knight{width:175px;height:205px}.enemy .monster.character-boss{width:232px;height:205px}}
+@media(max-width:1000px){.enemy .monster.character-goblin{width:102px;height:130px}.enemy .monster.character-orc{width:142px;height:130px}.enemy .monster.character-shaman{width:111px;height:130px}.enemy .monster.character-knight{width:111px;height:130px}.enemy .monster.character-boss{width:147px;height:130px}}
+@media(max-width:700px){.enemy .monster.character-goblin{width:82px;height:105px}.enemy .monster.character-orc{width:115px;height:105px}.enemy .monster.character-shaman{width:90px;height:105px}.enemy .monster.character-knight{width:90px;height:105px}.enemy .monster.character-boss{width:119px;height:105px}}
+
+/* Later-act atlases use exact 3x3 cells. Their geometric identities remain headless. */
+.character-facet-swarm,.character-lattice-sentinel,.character-hinge-idol,.character-crown-cluster,.character-burrowing-lens,.character-geode-mender,.character-prism-grazer,.character-gloom-moth,.character-twelve-faced-archon{background-image:url('enemies-act2-v1.png')}
+.character-cinder-imp,.character-chain-thrall,.character-brand-serf,.character-furnace-brute,.character-hook-fiend,.character-pain-cherub,.character-marrow-steward,.character-oath-demon,.character-vharzael-furnace-below{background-image:url('enemies-act3-v1.png')}
+.character-facet-swarm,.character-lattice-sentinel,.character-hinge-idol,.character-crown-cluster,.character-burrowing-lens,.character-geode-mender,.character-prism-grazer,.character-gloom-moth,.character-twelve-faced-archon,.character-cinder-imp,.character-chain-thrall,.character-brand-serf,.character-furnace-brute,.character-hook-fiend,.character-pain-cherub,.character-marrow-steward,.character-oath-demon,.character-vharzael-furnace-below{background-repeat:no-repeat;background-size:300% 300%;mix-blend-mode:screen;image-rendering:pixelated;image-rendering:crisp-edges}
+.character-facet-swarm,.character-cinder-imp{background-position:0 0}.character-lattice-sentinel,.character-chain-thrall{background-position:50% 0}.character-hinge-idol,.character-brand-serf{background-position:100% 0}.character-crown-cluster,.character-furnace-brute{background-position:0 50%}.character-burrowing-lens,.character-hook-fiend{background-position:50% 50%}.character-geode-mender,.character-pain-cherub{background-position:100% 50%}.character-prism-grazer,.character-marrow-steward{background-position:0 100%}.character-gloom-moth,.character-oath-demon{background-position:50% 100%}.character-twelve-faced-archon,.character-vharzael-furnace-below{background-position:100% 100%}
+.enemy .monster:is(.character-facet-swarm,.character-lattice-sentinel,.character-hinge-idol,.character-crown-cluster,.character-burrowing-lens,.character-geode-mender,.character-prism-grazer,.character-gloom-moth,.character-cinder-imp,.character-chain-thrall,.character-brand-serf,.character-furnace-brute,.character-hook-fiend,.character-pain-cherub,.character-marrow-steward,.character-oath-demon){width:160px;height:160px}
+.enemy .monster:is(.character-twelve-faced-archon,.character-vharzael-furnace-below){width:190px;height:190px}
+@media(min-width:1450px){.enemy .monster:is(.character-facet-swarm,.character-lattice-sentinel,.character-hinge-idol,.character-crown-cluster,.character-burrowing-lens,.character-geode-mender,.character-prism-grazer,.character-gloom-moth,.character-cinder-imp,.character-chain-thrall,.character-brand-serf,.character-furnace-brute,.character-hook-fiend,.character-pain-cherub,.character-marrow-steward,.character-oath-demon){width:190px;height:190px}.enemy .monster:is(.character-twelve-faced-archon,.character-vharzael-furnace-below){width:220px;height:220px}}
+@media(max-width:1000px){.enemy .monster:is(.character-facet-swarm,.character-lattice-sentinel,.character-hinge-idol,.character-crown-cluster,.character-burrowing-lens,.character-geode-mender,.character-prism-grazer,.character-gloom-moth,.character-cinder-imp,.character-chain-thrall,.character-brand-serf,.character-furnace-brute,.character-hook-fiend,.character-pain-cherub,.character-marrow-steward,.character-oath-demon){width:120px;height:120px}.enemy .monster:is(.character-twelve-faced-archon,.character-vharzael-furnace-below){width:140px;height:140px}}
+@media(max-width:700px){.enemy .monster:is(.character-facet-swarm,.character-lattice-sentinel,.character-hinge-idol,.character-crown-cluster,.character-burrowing-lens,.character-geode-mender,.character-prism-grazer,.character-gloom-moth,.character-cinder-imp,.character-chain-thrall,.character-brand-serf,.character-furnace-brute,.character-hook-fiend,.character-pain-cherub,.character-marrow-steward,.character-oath-demon){width:82px;height:82px}.enemy .monster:is(.character-twelve-faced-archon,.character-vharzael-furnace-below){width:96px;height:96px}}
+
+/* Appearance follows the item's intrinsic materialTier, not the current act. */
+.weapon-icon{background-image:url('equipment-crude-v1.png');background-size:300% 200%;mix-blend-mode:screen}
+.weapon-icon.material-ornate,.weapon-icon.material-infernal{background-image:url('equipment-v2.png')}
 .item-dagger{background-position:0% 0%}.item-sword{background-position:50% 0%}.item-hammer{background-position:100% 0%}.item-axe{background-position:0% 100%}.item-glaive{background-position:50% 100%}.item-leather{background-position:100% 100%}
-.weapon-icon.item-buckler,.weapon-icon.item-plate{background-image:url('defense-items.png');background-size:200% 100%}.item-buckler{background-position:0% 0%}.item-plate{background-position:100% 0%}
+.weapon-icon.item-buckler,.weapon-icon.item-plate{background-image:url('defense-crude-v1.png');background-size:200% 100%}
+.weapon-icon.item-buckler.material-ornate,.weapon-icon.item-plate.material-ornate,.weapon-icon.item-buckler.material-infernal,.weapon-icon.item-plate.material-infernal{background-image:url('defense-items.png')}
+.item-buckler{background-position:0% 0%}.item-plate{background-position:100% 0%}
+
+/* Accepted raw infernal atlas. Unequal final row/column retain the source bytes. */
+.weapon-icon.material-infernal[class*="item-art-"]{background-image:url('equipment-infernal-v1.png');background-repeat:no-repeat;filter:none}
+.weapon-icon.material-infernal:is(.item-art-hell-fang,.item-art-ember-fork,.item-art-chain-hook,.item-art-obsidian-lance,.item-art-furnace-maul,.item-art-ember-focus,.item-art-oath-blade,.item-art-brand-guard){background-size:499.6914% 299.6914%}
+.weapon-icon.material-infernal:is(.item-art-hell-cleaver,.item-art-branded-hide){background-size:501.2384% 299.6914%}
+.weapon-icon.material-infernal:is(.item-art-ribbed-hide,.item-art-black-plate,.item-art-horn-shield,.item-art-bone-cage){background-size:499.6914% 300.6192%}
+.weapon-icon.material-infernal.item-art-heart-obsidian{background-size:501.2384% 300.6192%}
+.item-art-hell-fang{background-position:0 0}.item-art-ember-fork{background-position:25.0193% 0}.item-art-chain-hook{background-position:50.0386% 0}.item-art-obsidian-lance{background-position:75.0579% 0}.item-art-hell-cleaver{background-position:100% 0}
+.item-art-furnace-maul{background-position:0 50.0773%}.item-art-ember-focus{background-position:25.0193% 50.0773%}.item-art-oath-blade{background-position:50.0386% 50.0773%}.item-art-brand-guard{background-position:75.0579% 50.0773%}.item-art-branded-hide{background-position:100% 50.0773%}
+.item-art-ribbed-hide{background-position:0 100%}.item-art-black-plate{background-position:25.0193% 100%}.item-art-horn-shield{background-position:50.0386% 100%}.item-art-bone-cage{background-position:75.0579% 100%}.item-art-heart-obsidian{background-position:100% 100%}
+

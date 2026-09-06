@@ -110,6 +110,22 @@
     linear-gradient(to bottom, transparent 0 45%, #0310168c 58% 87%, transparent 100%);
 }
 
+/* The chibi crops are taller than the former atlas crops. Keep the complete
+   actor and the full intent card inside the battlefield at short desktop
+   viewports without changing their shared floor baseline. */
+.stage {
+  min-height: 420px;
+}
+
+.enemy-row {
+  top: 0;
+  bottom: 2%;
+}
+
+@media (min-width: 701px) {
+  .lesson-strip { top: 6px; }
+}
+
 .stage-heading,
 .turn-tag {
   z-index: 5;
@@ -344,6 +360,11 @@
     background-size: auto 112%;
   }
 
+  .enemy-row {
+    top: 18%;
+    bottom: 12%;
+  }
+
   .stage::before {
     background:
       radial-gradient(ellipse 65% 44% at 60% 65%, transparent 0 28%, #02080d38 67%, #02080d78 100%),
@@ -420,4 +441,16 @@
 
 .animations-off .death-remains {
   animation: none;
+}
+
+/* EL-015: compact enemy summaries and a smaller coherently equipped player. */
+.stage .hero { width: 136.8px; height: 151.4592px; bottom: 12%; }
+.enemy-row { bottom: 7%; }
+.enemy-actions { grid-template-columns: 1fr; }
+@media (max-width: 1000px) {
+  .stage .hero { width: 111.6px; height: 123.5592px; }
+}
+@media (max-width: 700px) {
+  .stage .hero { width: 73.44px; height: 81.3096px; bottom: 18%; }
+  .enemy-row { bottom: 17%; }
 }

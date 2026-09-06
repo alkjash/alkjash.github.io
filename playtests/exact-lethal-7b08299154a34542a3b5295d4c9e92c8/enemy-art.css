@@ -17,6 +17,15 @@
   --prop-base-filter: brightness(1);
 }
 
+/* Raster-backed props carry their own matte; blend them independently so a
+   filtered base sprite cannot expose a rectangular tile. */
+.enemy-prop[style],
+.foe-headsman .enemy-prop,
+.foe-shieldbearer .enemy-prop,
+.foe-weaponbreaker .enemy-prop {
+  mix-blend-mode: screen;
+}
+
 .enemy-prop::before,
 .enemy-prop::after {
   content: '';
@@ -100,31 +109,23 @@
 }
 
 /* Redjaw: a blood-red brute with a compact ivory tusk silhouette. */
-.foe-redjaw .monster { filter: sepia(.3) hue-rotate(277deg) saturate(1.8); }
+.foe-redjaw .monster { filter: sepia(.35) hue-rotate(235deg) saturate(1.45) brightness(.88); }
 .foe-redjaw .enemy-prop {
-  left: 50%; top: 25%; width: 31%; height: 18%;
-  background: #b02e36;
-  clip-path: polygon(0 12%, 100% 12%, 92% 80%, 62% 100%, 12% 84%);
-  --prop-glint: #ff705b;
-}
-.foe-redjaw .enemy-prop::before {
-  left: 0; top: 0; width: 100%; height: 100%;
-  background: #f8e6c3;
-  clip-path: polygon(4% 0, 23% 0, 27% 77%, 17% 100%, 10% 61%, 63% 0, 81% 0, 80% 69%, 66% 100%, 64% 61%);
+  display: none;
 }
 
 /* Trapwright: open iron jaws resting just ahead of the goblin's feet. */
 .foe-trapwright .monster { filter: saturate(.7); }
 .foe-trapwright .enemy-prop {
-  left: -7%; top: 74%; width: 55%; height: 22%;
-  border-bottom: 4px solid #b3bcb7;
-  background: linear-gradient(90deg, transparent 42%, #8d9d97 42% 58%, transparent 58%);
+  left: 0; top: 80%; width: 42%; height: 15%;
+  border-bottom: 3px solid #87938f;
+  background: linear-gradient(90deg, transparent 42%, #65726f 42% 58%, transparent 58%);
   --prop-glint: #ffc45f;
 }
 .foe-trapwright .enemy-prop::before,
 .foe-trapwright .enemy-prop::after {
   top: 0; width: 47%; height: 84%;
-  background: #d0c9ab;
+  background: #929b91;
   clip-path: polygon(0 100%, 0 6%, 18% 30%, 28% 4%, 46% 40%, 61% 6%, 79% 52%, 100% 12%, 100% 100%);
 }
 .foe-trapwright .enemy-prop::before { left: 0; transform: rotate(-22deg); }
@@ -133,7 +134,7 @@
 /* Shieldbearer: the existing round buckler enlarged over the forward arm. */
 .foe-shieldbearer .monster { filter: saturate(.65) brightness(1.1); }
 .foe-shieldbearer .enemy-prop {
-  left: -1%; top: 33%; width: 57%; height: 72%;
+  left: -2%; top: 45%; width: 43%; height: 54%;
   background-image: url('assets/defense-items.png');
   background-size: 200% 100%;
   background-position: 0% 0%;
@@ -248,3 +249,20 @@
 .animations-off .enemy:not(.dead) .enemy-prop {
   animation: none;
 }
+
+/* ART-002: catalog overlays replace old generic props. Empty-hand atlases
+   preserve the actor silhouettes and prevent doubled weapons. */
+.enemy .catalog-equipped:is(.character-goblin,.character-orc,.character-shaman,.character-knight,.character-boss){background-image:url('assets/enemies-chibi-unarmed-v3.png')}
+.enemy .catalog-equipped:is(.character-chain-thrall,.character-brand-serf,.character-oath-demon){background-image:url('assets/enemies-act3-unarmed-v3.png')}
+.enemy .catalog-equipped::after,.enemy .catalog-equipped::before{display:none}
+.enemy .enemy-gear{position:absolute;display:block;pointer-events:none;z-index:5;border:0;box-shadow:none;image-rendering:pixelated;mix-blend-mode:screen;filter:none;min-width:0;min-height:0}
+.enemy .enemy-mainhand{left:-8%;top:30%;width:52%;height:65%;transform:rotate(-16deg)}
+.enemy .enemy-bodygear{left:41%;top:55%;width:38%;height:35%;z-index:3}
+.enemy .enemy-offhand{left:62%;top:56%;width:36%;height:40%;z-index:6}
+.enemy .character-orc .enemy-mainhand{left:7%;top:25%;width:45%;height:66%}
+.enemy .character-boss .enemy-mainhand{left:8%;top:32%;width:44%;height:60%}
+.enemy .character-shaman .enemy-mainhand{left:-3%;top:30%;width:44%;height:64%}
+.enemy .character-goblin .enemy-mainhand{left:-8%;top:55%;width:46%;height:44%}
+.enemy :is(.character-chain-thrall,.character-brand-serf,.character-oath-demon) .enemy-mainhand{left:5%;top:37%;width:39%;height:51%}
+.enemy :is(.character-chain-thrall,.character-brand-serf,.character-oath-demon) .enemy-bodygear{left:37%;top:51%;width:27%;height:31%}
+.enemy .catalog-equipped{filter:none}

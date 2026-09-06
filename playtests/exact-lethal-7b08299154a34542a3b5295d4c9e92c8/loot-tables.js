@@ -1,4 +1,5 @@
 import {WEAPONS} from './equipment-catalog.js';
+import {ACT_ENEMIES} from './act-content.js';
 
 const profile = (families, items, {excludedFamilies=[], excludedTags=[], defenseSlots=[]}={}) =>
   Object.freeze({
@@ -11,7 +12,7 @@ const profile = (families, items, {excludedFamilies=[], excludedTags=[], defense
 
 // Each enemy has an explicit pool. Families explain the identity; item IDs make
 // the rule closed, so adding equipment cannot silently leak into every enemy.
-export const ENEMY_LOOT_PROFILES = Object.freeze({
+const ACT_I_LOOT_PROFILES = {
   goblin:profile(['needle','blade','hook','powder','lightGuard'],[
     'dagger','sword','twin_fangs','needle_rain','powder_spike','knife_guard','fang','moon_needles','trap_hook'
   ],{excludedFamilies:['plate'],excludedTags:['heavy'],defenseSlots:['offhand']}),
@@ -60,6 +61,21 @@ export const ENEMY_LOOT_PROFILES = Object.freeze({
   oathkeeper:profile(['blade','spear','shield','plate'],[
     'sword','spear','war_pick','buckler','falchion','glaive','greatsword','plate','knight_lance','oathblade','vow_greatblade','tower_shield','chainmail'
   ],{defenseSlots:['body','offhand']})
+};
+
+// Later-act content owns enemy identities; this table imports and freezes its
+// already-closed item bindings without duplicating roster or combat data.
+const LATER_ACT_LOOT_PROFILES=Object.fromEntries(
+  Object.entries(ACT_ENEMIES).map(([id,enemy])=>[id,profile(
+    enemy.lootProfile.families,
+    enemy.lootProfile.items,
+    enemy.lootProfile
+  )])
+);
+
+export const ENEMY_LOOT_PROFILES = Object.freeze({
+  ...ACT_I_LOOT_PROFILES,
+  ...LATER_ACT_LOOT_PROFILES
 });
 
 const numericSeed = seed => {
@@ -76,12 +92,17 @@ const mix = value => {
 const hashText = text => numericSeed(text);
 
 function tierCap(day){
-  if(!Number.isInteger(day)||day<1||day>10)throw new RangeError(`Invalid loot day ${day}.`);
-  return day<=3?1:2;
+  if(!Number.isInteger(day)||day<1||day>30)throw new RangeError(`Invalid loot day ${day}.`);
+  if(day<=3)return 1;
+  if(day<=10)return 2;
+  if(day<=20)return 3;
+  return 4;
 }
 
-function validForProfile(id,entry,role,cap){
+function validForProfile(id,entry,role,cap,day){
   if(!entry||entry.rusty||!Number.isInteger(entry.tier)||entry.tier<1||entry.tier>cap)return false;
+  if(!Number.isInteger(entry.availableFrom)||day<entry.availableFrom)return false;
+  if(!Number.isInteger(entry.availableThrough)||day>entry.availableThrough)return false;
   const families=Array.isArray(entry.lootFamilies)?entry.lootFamilies:[];
   const tags=Array.isArray(entry.tags)?entry.tags:[];
   if(!families.some(family=>role.families.includes(family)))return false;
@@ -95,7 +116,7 @@ export function eligibleEnemyLoot(enemyType,day){
   const role=ENEMY_LOOT_PROFILES[enemyType];
   if(!role)throw new RangeError(`Unknown enemy loot role ${enemyType}.`);
   const cap=tierCap(day);
-  const items=role.items.filter(id=>validForProfile(id,WEAPONS[id],role,cap));
+  const items=role.items.filter(id=>validForProfile(id,WEAPONS[id],role,cap,day));
   if(!items.length)throw new RangeError(`No eligible loot for ${enemyType} on day ${day}.`);
   return [...items];
 }
@@ -109,11 +130,15 @@ export function selectEnemyLoot(enemyType,day,initialSeed,encounterIndex=0){
 
 export const SHOP_ANCHORS=Object.freeze({
   3:Object.freeze(['sword','buckler','axe']),
-  7:Object.freeze(['falchion','plate','buckler','fang'])
+  7:Object.freeze(['falchion','plate','buckler','fang']),
+  13:Object.freeze(['prism_needle','shard_spear','mirror_shield']),
+  17:Object.freeze(['facet_blade','prism_focus','lattice_mail','geode_maul']),
+  23:Object.freeze(['hell_fang','hell_cleaver','branded_hide']),
+  27:Object.freeze(['oath_blade_infernal','furnace_maul','black_plate','horn_shield'])
 });
 
 function shopDay(day){
-  if(day===3||day===7)return day;
+  if(Object.hasOwn(SHOP_ANCHORS,day))return day;
   throw new RangeError(`Day ${day} has no equipment shop.`);
 }
 
@@ -121,7 +146,8 @@ export function eligibleShopItems(day){
   shopDay(day);const cap=tierCap(day);
   return Object.keys(WEAPONS).filter(id=>{
     const item=WEAPONS[id];
-    return !item.rusty&&Number.isInteger(item.tier)&&item.tier>=1&&item.tier<=cap;
+    return !item.rusty&&item.shopEligible!==false&&Number.isInteger(item.tier)&&item.tier>=1&&item.tier<=cap&&
+      item.availableFrom<=day&&day<=item.availableThrough;
   });
 }
 

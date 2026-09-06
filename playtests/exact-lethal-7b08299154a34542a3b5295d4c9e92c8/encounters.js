@@ -1,6 +1,9 @@
 // The director uses its own random stream. Combat choices and reward rolls cannot
 // reroll tomorrow's encounter, and the director never looks at the carried gear.
+import {ACT_ENEMIES,ACT_ENCOUNTER_PROFILES} from './act-content.js';
+
 export const COMBAT_DAYS=Object.freeze([1,2,4,5,6,8,9,10]);
+export const CAMPAIGN_COMBAT_DAYS=Object.freeze([...COMBAT_DAYS,...Object.keys(ACT_ENCOUNTER_PROFILES).map(Number)]);
 export const NEW_ENEMY_TYPES=Object.freeze(['powderrunner','headsman','hexsinger','redjaw','trapwright','shieldbearer','bonecook','painkeeper','weaponbreaker','oathkeeper']);
 
 // Five highest aggregate scores in the matched day-6/day-9 enemy playtest.
@@ -27,7 +30,10 @@ export const ENCOUNTER_ROSTER=Object.freeze({
  painkeeper:{minDay:4,cost:1.3,attackWeight:1,armor:0,tags:['retaliation']},
  weaponbreaker:{minDay:4,cost:1.16,attackWeight:1,armor:0,tags:['jam']},
  oathkeeper:{minDay:4,cost:1.02,attackWeight:1,armor:0,tags:['overkill']},
- boss:{minDay:10,cost:1.18,attackWeight:1.15,armor:1,tags:['boss','growth']}
+ boss:{minDay:10,cost:1.18,attackWeight:1.15,armor:1,tags:['boss','growth']},
+ ...Object.fromEntries(Object.entries(ACT_ENEMIES).map(([id,enemy])=>[id,{
+  minDay:enemy.act===2?11:21,cost:1,attackWeight:1,armor:enemy.armor,tags:[...enemy.tags]
+ }]))
 });
 
 // Exact-finishing action budgets grow gradually. The reference weapon is fixed
@@ -168,8 +174,22 @@ export function estimateThreat(tuples,referenceDamage=5){return tuples.reduce((t
 },0);}
 
 export function generateEncounter(day,options={},seed=0){
- if(!COMBAT_DAYS.includes(day))throw new RangeError(`Day ${day} is not a combat day.`);
+ if(!CAMPAIGN_COMBAT_DAYS.includes(day))throw new RangeError(`Day ${day} is not a combat day.`);
  if(typeof options==='boolean')options={dangerous:options};
+ if(day>10){
+  const encounter=ACT_ENCOUNTER_PROFILES[day],localSeed=encounterSeed(seed,day),random=randomStream(localSeed);
+  const totalWeight=encounter.variants.reduce((sum,variant)=>sum+variant.weight,0);
+  let draw=random()*totalWeight,selected=encounter.variants.at(-1);
+  for(const variant of encounter.variants){draw-=variant.weight;if(draw<0){selected=variant;break;}}
+  const tuples=selected.tuples.map(([type,hp,blessing,override={}])=>[type,hp,blessing,{...override}]);
+  const hpBonus=options.hpBonus||0,armorBonus=options.armorBonus||0,attackBonus=options.attackBonus||0;
+  const scaled=tuples.map(([type,hp,blessing,stats])=>[type,Math.ceil(hp*(1+hpBonus)),blessing,{...stats,armor:stats.armor+armorBonus,attack:stats.attack+attackBonus}]);
+  const referenceDamage=day<=20?10:15,actualThreat=estimateThreat(scaled,referenceDamage);
+  return {day,seed:localSeed,profileId:encounter.id,variantId:selected.id,tuples,
+   types:tuples.map(tuple=>tuple[0]),dangerous:false,threatBudget:actualThreat,actualThreat,
+   hpBudget:scaled.reduce((sum,tuple)=>sum+tuple[1],0),
+   attackBudget:scaled.reduce((sum,tuple)=>sum+tuple[3].attack,0),referenceDamage};
+ }
  const profile={...COMBAT_PROFILES[day],...(options.profileOverrides?.[day]||{})};
  const hpBonus=options.hpBonus||0,armorBonus=options.armorBonus||0,attackBonus=options.attackBonus||0;
  const localSeed=encounterSeed(seed,day),random=randomStream(localSeed),types=chooseTypes(day,options,random);
@@ -180,7 +200,7 @@ export function generateEncounter(day,options={},seed=0){
  // Every composition fits the same day budget. The harder pool adds mechanics,
  // not a second stat premium that could make an earlier day exceed a later one.
  const dangerousSet=new Set(options.dangerousTypes||DANGEROUS_TYPES),containsDanger=types.some(type=>dangerousSet.has(type));
- const actionBudget=Math.round(profile.actionBudget*(1+hpBonus)),baseAttackBudget=profile.attack*types.length,attackBudget=baseAttackBudget+attackBonus*types.length;
+ const actionBudget=profile.actionBudget,baseAttackBudget=profile.attack*types.length,attackBudget=baseAttackBudget+attackBonus*types.length;
  const share=day===10?0.62:0.45+random()*0.1;
  const firstActions=Math.max(2,Math.min(actionBudget-2,Math.round(actionBudget*share))),actions=[firstActions,actionBudget-firstActions];
  const weight=types.reduce((sum,type)=>sum+ENCOUNTER_ROSTER[type].attackWeight,0);
@@ -188,10 +208,11 @@ export function generateEncounter(day,options={},seed=0){
  const attacks=[firstAttack,Math.max(1,baseAttackBudget-firstAttack)];
  const tuples=types.map((type,index)=>{
   const stats=typeStats(type,day,profile);stats.attack=attacks[index];
-  const hp=healthForActions(type,actions[index],profile,random,{hpBonus,armorBonus});
+  const hp=healthForActions(type,actions[index],profile,random);
   return[type,hp,null,stats];
  });
  const finalTuples=tuples.map(([type,hp,blessing,stats])=>[type,Math.ceil(hp*(1+hpBonus)),blessing,{...stats,armor:stats.armor+armorBonus,attack:stats.attack+attackBonus}]);
  const exactActions=finalTuples.reduce((sum,[type,hp,,stats])=>sum+referenceActions(type,hp,profile.referenceDamage,stats.armor),0);
- return{day,seed:localSeed,tuples,types,dangerous:containsDanger,threatBudget:8*actionBudget+2*attackBudget,actualThreat:estimateThreat(finalTuples,profile.referenceDamage),hpBudget:finalTuples.reduce((sum,tuple)=>sum+tuple[1],0),attackBudget,referenceDamage:profile.referenceDamage,referenceActionBudget:actionBudget,referenceActions:exactActions};
+ const actualThreat=estimateThreat(finalTuples,profile.referenceDamage);
+ return{day,seed:localSeed,tuples,types,dangerous:containsDanger,threatBudget:actualThreat,actualThreat,hpBudget:finalTuples.reduce((sum,tuple)=>sum+tuple[1],0),attackBudget,referenceDamage:profile.referenceDamage,baseReferenceActionBudget:actionBudget,referenceActionBudget:exactActions,referenceActions:exactActions};
 }
