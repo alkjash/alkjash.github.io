@@ -1,0 +1,14 @@
+/* Matching unarmed bases; equipped weapons mount at the forward fist. */
+.hero{width:190px;height:209px;overflow:visible;bottom:9%}
+.hero-figure{width:100%;height:100%;position:relative;mix-blend-mode:screen}
+.hero .hero-base{background-image:url('hero-equipment.png');background-size:256% 155.1515%;background-position:7.4786% 41.2088%;mix-blend-mode:screen}
+.hero .hero-armored{background-position:80.0214% 41.2088%}
+.hero .hero-mainhand{position:absolute;left:88%;top:51.5%;width:80%;height:auto;aspect-ratio:1;transform:translate(-30%,-68%);transform-origin:30% 68%;image-rendering:pixelated;mix-blend-mode:screen;pointer-events:none}
+.hero .held-dagger{width:55%;transform:translate(-33%,-68%)}
+.hero .held-sword{clip-path:inset(0 0 10% 0)}
+.hero .held-hammer{width:86%;transform:translate(-30%,-61%)}
+.hero .held-axe{width:86%;transform:translate(-30%,-63%)}
+.hero .held-glaive{width:88%;transform:translate(-30%,-62%)}
+.hero .hero-offhand{position:absolute;left:46%;top:61%;width:41%;height:auto;aspect-ratio:1;transform:translate(-50%,-50%);image-rendering:pixelated;pointer-events:none}
+@media(max-width:1000px){.hero{width:155px;height:170.5px}}
+@media(max-width:700px){.hero{width:100px;height:110px;left:0;bottom:13%}}

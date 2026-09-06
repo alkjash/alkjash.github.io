@@ -1,0 +1,276 @@
+/* Enemy turns: set --action-ms on the stage or a parent (520ms / 260ms).
+   Add the hero impact class at about 42% of the enemy lunge duration.
+   Screen-blended black-matte artwork stays black under these filters. */
+
+.enemy.enemy-acting,
+.enemy.enemy-preparing {
+  z-index: auto;
+}
+
+.enemy.enemy-acting .monster {
+  transform-origin: 50% 90%;
+  animation: enemy-strike var(--action-ms, 520ms) both;
+  will-change: transform;
+}
+
+.enemy.enemy-acting .enemy-info {
+  border-color: #e6b47d;
+  box-shadow: inset 0 0 0 3px #171914, inset 0 0 0 4px #755d3f,
+    0 0 15px #e59e3830;
+}
+
+.enemy.enemy-acting .intention {
+  color: #ffe0ab;
+}
+
+.enemy.enemy-preparing .monster {
+  transform-origin: 50% 95%;
+  animation: enemy-prepare var(--action-ms, 520ms) ease-in-out both;
+}
+
+.enemy.enemy-preparing:not(.dead) .enemy-prop {
+  animation: charged-prop-shake var(--action-ms, 520ms) steps(3, end) both;
+}
+
+/* Optional class supplied by app state when a visible counter is one action
+   from firing. The pose remains useful as a static outline with motion off. */
+.enemy.counter-imminent .monster {
+  transform-origin: 50% 95%;
+  filter: brightness(1.13) saturate(.82);
+}
+
+.enemy.counter-imminent .target-ring {
+  border-color: #e36a50;
+  box-shadow: 0 0 0 2px #491817, 0 0 14px #e36a5060;
+}
+
+.enemy.enemy-preparing .enemy-info {
+  border-color: #94bfc3;
+}
+
+.hero.enemy-hit .hero-figure {
+  transform-origin: 50% 95%;
+  animation: hero-recoil var(--action-ms, 520ms) ease-out both;
+}
+
+.hero.enemy-blocked .hero-figure {
+  transform-origin: 50% 95%;
+  animation: hero-guard var(--action-ms, 520ms) ease-out both;
+}
+
+/* A brief outlined shield arc, drawn independently of the sprite matte. */
+.hero.enemy-blocked::after {
+  content: '';
+  position: absolute;
+  right: 6%;
+  top: 14%;
+  width: 26%;
+  height: 60%;
+  border-right: 3px solid #d8faf6;
+  border-radius: 0 90% 90% 0;
+  pointer-events: none;
+  animation: guard-arc var(--action-ms, 520ms) ease-out both;
+}
+
+/* Player anticipation and impact are code-native overlays so the atlas keeps
+   its crisp black matte. */
+.hero.striking::before {
+  content: '';
+  position: absolute;
+  z-index: 7;
+  left: 69%;
+  top: 28%;
+  width: 62%;
+  height: 45%;
+  border-top: 5px solid #f5dfaa;
+  border-right: 2px solid #e36a50;
+  border-radius: 50%;
+  clip-path: polygon(35% 0, 100% 0, 100% 100%, 72% 74%);
+  filter: drop-shadow(0 0 3px #ef754f);
+  pointer-events: none;
+  animation: player-weapon-arc calc(var(--action-ms, 520ms) * .55) steps(3, end) both;
+}
+
+.enemy.attack-flash .monster-target::after {
+  content: '';
+  position: absolute;
+  z-index: 8;
+  left: 24%;
+  bottom: 2%;
+  width: 52%;
+  height: 22%;
+  background:
+    linear-gradient(35deg, transparent 42%, #f2c360 43% 55%, transparent 56%) 8% 70% / 19% 68% no-repeat,
+    linear-gradient(145deg, transparent 42%, #df684e 43% 55%, transparent 56%) 50% 40% / 23% 82% no-repeat,
+    linear-gradient(55deg, transparent 42%, #e7ddc8 43% 55%, transparent 56%) 90% 70% / 17% 62% no-repeat;
+  pointer-events: none;
+  animation: floor-impact calc(var(--action-ms, 520ms) * .58) steps(3, end) both;
+}
+
+.enemy.attack-flash:has(.finish-tag) .monster-target::after {
+  width: 70%;
+  left: 15%;
+  filter: drop-shadow(0 0 4px #ffd36a);
+}
+
+.hero-impact {
+  position: absolute;
+  z-index: 8;
+  left: 62%;
+  top: 4%;
+  color: #ff967d;
+  font: bold clamp(23px, 2.8vw, 36px) Georgia, 'Times New Roman', serif;
+  line-height: 1;
+  letter-spacing: 1px;
+  white-space: nowrap;
+  pointer-events: none;
+  text-shadow: 0 2px 2px #090807, 0 0 8px #451710;
+  animation: hero-impact-rise var(--action-ms, 520ms) ease-out both;
+}
+
+.hero-impact.blocked {
+  color: #c7f5f2;
+  font-size: clamp(15px, 1.7vw, 21px);
+  letter-spacing: 2px;
+  text-shadow: 0 2px 2px #070e13, 0 0 8px #124a51;
+}
+
+.round-banner {
+  position: absolute;
+  z-index: 8;
+  top: 23%;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 80%;
+  padding: 10px 22px;
+  border: 1px solid #a69c7d;
+  background: linear-gradient(100deg, #0a171bea, #15262bf5, #0a171bea);
+  box-shadow: inset 0 0 0 3px #0b151a, 0 5px 16px #0005;
+  color: #e7d9b7;
+  font: 15px Georgia, 'Times New Roman', serif;
+  letter-spacing: 2px;
+  text-align: center;
+  pointer-events: none;
+  animation: round-announcement var(--action-ms, 520ms) ease-out both;
+}
+
+@keyframes enemy-strike {
+  0% { transform: translateX(0) rotate(0); filter: brightness(1); }
+  20% { transform: translateX(7px) rotate(2deg); filter: brightness(1); }
+  42% { transform: translateX(-46px) rotate(-6deg); filter: brightness(1.35); }
+  52% { transform: translateX(-39px) rotate(-4deg); filter: brightness(1.12); }
+  76% { transform: translateX(3px) rotate(1deg); filter: brightness(1); }
+  100% { transform: translateX(0) rotate(0); filter: brightness(1); }
+}
+
+@keyframes enemy-prepare {
+  0%, 100% { transform: translateY(0); filter: brightness(1); }
+  45% { transform: translateY(-5px); filter: brightness(1.55) saturate(.75); }
+  70% { transform: translateY(-2px); filter: brightness(1.15); }
+}
+
+@keyframes charged-prop-shake {
+  0%, 100% { translate: 0 0; filter: var(--prop-base-filter, brightness(1)) drop-shadow(0 0 0 transparent); }
+  24% { translate: -3px 0; filter: var(--prop-base-filter, brightness(1)) drop-shadow(0 0 3px var(--prop-glint, #e36a50)); }
+  48% { translate: 3px -1px; filter: var(--prop-base-filter, brightness(1)) drop-shadow(0 0 6px var(--prop-glint, #e36a50)); }
+  72% { translate: -2px 0; filter: var(--prop-base-filter, brightness(1)) drop-shadow(0 0 4px var(--prop-glint, #e36a50)); }
+}
+
+@keyframes player-weapon-arc {
+  0% { opacity: 0; transform: rotate(-24deg) scale(.65); }
+  34% { opacity: .95; transform: rotate(-8deg) scale(1); }
+  68% { opacity: .7; transform: rotate(8deg) scale(1.07); }
+  100% { opacity: 0; transform: rotate(15deg) scale(1.12); }
+}
+
+@keyframes floor-impact {
+  0% { opacity: 0; transform: translateY(5px) scale(.5); }
+  28% { opacity: 1; transform: translateY(0) scale(1); }
+  68% { opacity: .75; transform: translateY(-4px) scale(1.12); }
+  100% { opacity: 0; transform: translateY(1px) scale(1.24); }
+}
+
+@keyframes hero-recoil {
+  0% { transform: translateX(0) rotate(0); filter: brightness(1); }
+  12% { transform: translateX(-13px) rotate(-5deg); filter: brightness(2.25) saturate(.55); }
+  28% { transform: translateX(-17px) rotate(-3deg); filter: brightness(1.55) sepia(.2); }
+  55% { transform: translateX(-7px) rotate(-1deg); filter: brightness(1.05); }
+  100% { transform: translateX(0) rotate(0); filter: brightness(1); }
+}
+
+@keyframes hero-guard {
+  0% { transform: translateX(0); filter: brightness(1); }
+  15% { transform: translateX(-4px); filter: brightness(1.75) saturate(.65); }
+  40% { transform: translateX(-2px); filter: brightness(1.15); }
+  100% { transform: translateX(0); filter: brightness(1); }
+}
+
+@keyframes guard-arc {
+  0% { opacity: 0; transform: scaleX(.7); }
+  15% { opacity: .9; transform: scaleX(1); }
+  55% { opacity: .35; transform: scaleX(1.1); }
+  100% { opacity: 0; transform: scaleX(1.15); }
+}
+
+@keyframes hero-impact-rise {
+  0% { opacity: 0; transform: translate(-50%, 7px) scale(.9); }
+  14% { opacity: 1; transform: translate(-50%, -3px) scale(1.12); }
+  32% { opacity: 1; transform: translate(-50%, -9px) scale(1); }
+  70% { opacity: 1; transform: translate(-50%, -22px) scale(1); }
+  100% { opacity: 0; transform: translate(-50%, -34px) scale(1); }
+}
+
+@keyframes round-announcement {
+  0% { opacity: 0; transform: translate(-50%, 5px); }
+  18%, 74% { opacity: 1; transform: translate(-50%, 0); }
+  100% { opacity: 0; transform: translate(-50%, -4px); }
+}
+
+@media (max-width: 700px) {
+  .hero-impact { left: 70%; }
+  .round-banner { top: 30%; padding: 8px 14px; font-size: 12px; }
+
+  @keyframes enemy-strike {
+    0% { transform: translateX(0) rotate(0); filter: brightness(1); }
+    20% { transform: translateX(4px) rotate(2deg); filter: brightness(1); }
+    42% { transform: translateX(-24px) rotate(-6deg); filter: brightness(1.35); }
+    52% { transform: translateX(-20px) rotate(-4deg); filter: brightness(1.12); }
+    76% { transform: translateX(2px) rotate(1deg); filter: brightness(1); }
+    100% { transform: translateX(0) rotate(0); filter: brightness(1); }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .enemy.enemy-acting .monster,
+  .enemy.enemy-preparing .monster,
+  .enemy.enemy-preparing:not(.dead) .enemy-prop,
+  .hero.enemy-hit .hero-figure,
+  .hero.enemy-blocked .hero-figure,
+  .hero.enemy-blocked::after,
+  .hero-impact,
+  .round-banner,
+  .hero.striking::before,
+  .enemy.attack-flash .monster-target::after {
+    animation: none !important;
+  }
+
+  .enemy.enemy-acting .monster,
+  .enemy.enemy-preparing .monster { filter: brightness(1.15); }
+  .hero.enemy-hit .hero-figure { filter: brightness(1.3); }
+  .hero.enemy-blocked .hero-figure { filter: brightness(1.15); }
+  .hero.enemy-blocked::after { opacity: .45; }
+  .hero-impact { opacity: 1; transform: translateX(-50%); }
+  .round-banner { opacity: 1; }
+  .enemy.counter-imminent .target-ring { border-color: #e36a50; }
+}
+
+.animations-off .enemy.enemy-preparing:not(.dead) .enemy-prop,
+.animations-off .hero.striking::before,
+.animations-off .enemy.attack-flash .monster-target::after {
+  animation: none !important;
+}
+
+.animations-off .hero.striking::before,
+.animations-off .enemy.attack-flash .monster-target::after {
+  display: none;
+}

@@ -1,0 +1,423 @@
+/* EL-001 aesthetics pass. Loaded last so this small color and hierarchy layer
+   can unify the older component styles without replacing their pixel artwork. */
+:root {
+  --ink-neutral: #e7ddc8;
+  --ink-muted: #a7b7b8;
+  --state-resource: #e7c35f;
+  --state-resource-cool: #9fd6dc;
+  --state-danger: #e36a50;
+  --state-danger-hot: #ff9a72;
+  --state-armor: #a9d7dc;
+  --state-exact: #ffd36a;
+}
+
+/* A1: one authored, blood-red broken X in the bar and intro. The surrounding
+   frame keeps its quiet diamond corners. */
+.brand {
+  font-weight: 600;
+  letter-spacing: 1.35px;
+}
+
+.brand .sigil,
+.intro .sigil-large {
+  display: inline-grid;
+  place-items: center;
+  width: 1.15em;
+  height: 1.15em;
+  color: transparent;
+  font-size: 30px;
+  line-height: 1;
+  margin-right: 9px;
+  position: relative;
+  transform: rotate(-4deg);
+  filter: drop-shadow(0 2px 0 #260609);
+}
+
+.intro .sigil-large {
+  font-size: 45px;
+  margin: 0 auto 3px;
+}
+
+.brand .sigil::before,
+.intro .sigil-large::before,
+.ending-mark::before {
+  content: 'X';
+  color: #c62f2d;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-weight: 700;
+  text-shadow: -1px 0 #f05b49, 2px 1px #64100f;
+  transform: scaleX(.82);
+}
+
+.brand .sigil::after,
+.intro .sigil-large::after,
+.ending-mark::after {
+  content: '';
+  position: absolute;
+  width: 12%;
+  height: 30%;
+  left: 18%;
+  top: 70%;
+  background: #b72525;
+  box-shadow: .5em .04em #a51e20;
+  clip-path: polygon(0 0, 100% 12%, 72% 100%, 20% 78%);
+}
+
+.blood-x {
+  color: #d63d35;
+  text-shadow: -1px 0 #ff7259, 2px 1px #69100f, 0 3px 3px #180306;
+  transform: rotate(-4deg) scaleX(.88);
+}
+
+/* The emblem carries the blood accent; the title remains a quiet ivory lockup. */
+.brand .blood-x,
+.intro .blood-x {
+  color: inherit;
+  text-shadow: none;
+  transform: none;
+}
+
+.intro h1 {
+  line-height: .95;
+  letter-spacing: 2.5px;
+}
+
+.intro > .eyebrow {
+  margin-top: 7px;
+}
+
+.ending-mark {
+  display: block;
+  width: 48px;
+  height: 48px;
+  position: relative;
+  font-size: 42px;
+  line-height: 1;
+  margin: 0 auto 12px;
+  text-align: center;
+}
+
+/* A3: localized stage focus. The translucent floor band leaves the blue ruin
+   and orange edge torches visible while quieting detail beneath actors. */
+.stage::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 48% 42% at 58% 66%, transparent 0 30%, #02080d28 62%, #02080d70 100%),
+    linear-gradient(to bottom, transparent 0 45%, #0310168c 58% 87%, transparent 100%);
+}
+
+.stage-heading,
+.turn-tag {
+  z-index: 5;
+}
+
+.stage-heading h2 {
+  color: var(--ink-neutral);
+}
+
+.combat-message {
+  z-index: 6;
+  bottom: 13px;
+}
+
+.enemy-row {
+  /* A z-index here creates a compositing boundary that traps the atlas'
+     screen blend and exposes its black matte. Keep the row in stage context. */
+  z-index: auto;
+}
+
+.hero {
+  z-index: auto;
+}
+
+/* EL-004: persistent, state-derived death aftermath. These are silhouettes,
+   not controls; the result is also repeated in the final summary wrapper. */
+.enemy.dead {
+  opacity: 1;
+}
+
+.enemy.dead .target-ring,
+.enemy.dead .enemy-prop,
+.enemy.dead .monster {
+  display: none;
+}
+
+.death-remains {
+  display: block;
+  position: relative;
+  width: 112px;
+  height: 58px;
+  flex: 0 0 auto;
+  pointer-events: none;
+  image-rendering: pixelated;
+  transform-origin: 50% 100%;
+  animation: remains-arrive calc(var(--action-ms, 520ms) * .75) steps(3, end) both;
+}
+
+.exact-remains {
+  filter: drop-shadow(0 5px 2px #000a) drop-shadow(0 0 7px #f2c75d35);
+  background: radial-gradient(ellipse at 50% 78%, #f4c84a28, transparent 66%);
+}
+
+.exact-remains::before,
+.exact-remains::after,
+.overkill-remains::before,
+.overkill-remains::after {
+  content: '';
+  position: absolute;
+  box-sizing: border-box;
+}
+
+/* Gold: an unmistakable three-stack coin pile with square pixel highlights. */
+.exact-remains.reward-gold::before {
+  left: 12px;
+  bottom: 7px;
+  width: 84px;
+  height: 32px;
+  background:
+    linear-gradient(#fff0a0 0 20%, #e4aa31 21% 66%, #7d4c18 67%) 3px 12px / 31px 17px no-repeat,
+    linear-gradient(#fff4a8 0 20%, #efb73a 21% 66%, #875619 67%) 31px 4px / 35px 25px no-repeat,
+    linear-gradient(#ffe68c 0 20%, #dc9826 21% 66%, #704014 67%) 63px 15px / 25px 14px no-repeat;
+  clip-path: polygon(0 28%, 18% 28%, 18% 10%, 58% 10%, 58% 0, 78% 0, 78% 37%, 100% 37%, 100% 100%, 0 100%);
+}
+
+.exact-remains.reward-gold::after {
+  left: 30px;
+  bottom: 14px;
+  width: 12px;
+  height: 8px;
+  background: #fff0a0;
+  box-shadow: 32px -10px #fff0a0, 48px 8px #f1c75e;
+}
+
+/* Item: a compact equipment bundle with a bright blade and tied red wrap. */
+.exact-remains.reward-item::before {
+  left: 46px;
+  bottom: 5px;
+  width: 17px;
+  height: 49px;
+  background: linear-gradient(90deg, #77898c 0 20%, #f0e4c5 21% 69%, #99aaac 70%);
+  border: 2px solid #1d292c;
+  clip-path: polygon(38% 0, 70% 0, 100% 70%, 67% 79%, 67% 100%, 30% 100%, 30% 79%, 0 70%);
+  transform: rotate(51deg);
+}
+
+.exact-remains.reward-item::after {
+  left: 27px;
+  bottom: 4px;
+  width: 58px;
+  height: 25px;
+  background: #7c2929;
+  border: 3px solid #d5a34a;
+  box-shadow: inset 0 -7px #39191a;
+  clip-path: polygon(6% 18%, 43% 0, 91% 18%, 100% 77%, 78% 100%, 13% 91%, 0 60%);
+}
+
+/* Overkill: a broad, asymmetric blood-and-bone silhouette with no loot glow. */
+.overkill-remains {
+  filter: drop-shadow(0 5px 2px #000b);
+}
+
+.overkill-remains::before {
+  left: 4px;
+  right: 4px;
+  bottom: 4px;
+  height: 28px;
+  background: #74191e;
+  box-shadow: inset 0 -8px #2b1115, inset 17px 5px #a82b2b;
+  clip-path: polygon(0 73%, 9% 45%, 22% 51%, 29% 15%, 39% 48%, 51% 0, 60% 48%, 75% 29%, 83% 58%, 100% 70%, 94% 100%, 8% 94%);
+}
+
+.overkill-remains::after {
+  left: 30px;
+  bottom: 17px;
+  width: 13px;
+  height: 7px;
+  background: #ead7b5;
+  transform: rotate(-31deg);
+  box-shadow: 38px 10px #d5c3a5, 53px -4px #9e2023;
+}
+
+.final-outcome-art {
+  display: grid;
+  grid-auto-flow: column;
+  gap: 14px;
+  justify-content: center;
+  place-items: center;
+  min-height: 78px;
+  margin: 2px auto 12px;
+}
+
+@keyframes remains-arrive {
+  0% { opacity: 0; transform: translateY(-9px) scale(.72); }
+  45% { opacity: 1; transform: translateY(2px) scale(1.06); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* A4: three semantic layers: neutral information, player resources, danger. */
+.enemy-info,
+.combat-message span,
+.turn-tag {
+  color: var(--ink-neutral);
+}
+
+.muted,
+.stat-label,
+.inspect-label,
+.eyebrow {
+  color: var(--ink-muted);
+}
+
+.gold,
+.weapon-stat.cost,
+.energy-label,
+.finish-tag,
+.log-lines .exact,
+.log-lines .loot {
+  color: var(--state-resource);
+}
+
+.red,
+.danger-mark,
+.log-lines .hurt {
+  color: var(--state-danger-hot);
+}
+
+.blue,
+.armor-text,
+.inspect-stats span:nth-child(2) {
+  color: var(--state-armor);
+}
+
+.finish-tag {
+  display: inline-block;
+  border: 1px solid currentColor;
+  padding: 3px 5px 2px;
+  background: #34280be6;
+  box-shadow: 0 0 10px #ffc94a35;
+  font-weight: 700;
+  letter-spacing: .7px;
+}
+
+.enemy.finish-exact .finish-tag {
+  color: var(--state-exact);
+}
+
+.enemy.finish-overkill .finish-tag {
+  color: var(--state-danger-hot);
+  background: #351511e6;
+  box-shadow: 0 0 9px #e36a5038;
+}
+
+.danger-mark {
+  font-weight: 700;
+  letter-spacing: 1.25px;
+}
+
+.intention,
+.armor-text,
+.enemy-counter,
+.trait {
+  letter-spacing: .15px;
+}
+
+@media (max-width: 700px) {
+  .brand {
+    font-size: 0;
+  }
+
+  .brand .sigil {
+    font-size: 30px;
+    margin-right: 0;
+  }
+
+  .brand .blood-x {
+    display: none;
+  }
+
+  .stage {
+    background-position: 55% 65%;
+    background-size: auto 112%;
+  }
+
+  .stage::before {
+    background:
+      radial-gradient(ellipse 65% 44% at 60% 65%, transparent 0 28%, #02080d38 67%, #02080d78 100%),
+      linear-gradient(to bottom, transparent 0 43%, #03101694 57% 88%, transparent 100%);
+  }
+
+  .hero {
+    width: 110px;
+    height: 103px;
+    left: 0;
+    bottom: 13%;
+  }
+
+  .enemy .monster {
+    transform: scale(1.06);
+    transform-origin: 50% 100%;
+  }
+
+  .intention,
+  .armor-text,
+  .enemy-counter,
+  .trait,
+  .danger-mark,
+  .finish-tag {
+    font-size: 10px;
+    letter-spacing: 0;
+    line-height: 1.25;
+  }
+
+  .enemy-health {
+    font-size: 18px;
+  }
+
+  .combat-message {
+    bottom: 8px;
+  }
+
+  .death-remains { max-width: 100%; }
+
+  .enemy:first-child .death-remains {
+    margin-left: 30px;
+  }
+
+  .final-outcome-art .death-remains {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 430px) {
+  .brand .sigil {
+    font-size: 30px;
+    width: 32px;
+    height: 32px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blood-x,
+  .brand .sigil,
+  .intro .sigil-large {
+    transform: none;
+  }
+
+  .death-remains {
+    animation: none;
+  }
+}
+
+.animations-off .blood-x,
+.animations-off .brand .sigil,
+.animations-off .intro .sigil-large {
+  transform: none;
+}
+
+.animations-off .death-remains {
+  animation: none;
+}

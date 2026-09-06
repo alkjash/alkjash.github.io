@@ -1,0 +1,9 @@
+.character-hero,.character-goblin,.character-orc,.character-shaman,.character-boss{background-image:url('characters-v2.png');mix-blend-mode:screen}
+.character-hero{background-size:349.09% 249.76%;background-position:8.67% 10.59%}
+.character-goblin{background-size:487.62% 353.1%;background-position:46.68% 24.52%}
+.character-orc{background-size:287.10% 262.56%;background-position:90.41% 12.62%}
+.character-shaman{background-size:432.68% 217.87%;background-position:8.04% 85.74%}
+.character-boss{background-size:279.27% 217.87%;background-position:47.67% 85.74%}
+.weapon-icon{background-image:url('equipment-v2.png');background-size:300% 200%;mix-blend-mode:screen}
+.item-dagger{background-position:0% 0%}.item-sword{background-position:50% 0%}.item-hammer{background-position:100% 0%}.item-axe{background-position:0% 100%}.item-glaive{background-position:50% 100%}.item-leather{background-position:100% 100%}
+.weapon-icon.item-buckler,.weapon-icon.item-plate{background-image:url('defense-items.png');background-size:200% 100%}.item-buckler{background-position:0% 0%}.item-plate{background-position:100% 0%}

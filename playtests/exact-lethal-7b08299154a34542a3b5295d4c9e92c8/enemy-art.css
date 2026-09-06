@@ -1,0 +1,250 @@
+/* Cosmetic identities for the ten additional foes.
+   Contract: .enemy.foe-TYPE > ... .monster contains
+   <span class="enemy-prop" aria-hidden="true"></span>.
+   Load after the base artwork. Props follow the animated monster, never its
+   stat panel. No filter or isolation is added to the screen-blended parent. */
+
+.enemy .enemy-prop {
+  display: none;
+  position: absolute;
+  z-index: 4;
+  pointer-events: none;
+  background-repeat: no-repeat;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  transform-origin: 50% 75%;
+  --prop-glint: #f0cc76;
+  --prop-base-filter: brightness(1);
+}
+
+.enemy-prop::before,
+.enemy-prop::after {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+  box-sizing: border-box;
+}
+
+.enemy:is(.foe-powderrunner, .foe-headsman, .foe-hexsinger, .foe-redjaw,
+  .foe-trapwright, .foe-shieldbearer, .foe-bonecook, .foe-painkeeper,
+  .foe-weaponbreaker, .foe-oathkeeper) .enemy-prop {
+  display: block;
+}
+
+/* Powder runner: iron bomb with a square ember and clearly lit fuse. */
+.foe-powderrunner .enemy-prop {
+  left: 2%;
+  top: 43%;
+  width: 32%;
+  height: 32%;
+  background: linear-gradient(135deg, #849296 0 14%, #394349 14% 48%, #1b252b 48%);
+  border: 3px solid #d5aa65;
+  clip-path: polygon(24% 0, 76% 0, 100% 24%, 100% 76%, 76% 100%, 24% 100%, 0 76%, 0 24%);
+  transform: rotate(-12deg);
+  --prop-glint: #ff704d;
+}
+
+.foe-powderrunner .enemy-prop::before {
+  left: 35%; top: 32%; width: 32%; height: 33%;
+  background: #e98937;
+  box-shadow: inset -3px -3px #9c4626;
+}
+
+.foe-powderrunner .monster::after {
+  content: '';
+  position: absolute;
+  z-index: 5;
+  left: 18%; top: 38%; width: 4%; height: 14%;
+  border-left: 3px solid #a88651;
+  border-top: 4px solid #ffdf7c;
+  transform: rotate(-24deg);
+  pointer-events: none;
+  box-shadow: 3px -3px 0 -1px #f19535;
+}
+
+/* Headsman: an oversized brass-hilt execution axe, mounted at the front. */
+.foe-headsman .monster { filter: saturate(.65) brightness(.88); }
+.foe-headsman .enemy-prop {
+  left: -15%; top: 15%; width: 68%; height: 84%;
+  background-image: url('assets/equipment-v2.png');
+  background-size: 300% 200%;
+  background-position: 0% 100%;
+  transform: rotate(-20deg);
+  --prop-glint: #ee6653;
+}
+.foe-headsman .enemy-prop::before {
+  left: 71%; top: 18%; width: 13%; height: 16%;
+  background: #b84338;
+  clip-path: polygon(0 0, 100% 0, 70% 100%, 42% 74%, 0 100%);
+}
+
+/* Hexsinger: violet skin, a floating diamond sigil and two curse motes. */
+.foe-hexsinger .monster { filter: hue-rotate(200deg) saturate(1.2); }
+.foe-hexsinger .enemy-prop {
+  left: 1%; top: 29%; width: 29%; height: 31%;
+  border: 3px solid #d2b9ff;
+  background: #367a8780;
+  transform: rotate(45deg);
+  filter: hue-rotate(-200deg);
+  --prop-base-filter: hue-rotate(-200deg);
+  --prop-glint: #9feaff;
+}
+.foe-hexsinger .enemy-prop::before {
+  inset: 25%;
+  background: #f1dcff;
+}
+.foe-hexsinger .enemy-prop::after {
+  left: -65%; top: 17%; width: 24%; height: 24%;
+  background: #bb94fa;
+  box-shadow: 18px -16px #d5bafa;
+}
+
+/* Redjaw: a blood-red brute with a compact ivory tusk silhouette. */
+.foe-redjaw .monster { filter: sepia(.3) hue-rotate(277deg) saturate(1.8); }
+.foe-redjaw .enemy-prop {
+  left: 50%; top: 25%; width: 31%; height: 18%;
+  background: #b02e36;
+  clip-path: polygon(0 12%, 100% 12%, 92% 80%, 62% 100%, 12% 84%);
+  --prop-glint: #ff705b;
+}
+.foe-redjaw .enemy-prop::before {
+  left: 0; top: 0; width: 100%; height: 100%;
+  background: #f8e6c3;
+  clip-path: polygon(4% 0, 23% 0, 27% 77%, 17% 100%, 10% 61%, 63% 0, 81% 0, 80% 69%, 66% 100%, 64% 61%);
+}
+
+/* Trapwright: open iron jaws resting just ahead of the goblin's feet. */
+.foe-trapwright .monster { filter: saturate(.7); }
+.foe-trapwright .enemy-prop {
+  left: -7%; top: 74%; width: 55%; height: 22%;
+  border-bottom: 4px solid #b3bcb7;
+  background: linear-gradient(90deg, transparent 42%, #8d9d97 42% 58%, transparent 58%);
+  --prop-glint: #ffc45f;
+}
+.foe-trapwright .enemy-prop::before,
+.foe-trapwright .enemy-prop::after {
+  top: 0; width: 47%; height: 84%;
+  background: #d0c9ab;
+  clip-path: polygon(0 100%, 0 6%, 18% 30%, 28% 4%, 46% 40%, 61% 6%, 79% 52%, 100% 12%, 100% 100%);
+}
+.foe-trapwright .enemy-prop::before { left: 0; transform: rotate(-22deg); }
+.foe-trapwright .enemy-prop::after { right: 0; transform: rotate(22deg); }
+
+/* Shieldbearer: the existing round buckler enlarged over the forward arm. */
+.foe-shieldbearer .monster { filter: saturate(.65) brightness(1.1); }
+.foe-shieldbearer .enemy-prop {
+  left: -1%; top: 33%; width: 57%; height: 72%;
+  background-image: url('assets/defense-items.png');
+  background-size: 200% 100%;
+  background-position: 0% 0%;
+  --prop-glint: #a9dce2;
+}
+
+/* Bonecook: a blocky iron pot, pale bone handles and toxic green broth. */
+.foe-bonecook .enemy-prop {
+  left: -1%; top: 57%; width: 45%; height: 38%;
+  border: 3px solid #748887;
+  background: linear-gradient(#c1dc83 0 14%, #568149 14% 24%, #35494b 24% 66%, #213438 66%);
+  clip-path: polygon(0 0, 100% 0, 94% 68%, 75% 86%, 75% 100%, 59% 100%, 59% 86%, 28% 86%, 28% 100%, 12% 100%, 12% 77%, 4% 61%);
+  --prop-glint: #bce984;
+}
+.foe-bonecook .enemy-prop::before {
+  left: 19%; top: 29%; width: 14%; height: 15%;
+  background: #dfd5b2;
+  box-shadow: 12px 7px #dfd5b2, 5px 14px #98b174;
+}
+.foe-bonecook .monster::after {
+  content: '';
+  position: absolute;
+  z-index: 5;
+  left: 13%; top: 48%; width: 4%; height: 8%;
+  background: #c0e788;
+  box-shadow: 9px -5px #9dcf76, 19px 3px #b9e184;
+  pointer-events: none;
+}
+
+/* Painkeeper: pale spikes across a dark-red shoulder mantle. */
+.foe-painkeeper .monster { filter: sepia(.18) saturate(.65); }
+.foe-painkeeper .enemy-prop {
+  left: 60%; top: 22%; width: 39%; height: 31%;
+  background: #844943;
+  clip-path: polygon(0 46%, 10% 0, 27% 34%, 42% 0, 54% 31%, 74% 0, 77% 40%, 100% 11%, 100% 100%, 0 100%);
+  --prop-glint: #f06b58;
+}
+.foe-painkeeper .enemy-prop::before {
+  inset: 0;
+  background: #e2d5b3;
+  clip-path: polygon(0 42%, 10% 0, 21% 34%, 32% 38%, 42% 0, 50% 31%, 62% 35%, 74% 0, 77% 40%, 89% 39%, 100% 11%, 96% 68%, 0 68%);
+}
+
+/* Weaponbreaker: the existing heavy steel hammer carried at the front. */
+.foe-weaponbreaker .monster { filter: saturate(.75) hue-rotate(15deg); }
+.foe-weaponbreaker .enemy-prop {
+  left: -13%; top: 18%; width: 63%; height: 77%;
+  background-image: url('assets/equipment-v2.png');
+  background-size: 300% 200%;
+  background-position: 100% 0%;
+  transform: rotate(-32deg);
+  --prop-glint: #f0ba5e;
+}
+
+/* Oathkeeper: a cyan rune tablet and a pair of angular shoulder seals. */
+.foe-oathkeeper .monster { filter: hue-rotate(63deg) saturate(.85); }
+.foe-oathkeeper .enemy-prop {
+  left: 55%; top: 47%; width: 25%; height: 38%;
+  border: 2px solid #e3cf9a;
+  background: #253b4e;
+  clip-path: polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%);
+  filter: hue-rotate(-63deg);
+  --prop-base-filter: hue-rotate(-63deg);
+  --prop-glint: #a8eff1;
+}
+
+/* One restrained two-frame glint keeps the mechanic cue alive without making
+   the subdued body palette flicker. Charged enemies receive a firmer shake in
+   animations.css. */
+.enemy:not(.dead) .enemy-prop {
+  animation: enemy-prop-glint calc(var(--action-ms, 520ms) * 5) steps(2, end) infinite;
+}
+
+@keyframes enemy-prop-glint {
+  0%, 84%, 100% { filter: var(--prop-base-filter) drop-shadow(0 0 0 transparent); }
+  88%, 94% { filter: var(--prop-base-filter) drop-shadow(0 0 4px var(--prop-glint)); }
+}
+.foe-oathkeeper .enemy-prop::before {
+  inset: 16% 22% 28%;
+  background: #bbf7f5;
+  clip-path: polygon(42% 0, 60% 0, 60% 36%, 100% 16%, 100% 37%, 60% 58%, 60% 100%, 42% 100%, 42% 63%, 0 82%, 0 60%, 42% 40%);
+}
+.foe-oathkeeper .monster::after {
+  content: '';
+  position: absolute;
+  z-index: 5;
+  left: 74%; top: 30%; width: 8%; height: 11%;
+  border: 2px solid #c5f0ed;
+  transform: rotate(45deg);
+  box-shadow: 8px 8px 0 -1px #659baf;
+  pointer-events: none;
+  filter: hue-rotate(-63deg);
+}
+
+/* Keep the props legible at the compact mobile sprite sizes. */
+@media (max-width: 700px) {
+  .foe-powderrunner .enemy-prop,
+  .foe-hexsinger .enemy-prop,
+  .foe-bonecook .enemy-prop { border-width: 2px; }
+  .foe-trapwright .enemy-prop { border-bottom-width: 2px; }
+  .foe-oathkeeper .enemy-prop { border-width: 2px; }
+  .foe-powderrunner .monster::after { border-left-width: 2px; border-top-width: 3px; }
+  .foe-oathkeeper .monster::after { border-width: 2px; }
+  .foe-headsman .enemy-prop,
+  .foe-weaponbreaker .enemy-prop { left: -8%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .enemy:not(.dead) .enemy-prop { animation: none; }
+}
+
+.animations-off .enemy:not(.dead) .enemy-prop {
+  animation: none;
+}
