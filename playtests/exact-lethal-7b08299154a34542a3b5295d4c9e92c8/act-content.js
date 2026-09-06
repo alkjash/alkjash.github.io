@@ -2,7 +2,9 @@
 //
 // This module deliberately does not import the engine, campaign topology, loot
 // catalog, or UI. Act I remains owned by the existing modules. All combat
-// numbers below are baseline, provisional values for the later balance pass.
+// numbers below include EL-019 enemy-only calibration. The final support
+// has lower HP so its weapon jam does not dominate the final-boss variants.
+// See work/el019-calibration for the frozen policy and sampling limitations.
 
 export const CONTENT_VERSION = 1;
 export const CONTENT_BALANCE_STATUS = 'PROVISIONAL_UNTIL_PLAYTESTED';
@@ -25,7 +27,7 @@ const lootProfile=(families,{items=[],excludedFamilies=[],excludedTags=[],defens
 export const ACT_ENEMIES=deepFreeze({
  facet_swarm:{
   name:'Facet Swarm',art:'facet-swarm',armor:0,attack:0,mechanic:'hexsinger',
-  chargeDamage:18,interruptExact:4,
+  chargeDamage:20,interruptExact:4,
   traitText:'REFRACTION · Deal its displayed exact total this turn to break its armor-piercing ray.',
   act:2,faction:'the-living-lattice',entityKind:'crystal-polyhedron',
   tags:['charge','exact-counter','swarm','headless','geometric'],
@@ -33,7 +35,7 @@ export const ACT_ENEMIES=deepFreeze({
   lootProfile:lootProfile(['crystal-needle','prism-focus','shard-spear'],{items:['prism_needle','prism_focus','shard_spear'],excludedFamilies:['infernal','plate'],excludedTags:['organic','heavy'],defenseSlots:[]})
  },
  lattice_sentinel:{
-  name:'Lattice Sentinel',art:'lattice-sentinel',armor:2,attack:9,mechanic:'shieldbearer',
+  name:'Lattice Sentinel',art:'lattice-sentinel',armor:2,attack:10,mechanic:'shieldbearer',
   traitText:'FACET WARD · While armored, it intercepts attacks aimed at its companion.',
   act:2,faction:'the-living-lattice',entityKind:'crystal-polyhedron',
   tags:['protector','armored','stacked','headless','geometric'],
@@ -41,7 +43,7 @@ export const ACT_ENEMIES=deepFreeze({
   lootProfile:lootProfile(['mirror-shield','lattice-mail','geode-maul'],{items:['mirror_shield','lattice_mail','geode_maul'],excludedFamilies:['infernal','cloth'],defenseSlots:['body','offhand']})
  },
  hinge_idol:{
-  name:'Hinge Idol',art:'hinge-idol',armor:1,attack:9,mechanic:'trapwright',trapDamage:10,
+  name:'Hinge Idol',art:'hinge-idol',armor:1,attack:10,mechanic:'trapwright',trapDamage:10,
   traitText:'CLOSING ANGLE · Marks one weapon; using it springs the idol shut before the strike.',
   act:2,faction:'the-living-lattice',entityKind:'crystal-polyhedron',
   tags:['slot-control','hinged','headless','geometric'],
@@ -49,7 +51,7 @@ export const ACT_ENEMIES=deepFreeze({
   lootProfile:lootProfile(['shard-hook','facet-blade','prism-focus'],{items:['shard_hook','facet_blade','prism_focus'],excludedFamilies:['infernal','cloth'],excludedTags:['organic'],defenseSlots:[]})
  },
  crown_cluster:{
-  name:'Crown Cluster',art:'crown-cluster',armor:1,attack:9,mechanic:'rally',
+  name:'Crown Cluster',art:'crown-cluster',armor:1,attack:10,mechanic:'rally',
   traitText:'HARMONIC CROWN · Every living foe gains 1 attack at the end of the turn.',
   act:2,faction:'the-living-lattice',entityKind:'crystal-polyhedron',
   tags:['support','ring','headless','geometric'],
@@ -57,7 +59,7 @@ export const ACT_ENEMIES=deepFreeze({
   lootProfile:lootProfile(['prism-focus','crystal-needle','mirror-shield'],{items:['prism_focus','prism_needle','mirror_shield'],excludedFamilies:['infernal','plate'],excludedTags:['organic','heavy'],defenseSlots:['offhand']})
  },
  burrowing_lens:{
-  name:'Burrowing Lens',art:'burrowing-lens',armor:1,attack:0,mechanic:'painkeeper',reflectionMultiplier:2,
+  name:'Burrowing Lens',art:'burrowing-lens',armor:1,attack:0,mechanic:'painkeeper',reflectionMultiplier:3,
   traitText:'SPLINTERED ECHO · Its next attack multiplies the largest hit it survives this turn.',
   act:2,faction:'the-living-lattice',entityKind:'crystal-polyhedron',
   tags:['retaliation','disk','burrower','headless','geometric'],
@@ -65,7 +67,7 @@ export const ACT_ENEMIES=deepFreeze({
   lootProfile:lootProfile(['prism-focus','shard-hook','crystal-needle'],{items:['prism_focus','shard_hook','prism_needle'],excludedFamilies:['infernal','plate'],excludedTags:['organic','heavy'],defenseSlots:[]})
  },
  geode_mender:{
-  name:'Geode Mender',art:'geode-mender',armor:1,attack:9,mechanic:'bonecook',healInterrupt:5,
+  name:'Geode Mender',art:'geode-mender',armor:1,attack:10,mechanic:'bonecook',healInterrupt:5,
   traitText:'REKNIT · Fully restores a wounded companion unless its displayed damage threshold is met.',
   act:2,faction:'the-living-lattice',entityKind:'crystal-polyhedron',
   tags:['support','heal','orbiting','headless','geometric'],
@@ -73,7 +75,7 @@ export const ACT_ENEMIES=deepFreeze({
   lootProfile:lootProfile(['prism-focus','lattice-mail','crystal-needle'],{items:['prism_focus','lattice_mail','prism_needle'],excludedFamilies:['infernal','shield'],excludedTags:['organic','heavy'],defenseSlots:['body']})
  },
  prism_grazer:{
-  name:'Prism Grazer',art:'prism-grazer',armor:1,attack:10,mechanic:'redjaw',berserkAttack:14,
+  name:'Prism Grazer',art:'prism-grazer',armor:1,attack:11,mechanic:'redjaw',berserkAttack:15,
   traitText:'PANIC FLASH · Below half health, its displayed attack rises.',
   act:2,faction:'deep-cave-fauna',entityKind:'cave-creature',
   tags:['threshold','beast','low-crawler','six-legged'],
@@ -81,7 +83,7 @@ export const ACT_ENEMIES=deepFreeze({
   lootProfile:lootProfile(['crystal-hide','shard-spear','facet-blade'],{items:['crystal_hide','shard_spear','facet_blade'],excludedFamilies:['infernal','plate'],excludedTags:['ceremonial'],defenseSlots:['body']})
  },
  gloom_moth:{
-  name:'Gloom Moth',art:'gloom-moth',armor:0,attack:9,mechanic:'windup',
+  name:'Gloom Moth',art:'gloom-moth',armor:0,attack:10,mechanic:'windup',windupGrowth:1,
   traitText:'DARK DIVE · Alternates a visible wing-folding windup with increasingly forceful dives.',
   act:2,faction:'deep-cave-fauna',entityKind:'cave-creature',
   tags:['windup','flying','creature','wide-silhouette'],
@@ -90,7 +92,7 @@ export const ACT_ENEMIES=deepFreeze({
  },
  twelve_faced_archon:{
   name:'The Twelve-Faced Archon',art:'twelve-faced-archon',armor:2,attack:0,mechanic:'headsman',
-  chargeDamage:18,interruptHits:3,
+  chargeDamage:20,interruptHits:3,
   traitText:'TWELVEFOLD VERDICT · Hit it three times this turn to interrupt its collapse.',
   act:2,faction:'the-living-lattice',entityKind:'crystal-polyhedron',
   tags:['boss','charge','multihit-counter','dodecahedron','headless','geometric'],
@@ -165,7 +167,7 @@ export const ACT_ENEMIES=deepFreeze({
  },
  vharzael_furnace_below:{
   name:'Vharzael, the Furnace Below',art:'vharzael-furnace-below',armor:2,attack:0,mechanic:'hexsinger',
-  chargeDamage:24,interruptExact:12,
+  chargeDamage:9,interruptExact:12,
   traitText:'FINAL EQUATION · Deal exactly 12 total damage this turn to break its furnace decree.',
   act:3,faction:'the-ember-court',entityKind:'demon',
   tags:['boss','charge','exact-counter','many-mawed','furnace'],
@@ -204,44 +206,44 @@ const encounter=(id,day,act,kind,variants)=>({id,day,act,kind,variants});
 // selected existing mechanic. Difficulty scaling stays outside this module.
 export const ACT_ENCOUNTER_PROFILES=deepFreeze({
  11:encounter('act2-d11',11,2,'combat',[
-  variant('falling-facets',4,[tuple('facet_swarm',20,null,{armor:0,attack:0,chargeDamage:12,interruptExact:3}),tuple('prism_grazer',24,null,{armor:1,attack:8,berserkAttack:12})]),
-  variant('first-hinge',3,[tuple('hinge_idol',22,null,{armor:1,attack:7,trapDamage:8}),tuple('crown_cluster',24,null,{armor:1,attack:7})]),
-  variant('moth-at-the-gate',3,[tuple('lattice_sentinel',26,null,{armor:2,attack:7}),tuple('gloom_moth',22,null,{armor:0,attack:7})])
+  variant('falling-facets',4,[tuple('facet_swarm',16,null,{armor:0,attack:0,chargeDamage:14,interruptExact:3}),tuple('prism_grazer',19,null,{armor:1,attack:9,berserkAttack:13})]),
+  variant('first-hinge',3,[tuple('hinge_idol',18,null,{armor:1,attack:8,trapDamage:8}),tuple('crown_cluster',19,null,{armor:1,attack:8})]),
+  variant('moth-at-the-gate',3,[tuple('lattice_sentinel',21,null,{armor:2,attack:8}),tuple('gloom_moth',18,null,{windupGrowth:1,armor:0,attack:8})])
  ]),
  12:encounter('act2-d12',12,2,'combat',[
-  variant('choir-and-lens',4,[tuple('crown_cluster',24,null,{armor:1,attack:7}),tuple('burrowing_lens',26,'precision',{armor:1,attack:0,reflectionMultiplier:2})]),
-  variant('mended-swarm',3,[tuple('geode_mender',22,null,{armor:1,attack:7,healInterrupt:5}),tuple('facet_swarm',24,null,{armor:0,attack:0,chargeDamage:14,interruptExact:3})]),
-  variant('grazing-lattice',3,[tuple('prism_grazer',28,null,{armor:1,attack:8,berserkAttack:12}),tuple('lattice_sentinel',26,null,{armor:2,attack:7})])
+  variant('choir-and-lens',4,[tuple('crown_cluster',19,null,{armor:1,attack:8}),tuple('burrowing_lens',21,'precision',{armor:1,attack:0,reflectionMultiplier:3})]),
+  variant('mended-swarm',3,[tuple('geode_mender',18,null,{armor:1,attack:8,healInterrupt:5}),tuple('facet_swarm',19,null,{armor:0,attack:0,chargeDamage:17,interruptExact:3})]),
+  variant('grazing-lattice',3,[tuple('prism_grazer',22,null,{armor:1,attack:9,berserkAttack:13}),tuple('lattice_sentinel',21,null,{armor:2,attack:8})])
  ]),
  14:encounter('act2-d14',14,2,'combat',[
-  variant('closing-proof',4,[tuple('hinge_idol',26,'laceration',{armor:1,attack:8,trapDamage:9}),tuple('facet_swarm',24,null,{armor:0,attack:0,chargeDamage:16,interruptExact:4})]),
-  variant('deep-grazers',3,[tuple('prism_grazer',28,null,{armor:1,attack:9,berserkAttack:13}),tuple('crown_cluster',26,null,{armor:1,attack:8})]),
-  variant('lens-under-wing',3,[tuple('burrowing_lens',28,null,{armor:1,attack:0,reflectionMultiplier:2}),tuple('gloom_moth',24,null,{armor:0,attack:8})])
+  variant('closing-proof',4,[tuple('hinge_idol',21,'laceration',{armor:1,attack:9,trapDamage:9}),tuple('facet_swarm',19,null,{armor:0,attack:0,chargeDamage:18,interruptExact:4})]),
+  variant('deep-grazers',3,[tuple('prism_grazer',22,null,{armor:1,attack:10,berserkAttack:14}),tuple('crown_cluster',21,null,{armor:1,attack:9})]),
+  variant('lens-under-wing',3,[tuple('burrowing_lens',22,null,{armor:1,attack:0,reflectionMultiplier:3}),tuple('gloom_moth',19,null,{windupGrowth:1,armor:0,attack:9})])
  ]),
  15:encounter('act2-d15',15,2,'combat',[
-  variant('menders-ward',4,[tuple('gloom_moth',26,null,{armor:0,attack:8}),tuple('geode_mender',24,null,{armor:1,attack:8,healInterrupt:5})]),
-  variant('violet-ray',3,[tuple('facet_swarm',26,'power',{armor:0,attack:0,chargeDamage:16,interruptExact:4}),tuple('hinge_idol',30,null,{armor:1,attack:8,trapDamage:9})]),
-  variant('panic-orbit',3,[tuple('crown_cluster',28,null,{armor:1,attack:8}),tuple('prism_grazer',32,null,{armor:1,attack:9,berserkAttack:13})])
+  variant('menders-ward',4,[tuple('gloom_moth',21,null,{windupGrowth:1,armor:0,attack:9}),tuple('geode_mender',19,null,{armor:1,attack:9,healInterrupt:5})]),
+  variant('violet-ray',3,[tuple('facet_swarm',21,'power',{armor:0,attack:0,chargeDamage:18,interruptExact:4}),tuple('hinge_idol',24,null,{armor:1,attack:9,trapDamage:9})]),
+  variant('panic-orbit',3,[tuple('crown_cluster',22,null,{armor:1,attack:9}),tuple('prism_grazer',26,null,{armor:1,attack:10,berserkAttack:14})])
  ]),
  16:encounter('act2-d16',16,2,'combat',[
-  variant('starless-mending',4,[tuple('geode_mender',28,null,{armor:1,attack:9,healInterrupt:5}),tuple('burrowing_lens',30,null,{armor:1,attack:0,reflectionMultiplier:2})]),
-  variant('black-wing-facets',3,[tuple('gloom_moth',28,null,{armor:0,attack:9}),tuple('facet_swarm',30,'precision',{armor:0,attack:0,chargeDamage:18,interruptExact:4})]),
-  variant('sentinel-idol',3,[tuple('lattice_sentinel',32,null,{armor:2,attack:9}),tuple('hinge_idol',28,null,{armor:1,attack:9,trapDamage:10})])
+  variant('starless-mending',4,[tuple('geode_mender',22,null,{armor:1,attack:10,healInterrupt:5}),tuple('burrowing_lens',24,null,{armor:1,attack:0,reflectionMultiplier:3})]),
+  variant('black-wing-facets',3,[tuple('gloom_moth',22,null,{windupGrowth:1,armor:0,attack:10}),tuple('facet_swarm',24,'precision',{armor:0,attack:0,chargeDamage:20,interruptExact:4})]),
+  variant('sentinel-idol',3,[tuple('lattice_sentinel',26,null,{armor:2,attack:10}),tuple('hinge_idol',22,null,{armor:1,attack:10,trapDamage:10})])
  ]),
  18:encounter('act2-d18',18,2,'combat',[
-  variant('hard-lattice',4,[tuple('lattice_sentinel',34,'dismantling',{armor:3,attack:9}),tuple('crown_cluster',30,null,{armor:1,attack:9})]),
-  variant('fault-hunters',3,[tuple('prism_grazer',32,null,{armor:1,attack:10,berserkAttack:14}),tuple('burrowing_lens',30,null,{armor:1,attack:0,reflectionMultiplier:2})]),
-  variant('ray-in-the-hinge',3,[tuple('facet_swarm',34,null,{armor:0,attack:0,chargeDamage:20,interruptExact:6}),tuple('hinge_idol',32,null,{armor:1,attack:9,trapDamage:10})])
+  variant('hard-lattice',4,[tuple('lattice_sentinel',27,'dismantling',{armor:3,attack:10}),tuple('crown_cluster',24,null,{armor:1,attack:10})]),
+  variant('fault-hunters',3,[tuple('prism_grazer',26,null,{armor:1,attack:11,berserkAttack:15}),tuple('burrowing_lens',24,null,{armor:1,attack:0,reflectionMultiplier:3})]),
+  variant('ray-in-the-hinge',3,[tuple('facet_swarm',27,null,{armor:0,attack:0,chargeDamage:23,interruptExact:6}),tuple('hinge_idol',26,null,{armor:1,attack:10,trapDamage:10})])
  ]),
  19:encounter('act2-d19',19,2,'combat',[
-  variant('vault-wardens',4,[tuple('lattice_sentinel',36,null,{armor:3,attack:10}),tuple('gloom_moth',30,'power',{armor:0,attack:10})]),
-  variant('last-refraction',3,[tuple('facet_swarm',32,null,{armor:0,attack:0,chargeDamage:22,interruptExact:6}),tuple('crown_cluster',34,null,{armor:1,attack:10})]),
-  variant('moth-over-lens',3,[tuple('gloom_moth',32,null,{armor:0,attack:10}),tuple('burrowing_lens',36,null,{armor:1,attack:0,reflectionMultiplier:2})])
+  variant('vault-wardens',4,[tuple('lattice_sentinel',29,null,{armor:3,attack:11}),tuple('gloom_moth',24,'power',{windupGrowth:1,armor:0,attack:11})]),
+  variant('last-refraction',3,[tuple('facet_swarm',26,null,{armor:0,attack:0,chargeDamage:25,interruptExact:6}),tuple('crown_cluster',27,null,{armor:1,attack:11})]),
+  variant('moth-over-lens',3,[tuple('gloom_moth',26,null,{windupGrowth:1,armor:0,attack:11}),tuple('burrowing_lens',29,null,{armor:1,attack:0,reflectionMultiplier:3})])
  ]),
  20:encounter('act2-boss',20,2,'boss',[
-  variant('twelve-faced-throne',6,[tuple('twelve_faced_archon',56,'dismantling',{armor:2,attack:0,chargeDamage:18,interruptHits:3}),tuple('crown_cluster',24,null,{armor:1,attack:9})]),
-  variant('archon-and-mender',2,[tuple('twelve_faced_archon',56,'dismantling',{armor:2,attack:0,chargeDamage:18,interruptHits:3}),tuple('geode_mender',18,null,{armor:1,attack:9,healInterrupt:6})]),
-  variant('archon-and-grazer',2,[tuple('twelve_faced_archon',56,'dismantling',{armor:2,attack:0,chargeDamage:18,interruptHits:3}),tuple('prism_grazer',26,null,{armor:1,attack:10,berserkAttack:14})])
+  variant('twelve-faced-throne',6,[tuple('twelve_faced_archon',45,'dismantling',{armor:2,attack:0,chargeDamage:20,interruptHits:3}),tuple('crown_cluster',19,null,{armor:1,attack:10})]),
+  variant('archon-and-mender',2,[tuple('twelve_faced_archon',45,'dismantling',{armor:2,attack:0,chargeDamage:20,interruptHits:3}),tuple('geode_mender',14,null,{armor:1,attack:10,healInterrupt:6})]),
+  variant('archon-and-grazer',2,[tuple('twelve_faced_archon',45,'dismantling',{armor:2,attack:0,chargeDamage:20,interruptHits:3}),tuple('prism_grazer',21,null,{armor:1,attack:11,berserkAttack:15})])
  ]),
 
  21:encounter('act3-d21',21,3,'combat',[
@@ -280,23 +282,23 @@ export const ACT_ENCOUNTER_PROFILES=deepFreeze({
   variant('steward-of-brands',3,[tuple('marrow_steward',44,null,{armor:1,attack:14,healInterrupt:8}),tuple('brand_serf',48,null,{armor:1,attack:15})])
  ]),
  30:encounter('act3-boss',30,3,'boss',[
-  variant('heart-below',6,[tuple('vharzael_furnace_below',72,'dismantling',{armor:2,attack:0,chargeDamage:24,interruptExact:12}),tuple('oath_demon',30,null,{armor:2,attack:12,oathMultiplier:3})]),
-  variant('heart-and-steward',2,[tuple('vharzael_furnace_below',72,'dismantling',{armor:2,attack:0,chargeDamage:24,interruptExact:12}),tuple('marrow_steward',24,null,{armor:1,attack:12,healInterrupt:8})]),
-  variant('heart-and-chain',2,[tuple('vharzael_furnace_below',72,'dismantling',{armor:2,attack:0,chargeDamage:24,interruptExact:12}),tuple('chain_thrall',30,null,{armor:1,attack:12})])
+  variant('heart-below',6,[tuple('vharzael_furnace_below',48,'dismantling',{armor:2,attack:0,chargeDamage:10,interruptExact:12}),tuple('oath_demon',30,null,{armor:2,attack:12,oathMultiplier:3})]),
+  variant('heart-and-steward',2,[tuple('vharzael_furnace_below',48,'dismantling',{armor:2,attack:0,chargeDamage:9,interruptExact:12}),tuple('marrow_steward',24,null,{armor:1,attack:12,healInterrupt:8})]),
+  variant('heart-and-chain',2,[tuple('vharzael_furnace_below',48,'dismantling',{armor:2,attack:0,chargeDamage:9,interruptExact:12}),tuple('chain_thrall',18,null,{armor:1,attack:12})])
  ])
 });
 
 // Intended progression bands are review anchors, not claims about win rates.
 // Zero-attack charged and reactive enemies are summarized by chargeDamage.
 export const ACT_DAY_BALANCE_PROFILES=deepFreeze({
- 11:{hp:[20,26],attack:[7,8],armor:[0,2],charge:[12,12],status:CONTENT_BALANCE_STATUS},
- 12:{hp:[22,28],attack:[7,8],armor:[0,2],charge:[14,14],status:CONTENT_BALANCE_STATUS},
- 14:{hp:[24,28],attack:[8,9],armor:[0,1],charge:[16,16],status:CONTENT_BALANCE_STATUS},
- 15:{hp:[24,32],attack:[8,9],armor:[0,1],charge:[16,16],status:CONTENT_BALANCE_STATUS},
- 16:{hp:[28,32],attack:[9,9],armor:[0,2],charge:[18,18],status:CONTENT_BALANCE_STATUS},
- 18:{hp:[30,34],attack:[9,10],armor:[0,3],charge:[20,20],status:CONTENT_BALANCE_STATUS},
- 19:{hp:[30,36],attack:[10,10],armor:[0,3],charge:[22,22],status:CONTENT_BALANCE_STATUS},
- 20:{hp:[18,56],attack:[9,10],armor:[1,2],charge:[18,18],status:CONTENT_BALANCE_STATUS},
+ 11:{hp:[16,21],attack:[8,9],armor:[0,2],charge:[14,14],status:CONTENT_BALANCE_STATUS},
+ 12:{hp:[18,22],attack:[8,9],armor:[0,2],charge:[17,17],status:CONTENT_BALANCE_STATUS},
+ 14:{hp:[19,22],attack:[9,10],armor:[0,1],charge:[18,18],status:CONTENT_BALANCE_STATUS},
+ 15:{hp:[19,26],attack:[9,10],armor:[0,1],charge:[18,18],status:CONTENT_BALANCE_STATUS},
+ 16:{hp:[22,26],attack:[10,10],armor:[0,2],charge:[20,20],status:CONTENT_BALANCE_STATUS},
+ 18:{hp:[24,27],attack:[10,11],armor:[0,3],charge:[23,23],status:CONTENT_BALANCE_STATUS},
+ 19:{hp:[24,29],attack:[11,11],armor:[0,3],charge:[25,25],status:CONTENT_BALANCE_STATUS},
+ 20:{hp:[14,45],attack:[10,11],armor:[1,2],charge:[20,20],status:CONTENT_BALANCE_STATUS},
  21:{hp:[24,32],attack:[10,11],armor:[0,2],charge:[20,20],status:CONTENT_BALANCE_STATUS},
  22:{hp:[28,34],attack:[10,11],armor:[0,2],charge:[22,22],status:CONTENT_BALANCE_STATUS},
  24:{hp:[28,36],attack:[11,12],armor:[0,2],charge:[24,24],status:CONTENT_BALANCE_STATUS},
@@ -304,7 +306,7 @@ export const ACT_DAY_BALANCE_PROFILES=deepFreeze({
  26:{hp:[34,42],attack:[12,13],armor:[0,2],charge:[26,26],status:CONTENT_BALANCE_STATUS},
  28:{hp:[36,44],attack:[13,14],armor:[0,2],charge:[28,28],status:CONTENT_BALANCE_STATUS},
  29:{hp:[44,50],attack:[14,15],armor:[1,3],charge:[30,30],status:CONTENT_BALANCE_STATUS},
- 30:{hp:[24,72],attack:[12,12],armor:[1,2],charge:[24,24],status:CONTENT_BALANCE_STATUS}
+ 30:{hp:[18,48],attack:[12,12],armor:[1,2],charge:[9,10],status:CONTENT_BALANCE_STATUS}
 });
 
 export const ACT_EVENTS=deepFreeze({
@@ -363,7 +365,7 @@ export const ACT_CONTENT=deepFreeze({
 
 const allowedMechanics=new Set(['steal','rage','windup','fortify','rally','powderrunner','headsman','hexsinger','redjaw','trapwright','shieldbearer','bonecook','painkeeper','weaponbreaker','oathkeeper']);
 const mechanicParams={powderrunner:['chargeDamage','interruptHit'],headsman:['chargeDamage','interruptHits'],hexsinger:['chargeDamage','interruptExact'],redjaw:['berserkAttack'],trapwright:['trapDamage'],bonecook:['healInterrupt'],painkeeper:['reflectionMultiplier'],oathkeeper:['oathMultiplier']};
-const allowedTupleOverrides=new Set(['attack','armor','chargeDamage','interruptHit','interruptHits','interruptExact','berserkAttack','trapDamage','healInterrupt','reflectionMultiplier','oathMultiplier']);
+const allowedTupleOverrides=new Set(['attack','armor','chargeDamage','interruptHit','interruptHits','interruptExact','berserkAttack','trapDamage','healInterrupt','reflectionMultiplier','oathMultiplier','windupGrowth']);
 const requiredCombatDays=[11,12,14,15,16,18,19,20,21,22,24,25,26,28,29,30];
 const requiredEventDays=[13,17,23,27];
 

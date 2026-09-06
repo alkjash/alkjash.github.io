@@ -63,7 +63,7 @@ function activeEquipment(s){return s.inventory.filter(item=>!WEAPONS[item.id].pa
 function markDrop(s,drop,status,slot=null){const entry=s.dropHistory.find(item=>item.uid===drop.uid);if(entry){entry.status=status;entry.slot=slot;}if(s.lastLoot?.uid===drop.uid){s.lastLoot.status=status;s.lastLoot.slot=slot;}}
 function placeDrop(s,drop,slot){
  const oldUid=s.slots[slot],old=s.inventory.find(item=>item.uid===oldUid);
- if(oldUid)s.inventory=s.inventory.filter(item=>item.uid!==oldUid);
+ if(oldUid){if(old)markDrop(s,old,'left');s.inventory=s.inventory.filter(item=>item.uid!==oldUid);}
  s.inventory.push({uid:drop.uid,id:drop.id,blessings:[...drop.blessings],kills:drop.kills||0});s.slots[slot]=drop.uid;
  markDrop(s,drop,'equipped',slot);note(s,`${WEAPONS[drop.id].name} equipped in slot ${slot+1}${old?`; ${WEAPONS[old.id].name} left behind`:''}.`,'gold');
 }
@@ -102,7 +102,7 @@ export function availableDifficulties(profile={}){const wins=Array.isArray(profi
 export function recordWin(profile={},s){const result={...profile,wins:[...new Set(Array.isArray(profile.wins)?profile.wins:[])]};if(s?.phase==='won'&&has(DIFFICULTIES,s.difficulty)&&!result.wins.includes(s.difficulty))result.wins.push(s.difficulty);return result;}
 export function newRun(seed=Date.now(),difficulty='pilgrim'){
  if(!has(DIFFICULTIES,difficulty))difficulty='pilgrim';const value=seedNumber(seed);
- const s={version:SAVE_VERSION,id:`${value}-${difficulty}`,initialSeed:value,seed:value,difficulty,character:'wanderer',phase:'draft',day:1,act:1,plannedDays:30,campaign:copy(campaignStateForDay(1)),hp:84,maxHp:84,gold:6,energy:3,maxEnergy:3,turn:1,nextUid:1,slots:[null,null,null,null],inventory:[],pendingDrops:[],startingChoices:[],enemies:[],loot:[],offers:[],event:null,dropHistory:[],lastLoot:null,jammedSlots:[],lastWeaponUsedSlot:null,exact:0,kills:0,overkills:0,roomExact:0,roomKills:0,damageTaken:0,log:[],history:[],lastAction:null};
+ const s={version:SAVE_VERSION,id:`${value}-${difficulty}`,initialSeed:value,seed:value,difficulty,character:'wanderer',phase:'draft',day:1,act:1,plannedDays:30,campaign:copy(campaignStateForDay(1)),hp:50,maxHp:50,gold:6,energy:3,maxEnergy:3,turn:1,nextUid:1,slots:[null,null,null,null],inventory:[],pendingDrops:[],startingChoices:[],enemies:[],loot:[],offers:[],event:null,dropHistory:[],lastLoot:null,jammedSlots:[],lastWeaponUsedSlot:null,exact:0,kills:0,overkills:0,roomExact:0,roomKills:0,damageTaken:0,log:[],history:[],lastAction:null};
  const pool=STARTING_POOL.filter(id=>id!=='rusty_dagger');for(let i=pool.length-1;i>0;i--){const j=roll(s,0,i);[pool[i],pool[j]]=[pool[j],pool[i]];}
  s.startingChoices=['rusty_dagger',...pool.slice(0,3)].map(id=>({id}));
  note(s,'Choose two rusty weapons. Your other two equipment slots start empty.');return s;
@@ -126,7 +126,7 @@ function counterDescription(e){
   case 'redjaw':return `BLOOD FURY · Its base attack rises from ${e.attack} to ${e.berserkAttack} while below half health.`;
   case 'trapwright':return `TRAPPED WEAPON · Each use of the marked slot triggers ${e.trapDamage} damage before the strike. Armor applies. The marked slot changes each turn.`;
   case 'shieldbearer':return 'INTERCEPT · While it has armor, attacks aimed at a companion are redirected here.';
-  case 'bonecook':return `BONE BROTH · Fully heals a companion. Deal ${e.healInterrupt} total damage this turn to interrupt it.`;
+  case 'bonecook':return `BONE BROTH · Fully heals a companion, or attacks when alone. Deal at least ${e.healInterrupt} total damage after armor this turn to interrupt the current action.`;
   case 'painkeeper':return `PAIN MIRROR · Its next attack equals ${e.reflectionMultiplier} times the largest hit it survives this turn.`;
   case 'weaponbreaker':return 'JAM · Its attack jams the last weapon used this player turn for the following player turn, even if armor blocks the attack.';
   case 'oathkeeper':return `BLOOD OATH · Gains ${e.oathMultiplier} attack per point of overkill dealt to a companion.`;
@@ -154,7 +154,7 @@ function rollIntent(s,e){
  else if(m==='weaponbreaker'){const slot=s.lastWeaponUsedSlot;label=`Attack ${value}${validSlot(slot)?` · jam ${'QWER'[slot]} next turn`:' · no weapon used yet'}`;e.intent={type:'attack',value,label,jamSlot:validSlot(slot)?slot:null};e.counterText=validSlot(slot)?`Last used: ${'QWER'[slot]}`:'Use a weapon to reveal its jam target';return;}
  else if(m==='oathkeeper'){label=`Attack ${value}`;e.counterText=`Overkill oath bonus +${e.oathBonus||0} attack`;}
  else if(m==='windup'&&s.turn%2===1){e.intent={type:'wait',value:0,label:'Windup · preparing a stab'};return;}
- else {value+=m==='windup'?Math.floor((s.turn-1)/2)*2:0;label=`${m==='windup'?'Stab':'Attack'} ${value}`;}
+ else {value+=m==='windup'?Math.floor((s.turn-1)/2)*(e.windupGrowth??2):0;label=`${m==='windup'?'Stab':'Attack'} ${value}`;}
  e.intent={type:'attack',value,label,...(m==='hexsinger'?{pierce:true}:{})};
 }
 export function refreshIntents(s){for(const e of s.enemies)if(!e.dead)rollIntent(s,e);return s;}
@@ -165,7 +165,7 @@ function beginEnemyTurnCounters(s,e){
  if(e.mechanic==='trapwright'){const slots=s.slots.map((_,slot)=>slot).filter(slot=>{const w=getWeapon(s,slot);return w&&!w.passive;});e.trappedSlot=slots.length?pick(s,slots):null;}else e.trappedSlot=null;
 }
 export function createEncounter(s,tuples){
- const keys=['attack','armor','chargeDamage','interruptHit','interruptHits','interruptExact','berserkAttack','trapDamage','healInterrupt','reflectionMultiplier','oathMultiplier'];
+ const keys=['attack','armor','chargeDamage','interruptHit','interruptHits','interruptExact','berserkAttack','trapDamage','healInterrupt','reflectionMultiplier','oathMultiplier','windupGrowth'];
  if(!Array.isArray(tuples)||!tuples.length||tuples.length>2||tuples.some(t=>!Array.isArray(t)||!has(ENEMIES,t[0])||!Number.isInteger(t[1])||t[1]<=0||(t[2]!=null&&!has(BLESSINGS,t[2]))))return false;
  const prepared=[];
  for(const t of tuples){const override={...(typeof t[3]==='number'?{attack:t[3]}:t[3]||{}),...(t[4]||{})};if(Object.entries(override).some(([key,value])=>!keys.includes(key)||!Number.isInteger(value)||value<0))return false;prepared.push(override);}
@@ -411,7 +411,7 @@ export function restoreRun(serialized){
   const liveUids=new Set(s.slots.filter(Boolean));
   for(const item of s.pendingDrops){if(!validDrop(item)||typeof item.uid!=='string'||liveUids.has(item.uid)||!Number.isInteger(item.kills)||item.kills<0)return null;liveUids.add(item.uid);}
   if(s.phase==='draft'&&s.pendingDrops.length)return null;
-  if(s.phase==='draft'){s.hp=84;s.maxHp=84;if(!s.startingChoices.some(item=>item.id==='rusty_dagger'))s.startingChoices[s.startingChoices.length-1]={id:'rusty_dagger'};}
+  if(s.phase==='draft'){s.hp=50;s.maxHp=50;if(!s.startingChoices.some(item=>item.id==='rusty_dagger'))s.startingChoices[s.startingChoices.length-1]={id:'rusty_dagger'};}
   if(oldVersion<6){s.version=6;s.migratedFrom=oldVersion;for(const item of s.pendingDrops)item.type='item';for(const entry of s.dropHistory)if(entry.id&&!entry.type)entry.type='item';if(s.lastLoot?.id&&!s.lastLoot.type)s.lastLoot.type='item';}
   if(oldVersion<7){s.version=7;s.migratedFrom=oldVersion;}
   if(oldVersion<8){
@@ -435,6 +435,7 @@ export function restoreRun(serialized){
   if(s.phase!=='won'&&s.campaign.finalComplete)return null;
   // Preserve legacy progress, prices and purchased flags while removing obsolete bag/sale wording.
   if(s.event){const current=makeEvent(s);s.event.desc=current.desc;for(const option of s.event.options){const fresh=current.options.find(x=>x.id===option.id);if(fresh){option.desc=fresh.desc;option.endsEvent=fresh.endsEvent;if(fresh.purchasedOnce)option.purchasedOnce=true;}else if(option.item&&WEAPONS[option.item])option.desc=describeWeapon(WEAPONS[option.item])+' Choose a slot if needed.';}}
+  for(const e of s.enemies)if(e.mechanic==='bonecook')e.traitText=counterDescription(e);
   return s;
  }catch{return null;}
 }

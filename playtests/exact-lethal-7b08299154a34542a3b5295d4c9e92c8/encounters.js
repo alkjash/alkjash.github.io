@@ -36,20 +36,23 @@ export const ENCOUNTER_ROSTER=Object.freeze({
  }]))
 });
 
+// EL-019 calibrated damage with the frozen simple precision policy.
+// See work/el019-calibration for parameters and conditional mortality evidence.
 // Exact-finishing action budgets grow gradually. The reference weapon is fixed
 // by the day and the shop stock; actual player equipment is never consulted.
-// Attack damage also accounts for the armor sold at those stops.
+// EL-018 keeps the five-damage reference through Act I so the second shop
+// does not create an abrupt enemy HP/attack jump. Actual gear is never read.
 // Charge damage remains frightening when its clearly displayed counter is
 // ignored; early versions have weaker, day-fixed numbers than late versions.
 export const COMBAT_PROFILES=Object.freeze({
  1:{actionBudget:2,referenceDamage:2,attack:2,specialScale:0.3},
  2:{actionBudget:5,referenceDamage:2,attack:2,specialScale:0.35},
- 4:{actionBudget:6,referenceDamage:5,attack:3,specialScale:0.45},
- 5:{actionBudget:7,referenceDamage:5,attack:4,specialScale:0.55},
- 6:{actionBudget:8,referenceDamage:5,attack:5,specialScale:0.7},
- 8:{actionBudget:9,referenceDamage:10,attack:11,specialScale:0.85},
- 9:{actionBudget:10,referenceDamage:10,attack:11,specialScale:0.95},
- 10:{actionBudget:12,referenceDamage:10,attack:10,specialScale:1}
+ 4:{actionBudget:6,referenceDamage:5,attack:6,specialScale:0.6},
+ 5:{actionBudget:7,referenceDamage:5,attack:6,specialScale:0.7},
+ 6:{actionBudget:8,referenceDamage:5,attack:7,specialScale:0.8},
+ 8:{actionBudget:8,referenceDamage:5,attack:7,specialScale:0.9},
+ 9:{actionBudget:9,referenceDamage:5,attack:9,specialScale:1},
+ 10:{actionBudget:10,referenceDamage:5,attack:8,specialScale:1}
 });
 
 function numericSeed(seed){
@@ -102,16 +105,16 @@ function chooseTypes(day,options,random){
 export function mechanicStats(day,profile=COMBAT_PROFILES[day]){
  const scale=profile.specialScale;
  return {
-  chargeDamage:{powderrunner:Math.round(40*scale),headsman:Math.round(45*scale),hexsinger:Math.round(30*scale)},
-  // The fixed five-damage sword from the first shop can answer early bombs.
-  interruptHit:day<8?5:6,interruptHits:3,interruptExact:2,
-  berserkAttack:Math.round(28*scale),trapDamage:Math.max(4,Math.round(12*scale)),
-  healInterrupt:4,reflectionMultiplier:day<8?3:4,oathMultiplier:day<8?3:4
+  chargeDamage:{powderrunner:Math.round(10*scale*1.85),headsman:Math.round(10*scale*1.85),hexsinger:Math.round(8*scale*1.85)},
+  // The first-shop five-damage sword can answer bombs throughout Act I.
+  interruptHit:5,interruptHits:3,interruptExact:2,
+  berserkAttack:Math.round(6*scale*1.85),trapDamage:Math.max(2,Math.round(4*scale*1.85)),
+  healInterrupt:4,reflectionMultiplier:2,oathMultiplier:2
  };
 }
 
 function typeStats(type,day,profile){
- const all=mechanicStats(day,profile),stats={armor:ENCOUNTER_ROSTER[type].armor};
+ const all=mechanicStats(day,profile),stats={armor:ENCOUNTER_ROSTER[type].armor,...(type==='assassin'?{windupGrowth:1}:{})};
  if(type==='powderrunner')Object.assign(stats,{chargeDamage:all.chargeDamage.powderrunner,interruptHit:all.interruptHit});
  if(type==='headsman')Object.assign(stats,{chargeDamage:all.chargeDamage.headsman,interruptHits:all.interruptHits});
  if(type==='hexsinger')Object.assign(stats,{chargeDamage:all.chargeDamage.hexsinger,interruptExact:all.interruptExact});
