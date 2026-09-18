@@ -14,7 +14,7 @@ In Fall 2026, I am teaching Math 3012, Applied Combinatorics.
 
 My  research interests are extremal, probabilistic, and algebraic combinatorics, especially Ramsey theory, graph coloring, additive combinatorics, discrete geometry, and coding theory, and their applications to computer science.
 
-Recently, I have also become interested in [AI safety](/ai-safety/).
+I am also interested in [AI Safety](/ai-safety/).
 
 Previously, I was an NSF postdoctoral research fellow at Princeton University working with [Noga Alon](https://web.math.princeton.edu/~nalon/). Before that, I received my PhD in mathematics from Stanford University in 2021, where my advisor was [Jacob Fox](https://stanford.edu/~jacobfox/).
 
