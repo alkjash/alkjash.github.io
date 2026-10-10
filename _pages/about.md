@@ -30,6 +30,8 @@ Winston Stucki (SoM PhD Student) <br />
 
 If you are a student interested in working with me, please reach out after taking a look at [problems](https://alkjash.github.io/problems/) and [my blog](https://alkjash.github.io/blog/) to get a sense of my research interests and philosophy.
 
+This cycle, I am hiring for a Visiting Assistant Professor position (a three-year postdoc) in Mathematical AI Safety (broadly construed). Please apply through [MathJobs](https://www.mathjobs.org/jobs/list/29073) by November 1, 2026, and feel free to [contact me](mailto:xhe399@gatech.edu) if you have any questions.
+
 Contact: xhe399 [at] gatech [dot] edu
 
 Office: Skiles 260
