@@ -12,6 +12,8 @@ Welcome! I am a (tenure-track) Richard Duke Assistant Professor in the School of
 
 In Fall 2026, I am teaching Math 3012, Applied Combinatorics.
 
+In Spring 2027, I am teaching Math 7018, Probabilistic Combinatorics, and Math 8803-XHE (Topics in Mathematical AI Safety).
+
 My  research interests are extremal, probabilistic, and algebraic combinatorics, especially Ramsey theory, graph coloring, additive combinatorics, discrete geometry, and coding theory, and their applications to computer science.
 
 I am also interested in [AI Safety](/ai-safety/).
