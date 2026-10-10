@@ -7,6 +7,8 @@ author_profile: true
 
 In Fall 2026, I am teaching Math 3012, Applied Combinatorics.
 
+In Spring 2027, I am teaching Math 7018, Probabilistic Combinatorics, and Math 8803-XHE (Topics in Mathematical AI Safety).
+
 ## Past Teaching at Georgia Tech
 
 * Spring 2026: Math 7018, Probabilistic Combinatorics
