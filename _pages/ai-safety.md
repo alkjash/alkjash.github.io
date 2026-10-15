@@ -13,6 +13,10 @@ author_profile: true
 2. [AI Safety: A Short FAQ for Mathematicians](/ai-safety-for-mathematicians/)
 3. [Addressing Broader AI Risks as Mathematicians](/files/Broader%20AI%20Risk.pdf) (with Francis Su), to appear in *MAA Focus*.
 
+## Talks
+
+1. AI Risks and what mathematicians can do about them, AI for the Working Mathematician Seminar, GT, Oct 15 2026, [slides](/files/AI%20Risks%20Oct%202026.pdf)
+
 ## Teaching and reading group
 
 In Spring 2027, I am teaching a new topics course, “Topics in Mathematical AI Safety.”
