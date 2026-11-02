@@ -7,7 +7,11 @@ author_profile: true
 
 This page contains the pdf files (from the arXiv) for my papers. For a few, you can also find the slides for an associated talk.
 
-<ol reversed start="45">
+<ol reversed start="49">
+<li>Krishna Angal, Ruben Ascoli, Simon X. He, Xiaoyu He, Logan Post, Arker Oke Soe, and Olga Zhukova, Deck Reconstruction for Restricted Word Classes, preprint (2026). [<a href="https://arxiv.org/pdf/2610.41110">pdf</a>]</li>
+<li>Joshua Brakensiek, David Conlon, Venkatesan Guruswami, Xiaoyu He, Jiaxi Nie, Maya Sankar, and Hung-Hsun Hans Yu, Upper Bounds for CSP Non-redundancy via Locally Decodable Codes, preprint (2026). [<a href="https://arxiv.org/pdf/2610.38664">pdf</a>]</li>
+<li>David Conlon, Xiaoyu He, Jiaxi Nie, and Logan Post, New bounds for off-diagonal hypergraph Ramsey numbers, preprint (2026). [<a href="https://arxiv.org/pdf/2610.14829">pdf</a>]</li>
+<li>Ruben Ascoli, Xiaoyu He, Jinyoung Park, and Michel Talagrand, A reformulation of the discrete Convexity Conjecture via $k$-thresholds, preprint (2026). [<a href="https://arxiv.org/pdf/2608.11183">pdf</a>]</li>
 <li>Xiaoyu He, Jiaxi Nie, Logan Post, Jacques Verstraëte, Hypergraph Ramsey numbers with quasipolynomial growth rate, preprint (2026). [<a href="https://arxiv.org/pdf/2603.16069">pdf</a>]</li>
 <li>Xiaoyu He, Logan Post, Asymptotically half of binary words are shuffle squares, preprint (2025). [<a href="https://arxiv.org/pdf/2512.12077">pdf</a>]</li>
 <li>Xiaoyu He, Nitya Mani, Jiaxi Nie, Nathan Tung, Fan Wei, New Sidorenko-type inequalities in tournaments, preprint (2025). [<a href="https://arxiv.org/pdf/2512.11222">pdf</a>]</li>
