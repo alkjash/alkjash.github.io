@@ -15,7 +15,7 @@ author_profile: true
 
 ## Talks
 
-1. [AI Risks and what mathematicians can do about them](/files/AI%20Risks%20Oct%202026.pdf), AI for the Working Mathematician Seminar, GT, Oct 15 2026.
+1. [AI Risks and What Mathematicians Can Do About It](/files/AI%20Risks%20Oct%202026.pdf), AI for the Working Mathematician Seminar, GT, Oct 15 2026.
 2. [AI Risks and What Mathematicians Can Do About It](/files/AI%20Risks%20and%20What%20Mathematicians%20Can%20Do%20About%20It%20-%20GSU%20Colloquium%20-%202026-11-06.pptx), GSU Colloquium, Nov 6 2026.
 
 ## Teaching and reading group
